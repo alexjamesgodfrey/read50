@@ -108,7 +108,7 @@ class Leaderboard extends Component {
                 <Header />
                 <h2 className="head">Read50 Leaderboard</h2>
                 <h5 className="tiny-head">Displays the stats of the top 100 readers on read50.com</h5>
-                <h5 className="tiny-tiny-head">**page numbers will not work until there are more than 25 registered users**</h5>
+                <h5 className="tiny-tiny-head">*page numbers will not work until there are more than 25 registered users**</h5>
                 <div className="leaderboard-entry">
                     <div className="entry-rank">Rank</div>
                     <div className="entry-name">Username</div>
