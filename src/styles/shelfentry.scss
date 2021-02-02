@@ -1,0 +1,111 @@
+@import "./_variables.scss";
+
+.shelf {
+  width: 500px;
+  height: 400px;
+  p {
+    text-align: center;
+  }
+  a {
+    color: $primary-color;
+  }
+  a:hover {
+    color: $primary-color;
+  }
+}
+
+.items {
+  height: 320px;
+  overflow-y: scroll;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+}
+
+.shelfspinner {
+  display: flex;
+}
+
+.TBRshelf {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  p {
+    margin: 0px;
+    text-align: center;
+    font-size: 18px;
+    width: 200px;
+  }
+}
+
+.CURRshelf {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  p {
+    margin: 0px;
+    text-align: center;
+    font-size: 18px;
+    width: 200px;
+  }
+}
+
+.ARLshelf {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  p {
+    margin: 0px;
+    text-align: center;
+    font-size: 18px;
+    width: 200px;
+  }
+}
+
+.DNFshelf {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  p {
+    margin: 0px;
+    text-align: center;
+    font-size: 18px;
+    width: 200px;
+  }
+}
+
+.spin {
+  margin-left: 50px;
+  margin-bottom: 10px;
+}
+
+.checkbox-container {
+  width: 250px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.remove-button {
+  margin-bottom: 10px;
+}
+
+.image {
+  height: 200px;
+}
+
+.shelf-title {
+  width: 100%;
+}

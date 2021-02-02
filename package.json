@@ -1,17 +1,33 @@
 {
-  "homepage": "http://agod1373.github.io/read50",
+  "homepage": ".",
   "name": "read50",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "^11.2.2",
-    "@testing-library/user-event": "^12.6.0",
+    "@auth0/auth0-react": "^1.2.0",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.6.3",
+    "bootstrap": "^4.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-openid-connect": "^2.2.1",
+    "pg": "^8.5.1",
     "react": "^17.0.1",
+    "react-beautiful-dnd": "^13.0.0",
+    "react-bootstrap": "^1.4.3",
+    "react-countup": "^4.3.3",
+    "react-datepicker": "^3.4.1",
     "react-dom": "^17.0.1",
-    "react-scripts": "4.0.1",
+    "react-draggable": "^4.4.3",
+    "react-particles-js": "^3.4.1",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.1",
     "superagent": "^6.1.0",
-    "web-vitals": "^0.2.4"
+    "uuid": "^8.3.2",
+    "web-vitals": "^1.1.0"
   },
   "scripts": {
     "predeploy": "npm run build",
@@ -40,6 +56,8 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^3.1.0"
-  }
+    "gh-pages": "^3.1.0",
+    "node-sass": "^4.14.1"
+  },
+  "proxy": "http://localhost:5000"
 }

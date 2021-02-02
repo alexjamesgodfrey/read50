@@ -1,0 +1,34 @@
+@import "./_variables.scss";
+
+.total {
+  margin-top: 25vh;
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+
+  h3 {
+    text-align: center;
+  }
+}
+
+h3 {
+  color: $primary-color;
+}
+
+.spinner-container {
+  margin-top: 30px;
+}
+
+.tip-container {
+  margin-top: 30px;
+  width: 400px;
+  text-align: center;
+  color: $primary-color;
+}

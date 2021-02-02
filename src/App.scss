@@ -1,0 +1,74 @@
+//import bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+//import variables
+@import "./styles/variables.scss";
+
+//import other scss files
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+h1 {
+  color: $primary-color;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.spinner {
+  margin-top: 20vh;
+}
+
+.loginbutton {
+  font-size: 20px;
+  padding: 5px;
+  background-color: #30bf7a;
+  color: #fcf6f5ff;
+  border: none;
+  border-radius: 10%;
+  cursor: pointer;
+}
+
+.logoutbutton {
+  font-size: 20px;
+  padding: 5px;
+  background-color: #db5e56;
+  color: #fcf6f5ff;
+  border: none;
+  border-radius: 10%;
+  cursor: pointer;
+}
+
+.booklist {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pagination-box {
+  display: flex;
+  width: 100%;
+  margin: 40px 0px 100px 0px;
+  justify-content: center;
+}
+
+.pagination {
+  display: flex;
+  border-radius: 2%;
+}
+
+.hashrouter-link {
+  color: $primary-color;
+}
+
+.hashrouter-link:hover {
+  color: $primary-color;
+  text-decoration: none;
+}

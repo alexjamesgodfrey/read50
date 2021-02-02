@@ -1,0 +1,142 @@
+@import "_variables.scss";
+
+.profile {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile-top {
+  margin: 0 auto;
+  display: flex;
+}
+
+.profile-main {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.book {
+  display: flex;
+
+  #book-image {
+    margin: 0 auto;
+    width: 125px;
+  }
+
+  .left-side {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .right-side {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #added {
+    max-width: 200px;
+    margin: 0 auto;
+    text-align: center;
+    color: $primary-color;
+  }
+
+  h3 {
+    text-align: center;
+  }
+
+  h4 {
+    text-align: center;
+    color: $primary-color;
+  }
+}
+
+.profile-pic {
+  border-radius: 50%;
+}
+
+.profile-info {
+  margin-left: 15px;
+}
+
+.color-picker {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.color-square {
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border: 2px solid black;
+  border-radius: 15%;
+  margin: 10px 3px;
+}
+
+.profile-piece {
+  text-align: center;
+}
+
+#red {
+  margin-left: 0px;
+  margin-right: 3px;
+  background-color: #dc3545;
+}
+
+#green {
+  background-color: #30bf7a;
+}
+
+#blue {
+  background-color: #49a1c9;
+}
+
+#orange {
+  background-color: #e88351;
+}
+
+#purple {
+  background-color: #d649c3;
+}
+
+p {
+  color: black;
+}
+
+#goal-progress {
+  margin: 0px auto 40px auto;
+  width: 80%;
+}
+
+h3 {
+  text-align: center;
+}
+
+.progress-box {
+  margin: 0 auto;
+  display: flex;
+}
+
+#edit-button {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+#goal-enter {
+  width: 50px;
+  height: 30px;
+  margin-left: 10px;
+  margin-top: 3px;
+}
+
+.goal {
+  margin-left: 10px;
+}
+
+.shelf-dropdown {
+  margin: 30px auto 0px auto;
+}

@@ -1,0 +1,156 @@
+#card-title {
+  font-size: max(1.3vw, 22px);
+  line-height: 0.8;
+}
+
+#author {
+  font-size: max(1vw, 20px);
+  line-height: 0.9;
+}
+
+#date {
+  font-size: max(0.7vw, 18px);
+  line-height: 0.9;
+  margin-bottom: 10px;
+}
+
+.bookcard {
+  display: flex;
+  align-items: center;
+  max-width: 600px;
+  text-align: center;
+  padding: 20px 10px 20px 30px;
+  margin: 25px;
+  border: 3px solid red;
+  border-color: #dc3545;
+  border-radius: 2%;
+}
+
+.bookcard img {
+  margin-right: 10px;
+}
+
+#right-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.desc {
+  display: flex;
+  flex-direction: column;
+}
+
+.action-buttons {
+  margin-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 250px;
+  justify-content: space-around;
+}
+
+.checklist-container {
+  height: 40px;
+  width: 25%;
+}
+
+.TBR {
+  color: white;
+  width: 35px;
+  height: 35px;
+  border: 2px solid black;
+  border-radius: 5%;
+  cursor: pointer;
+  background-color: #fcf6f5ff;
+}
+
+.CURR {
+  color: white;
+  width: 35px;
+  height: 35px;
+  border: 2px solid black;
+  border-radius: 5%;
+  cursor: pointer;
+  background-color: #fcf6f5ff;
+}
+
+.ARL {
+  color: white;
+  width: 35px;
+  height: 35px;
+  border: 2px solid black;
+  border-radius: 5%;
+  cursor: pointer;
+  background-color: #fcf6f5ff;
+}
+
+.DNF {
+  color: white;
+  width: 35px;
+  height: 35px;
+  border: 2px solid black;
+  border-radius: 5%;
+  cursor: pointer;
+  background-color: #fcf6f5ff;
+}
+
+.description-container {
+  width: 25%;
+}
+
+.add-description {
+  color: #dc3545;
+  margin-bottom: 0px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.external-container {
+  padding-top: 8px;
+  width: 30%;
+  height: 60px;
+}
+
+.wikipedia-png {
+  margin-left: 5px;
+  width: 55px;
+  height: 55px;
+}
+
+.amazon-png {
+  margin-top: 6px;
+  margin-left: 2px;
+  width: 50px;
+  height: 50px;
+}
+
+.bookshop-png {
+  margin-top: 10px;
+  margin-left: 12px;
+  width: 38px;
+  height: 38px;
+}
+
+.TBR-count {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #dc3545;
+}
+
+.CURR-count {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #dc3545;
+}
+
+.ARL-count {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #dc3545;
+}
+
+.DNF-count {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #dc3545;
+}

@@ -1,0 +1,10 @@
+@import "./_variables.scss";
+
+#pagination {
+  background-color: $primary-color;
+  color: $secondary-color;
+}
+
+#non-active {
+  color: $primary-color;
+}

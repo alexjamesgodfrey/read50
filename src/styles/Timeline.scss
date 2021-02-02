@@ -1,0 +1,24 @@
+@import "_variables.scss";
+
+.timelines {
+  width: 500px;
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.title {
+  text-align: center;
+  color: $primary-color;
+}
+
+.timeline-beef {
+  text-align: center;
+}
+
+.added {
+  color: #2bcf5a;
+}
+
+.removed {
+  color: #e3304b;
+}

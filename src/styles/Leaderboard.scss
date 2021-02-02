@@ -1,0 +1,109 @@
+@import "./_variables.scss";
+
+.leaderboard-page {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.head {
+  margin: 20px 0px 0px 0px;
+  text-align: center;
+}
+
+.tiny-head {
+  text-align: center;
+  margin: 0px;
+}
+
+.tiny-tiny-head {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.leaderboard-entry {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.entry-rank {
+  width: 15%;
+  min-width: 65px;
+  text-align: center;
+  font-weight: bold;
+  border: 2px solid black;
+  border-right: 1px solid black;
+  border-color: $primary-color;
+}
+
+.entry-name {
+  width: 25%;
+  min-width: 120px;
+  text-align: center;
+  font-weight: bold;
+  border: 2px solid black;
+  border-right: 1px solid black;
+  border-color: $primary-color;
+}
+
+.entry-part {
+  width: 25%;
+  min-width: 120px;
+  text-align: center;
+  font-weight: bold;
+  border: 2px solid black;
+  border-right: 1px solid black;
+  border-color: $primary-color;
+}
+
+.entry-meat {
+  width: 25%;
+  min-width: 160px;
+  text-align: center;
+  font-weight: bold;
+  border: 2px solid black;
+  border-color: $primary-color;
+}
+
+.real-entry-rank {
+  width: 15%;
+  min-width: 70px;
+  text-align: center;
+  border: 2px solid black;
+  border-right: 1px solid black;
+  border-top: none;
+  border-color: $leaderboard-entry-color;
+}
+
+.real-entry-name {
+  width: 25%;
+  min-width: 120px;
+  text-align: center;
+  border: 2px solid black;
+  border-right: 1px solid black;
+  border-top: none;
+  border-color: $leaderboard-entry-color;
+}
+
+.real-entry-part {
+  width: 25%;
+  min-width: 120px;
+  text-align: center;
+  border: 2px solid black;
+  border-right: 1px solid black;
+  border-top: none;
+  border-color: $leaderboard-entry-color;
+}
+
+.real-entry-meat {
+  width: 25%;
+  min-width: 160px;
+  text-align: center;
+  border: 2px solid black;
+  border-top: none;
+  border-color: $leaderboard-entry-color;
+}

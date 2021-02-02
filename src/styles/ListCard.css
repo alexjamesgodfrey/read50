@@ -1,0 +1,104 @@
+#card-title {
+  font-size: max(1.3vw, 22px);
+}
+
+#author {
+  font-size: max(1vw, 20px);
+}
+
+#date {
+  font-size: max(0.7vw, 18px);
+}
+
+.bookcard {
+  display: flex;
+  align-items: center;
+  max-width: 600px;
+  text-align: center;
+  padding: 20px 10px 20px 30px;
+  margin: 25px;
+  border: 3px solid #7e8079;
+  border-radius: 2%;
+}
+
+.bookcard img {
+  margin-right: 10px;
+}
+
+#right-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.desc {
+  display: flex;
+  flex-direction: column;
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 250px;
+  margin-top: 10px;
+  justify-content: space-around;
+}
+
+.checklist-container {
+  height: 40px;
+  width: 33%;
+}
+
+.TBR {
+  color: white;
+  width: 35px;
+  height: 35px;
+  border: 2px solid black;
+  border-radius: 5%;
+  cursor: pointer;
+  background-color: #fcf6f5ff;
+}
+
+.CURR {
+  color: white;
+  width: 35px;
+  height: 35px;
+  border: 2px solid black;
+  border-radius: 5%;
+  cursor: pointer;
+  background-color: #fcf6f5ff;
+}
+
+.ARL {
+  color: white;
+  width: 35px;
+  height: 35px;
+  border: 2px solid black;
+  border-radius: 5%;
+  cursor: pointer;
+  background-color: #fcf6f5ff;
+}
+
+.description-container {
+  width: 33%;
+}
+
+.add-description {
+  color: #7e8079;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.amazon {
+  padding-top: 10px;
+}
+
+.button-image {
+  width: 40px;
+  height: 40px;
+}
+
+.amazon-png {
+  width: 50px;
+  height: 50px;
+}
