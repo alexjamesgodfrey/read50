@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "./static/css/main.c316e791.chunk.css",
-    "main.js": "./static/js/main.50cab843.chunk.js",
-    "main.js.map": "./static/js/main.50cab843.chunk.js.map",
-    "runtime-main.js": "./static/js/runtime-main.7d058c57.js",
-    "runtime-main.js.map": "./static/js/runtime-main.7d058c57.js.map",
-    "static/css/2.20aa2d7b.chunk.css": "./static/css/2.20aa2d7b.chunk.css",
-    "static/js/2.181fd917.chunk.js": "./static/js/2.181fd917.chunk.js",
-    "static/js/2.181fd917.chunk.js.map": "./static/js/2.181fd917.chunk.js.map",
-    "static/js/3.427eba02.chunk.js": "./static/js/3.427eba02.chunk.js",
-    "static/js/3.427eba02.chunk.js.map": "./static/js/3.427eba02.chunk.js.map",
+    "main.css": "./static/css/main.8cc7ee49.chunk.css",
+    "main.js": "./static/js/main.0ec4af3a.chunk.js",
+    "main.js.map": "./static/js/main.0ec4af3a.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.201cc5c1.js",
+    "runtime-main.js.map": "./static/js/runtime-main.201cc5c1.js.map",
+    "static/css/2.150d169a.chunk.css": "./static/css/2.150d169a.chunk.css",
+    "static/js/2.0bbb6682.chunk.js": "./static/js/2.0bbb6682.chunk.js",
+    "static/js/2.0bbb6682.chunk.js.map": "./static/js/2.0bbb6682.chunk.js.map",
+    "static/js/3.da9ed6c8.chunk.js": "./static/js/3.da9ed6c8.chunk.js",
+    "static/js/3.da9ed6c8.chunk.js.map": "./static/js/3.da9ed6c8.chunk.js.map",
     "index.html": "./index.html",
-    "static/css/2.20aa2d7b.chunk.css.map": "./static/css/2.20aa2d7b.chunk.css.map",
-    "static/css/main.c316e791.chunk.css.map": "./static/css/main.c316e791.chunk.css.map",
-    "static/js/2.181fd917.chunk.js.LICENSE.txt": "./static/js/2.181fd917.chunk.js.LICENSE.txt",
+    "static/css/2.150d169a.chunk.css.map": "./static/css/2.150d169a.chunk.css.map",
+    "static/css/main.8cc7ee49.chunk.css.map": "./static/css/main.8cc7ee49.chunk.css.map",
+    "static/js/2.0bbb6682.chunk.js.LICENSE.txt": "./static/js/2.0bbb6682.chunk.js.LICENSE.txt",
     "static/media/WoKSample.60165b7a.jpg": "./static/media/WoKSample.60165b7a.jpg",
     "static/media/amazon_logo.4e278f07.png": "./static/media/amazon_logo.4e278f07.png",
     "static/media/amusingsample.70df2915.jpg": "./static/media/amusingsample.70df2915.jpg",
@@ -45,10 +45,10 @@
     "static/media/wizardandglasssample.a52740c2.jpg": "./static/media/wizardandglasssample.a52740c2.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.7d058c57.js",
-    "static/css/2.20aa2d7b.chunk.css",
-    "static/js/2.181fd917.chunk.js",
-    "static/css/main.c316e791.chunk.css",
-    "static/js/main.50cab843.chunk.js"
+    "static/js/runtime-main.201cc5c1.js",
+    "static/css/2.150d169a.chunk.css",
+    "static/js/2.0bbb6682.chunk.js",
+    "static/css/main.8cc7ee49.chunk.css",
+    "static/js/main.0ec4af3a.chunk.js"
   ]
 }
