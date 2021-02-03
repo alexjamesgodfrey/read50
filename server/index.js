@@ -26,6 +26,7 @@ require('./routes/booklists.js')(app);
 require('./routes/shelves.js')(app);
 require('./routes/leaderboards.js')(app);
 require('./routes/deletions.js')(app);
+require('./setupProxy.js')(app);
 
 
 /** ROUTE DOCUMENTS
