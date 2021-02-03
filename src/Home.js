@@ -58,7 +58,7 @@ class Home extends Component {
     }
 
     getNumbers = async () => {
-        const getUsers = await fetch('https://read50.herokuapp.com/api/usercount');
+        const getUsers = await fetch('/api/usercount');
         const userJson = await getUsers.json();
         
         const getBooks = await fetch('/api/3numsum/bookcount');
