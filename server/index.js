@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 5000;
 //process.env.PORT
 //process.env.NODE_ENV => production or undefined
 
-app.use(express.static(path.join(__dirname, "../build")));
+app.use(express.static(path.join(__dirname, "../client/build")));
 
 //middleware
 app.use(cors());
@@ -21,7 +21,6 @@ require('./routes/booklists.js')(app);
 require('./routes/shelves.js')(app);
 require('./routes/leaderboards.js')(app);
 require('./routes/deletions.js')(app);
-require('./setupProxy.js')(app);
 
 
 /** ROUTE DOCUMENTS
@@ -175,7 +174,7 @@ app.get("/api/booklists/ARL/:auth0_id/:google_id", async (req, res) => {
 });
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../build"));
+    res.sendFile(path.join(__dirname, "../client/build"));
 })
 
 
