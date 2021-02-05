@@ -9,8 +9,9 @@ const devConfig = {
     database: process.env.PG_DATABASE
 };
 
+//HEROKU_POSTGRESQL_JADE_URL
 const proConfig = {
-    connectionString: process.env.DATABASE_URL
+    connectionString: process.env.HEROKU_POSTGRESQL_JADE_URL
 }
 
 const pool = new Pool(process.env.NODE_ENV = "production" ? proConfig : devConfig);
