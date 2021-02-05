@@ -14,6 +14,7 @@ const proConfig = {
     connectionString: process.env.HEROKU_POSTGRESQL_JADE_URL
 }
 
-const pool = new Pool(process.env.NODE_ENV = "production" ? proConfig : devConfig);
+// const pool = new Pool(process.env.NODE_ENV = "production" ? proConfig : devConfig);
+const pool = new Pool(proConfig);
 
 module.exports = pool;
