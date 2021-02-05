@@ -1,7 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Particles from 'react-particles-js';
 import CountUp from 'react-countup';
 import Loading from './components/Loading.js';
 import Button from 'react-bootstrap/Button';
@@ -103,20 +102,6 @@ class Home extends Component {
         }
         return (
             <div id="sample-total">
-                <Particles id="particles"
-                    params={{
-                        "particles": {
-                            "number": {
-                                "value": 30
-                            },
-                            "color": {
-                                "value": '#dc3545'
-                            },
-                            "size": {
-                                "value": 3
-                            }
-                        }
-                    }} />
                 <div id="bg">
                     <p className="main-count"><CountUp end={books} duration={3} /> books.</p>
                     <p className="main-count"><CountUp end={pages} duration={2} /> pages.</p>
