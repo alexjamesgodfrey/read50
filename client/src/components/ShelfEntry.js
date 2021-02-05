@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { useAuth0 } from '@auth0/auth0-react';
 import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'

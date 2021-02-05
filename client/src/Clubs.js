@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import DatePicker from "react-datepicker";
 import Header from './components/Header.js';
 import Loading from './components/Loading.js';
 import ClubLogo from './images/clubs.png';

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import DatePicker from "react-datepicker";
 import amazon from '../images/amazon_logo.png';
 import bookshop from '../images/bookshop_logo.png';
 import wikipedia from '../images/wikipedia.png';
