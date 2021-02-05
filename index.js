@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 5000;
 //process.env.PORT
 //process.env.NODE_ENV => production or undefined
 
-app.use(express.static(path.join(__dirname, "../client/build")));
+app.use(express.static(path.join(__dirname, "/client/build")));
 
 //middleware
 app.use(cors());
@@ -174,7 +174,7 @@ app.get("/api/booklists/ARL/:auth0_id/:google_id", async (req, res) => {
 });
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/build"));
+    res.sendFile(path.join(__dirname, "/client/build"));
 })
 
 
