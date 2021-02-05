@@ -1,5 +1,5 @@
 {
-  "homepage": ".",
+  "homepage": "http://agod1373.github.io/read50",
   "name": "read50",
   "version": "0.1.0",
   "private": true,
@@ -27,14 +27,13 @@
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.0"
   },
-  "scripts": {
+"scripts": { 
+    "start": "react-scripts start",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "node-sass": "node-sass --output-style compressed -o dist/css/ scss --recursive"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
