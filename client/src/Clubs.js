@@ -33,7 +33,6 @@ const Clubs = (props) => {
                 <img className="club-logo" src={ClubLogo} />
                 <h2>Read50 clubs coming soon</h2>
             </div>
-            <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
         </div>
         
     )
