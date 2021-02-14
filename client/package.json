@@ -52,6 +52,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {},
-  "proxy": "http://18.217.242.61:5000/"
+  "devDependencies": {}
 }

@@ -53,26 +53,26 @@ class Leaderboard extends Component {
         //create final array
         let finalArray = [];
         //create users array
-        const getUsers = await fetch('http://18.217.242.61:5000/api/getsubs');
+        const getUsers = await fetch('/api/getsubs');
         const json = await getUsers.json();
         this.setState({ users: [...json] });
         //create the entries array by looping through users and booklists
         for (let i = 0; i < this.state.users.length; i++){
             //create the three num sum
             let auth0_id = this.state.users[i];
-            const books = await fetch(`http://18.217.242.61:5000/api/3numsum/books/${auth0_id}`);
+            const books = await fetch(`/api/3numsum/books/${auth0_id}`);
             let booksJson = await books.json();
             let booksReal = this.numConverter(parseInt(booksJson));
-            const pages = await fetch(`http://18.217.242.61:5000/api/3numsum/pages/${auth0_id}`);
+            const pages = await fetch(`/api/3numsum/pages/${auth0_id}`);
             let pagesJson = await pages.json();
             let pagesReal = this.numConverter(parseInt(pagesJson));
-            const words = await fetch(`http://18.217.242.61:5000/api/3numsum/words/${auth0_id}`);
+            const words = await fetch(`/api/3numsum/words/${auth0_id}`);
             let wordsJson = await words.json();
             let wordsReal = this.numConverter(parseInt(wordsJson));
             const total = booksReal + ' / ' + pagesReal + ' / ' + wordsReal;
 
             //get the users user name
-            const username = await fetch(`http://18.217.242.61:5000/api/users/username/${auth0_id}`);
+            const username = await fetch(`/api/users/username/${auth0_id}`);
             let usernameJson = await username.json();
 
             //get the users pen name

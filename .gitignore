@@ -6,3 +6,9 @@
 
 #environment variables
 /server/.env
+
+#firebase
+/functions
+/.firebase
+.firebaserc
+firebase.json

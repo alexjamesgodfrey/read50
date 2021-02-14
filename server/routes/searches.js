@@ -3,7 +3,7 @@
  * todo: lots
  */
 
-const pool = require("../db");
+const pool = require("../db.js");
 
 module.exports = function (app) {
     //create a search 

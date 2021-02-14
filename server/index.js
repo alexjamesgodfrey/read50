@@ -9,8 +9,7 @@ const PORT = process.env.PORT || 5000;
 //middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "..", "client", "build")))
-app.use(express.static(path.join(__dirname, "..", "client", "public")))
+app.use(express.static(path.join(__dirname, "..", "client", "build")));
 
 // import routes
 require('./routes/users.js')(app);
@@ -43,7 +42,6 @@ app.get("/", async (req, res) => {
     } catch (err) {
         console.error(err.message);
     }
-    
 })
 
 app.listen(PORT, () => {

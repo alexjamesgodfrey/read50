@@ -12,7 +12,7 @@ ReactDOM.render(
   <Auth0Provider
     domain="dev-rtb0ue8q.us.auth0.com"
     clientId="8WjM6U2lIKjte5t7Z9FQ3G05DK0Y9wrF"
-    redirectUri="/#/search"
+    redirectUri="https://read50.web.app/#/search"
   >
     
     <App />
