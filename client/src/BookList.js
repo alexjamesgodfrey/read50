@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import CardPage from './components/CardPage';
 import Pagination from 'react-bootstrap/Pagination';
-import RightArrow from './images/rightarrow.png';
 import './styles/pagination.scss';
 
 const BookList = (props) => {
@@ -11,7 +10,6 @@ const BookList = (props) => {
     behavior: 'smooth'
   });
   const [page, setPage] = useState(1);
-  console.log(page);
 
   const one = () => setPage(1);
   const two = () => setPage(2);

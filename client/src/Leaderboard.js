@@ -1,8 +1,6 @@
-import { render } from '@testing-library/react';
 import React, { Component } from 'react';
 import Header from './components/Header.js';
 import LeaderboardList from './components/LeaderboardList.js';
-import LeaderboardPage from './components/LeaderboardPage';
 import Loading from './components/Loading.js';
 import './styles/Leaderboard.scss';
 

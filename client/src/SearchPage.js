@@ -5,14 +5,13 @@ import Loading from './components/Loading.js';
 import Books from './Books.js';
 
 const SearchPage = (props) => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user, isAuthenticated  } = useAuth0();
 
   const [load, setLoad] = useState(true);
 
   const loadingFunc = async ms => {
     await props.sleep(ms);
     setLoad(false);
-    console.log('success');
   }
 
   useEffect(() => { 
@@ -29,12 +28,7 @@ const SearchPage = (props) => {
       <Loading />
     )
   }
-
-  //run upon authentication
-  if (isAuthenticated) {
-    props.enforceColors(user.sub);
-  };
-
+  
   return (
     <div className="App">
       <Header />

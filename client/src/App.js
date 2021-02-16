@@ -29,15 +29,13 @@ class App extends Component {
       "username": "${username}",
       "picture_link": "${picture}",
       "logincount": "${logcount}",
-      "color": "#ba7373"}
-      `
+      "color": "#ba7373"}`
+      
       const response = await fetch("/api/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: auth0User
       });
-      console.log(auth0User);
-      console.log(response);
     } catch (err) {
       console.error(err.message);
     }
@@ -50,30 +48,13 @@ class App extends Component {
     const response = await fetch(`/api/users/herecheck/${sub}`);
     const responseText = await response.text();
     await this.sleep(100);
-    console.log(responseText);
     if (responseText !== 'valid user') {
       //add to database function and set inDB to true
       this.addToDB(sub, email, username, picture, logcount);
-      console.log('user has been added to database');
     } else {
       //set inDB to true
       this.state.inDB = true;
-      console.log('user is already in database');
     }
-  };
-
-  enforceColors = async (sub) => {
-    //make sure to put in isAuthenticated block
-    //get colors from database
-    const response = await fetch(`/api/users/color/${sub}`);
-    let currentColor = await response.text();
-    const finalColor = currentColor.slice(1, -1);
-    //update all h1 colors
-    const h1Elements = document.getElementsByTagName("h1");
-    for (let i = 0; i < h1Elements.length; i++) {
-      h1Elements[i].style.color = finalColor;
-    }
-    console.log('colors updated');
   };
 
   changeColor = async (sub, color) => {
@@ -99,11 +80,11 @@ class App extends Component {
         <div>
           <Switch>
             <Route exact path="/" component={Home} exact />
-            <Route path="/search" component={(props) => <SearchPage {...props} sleep={this.sleep} addToDB={this.addToDB} checkIfDB={this.checkIfDB} enforceColors={this.enforceColors} />} />
-            <Route path="/shelves" component={(props) => <Shelves {...props} sleep={this.sleep} enforceColors={this.enforceColors} />} />
+            <Route path="/search" component={(props) => <SearchPage {...props} sleep={this.sleep} addToDB={this.addToDB} checkIfDB={this.checkIfDB} />} />
+            <Route path="/shelves" component={(props) => <Shelves {...props} sleep={this.sleep} />} />
             <Route path="/profile" component={(props) => <Profile {...props} state={this.state} sleep={this.sleep} />} />
-            <Route path="/clubs" component={(props) => <Clubs {...props} sleep={this.sleep} enforceColors={this.enforceColors} />} />
-            <Route path="/leaderboard" component={(props) => <Leaderboard {...props} sleep={this.sleep} enforceColors={this.enforceColors} />} />
+            <Route path="/clubs" component={(props) => <Clubs {...props} sleep={this.sleep} />} />
+            <Route path="/leaderboard" component={(props) => <Leaderboard {...props} sleep={this.sleep} />} />
             <Route component={Error} />
           </Switch>
         </div> 

@@ -1,8 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 
 const TimelineEntry = (props) => {
-
-    const addString = `${props.title} by ${props.author} added to ${props.listtype} shelf on ${props.date}`;
 
     if (props.type === 'add') {
         if (props.listtype === "ARL") {

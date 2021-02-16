@@ -1,9 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
-import { Link } from 'react-router-dom';
 import CountUp from 'react-countup';
 import Loading from './components/Loading.js';
-import Button from 'react-bootstrap/Button';
 import SampleBookCard from './components/SampleBookCard.js';
 import LoginButton from './components/LoginButton.js';
 import wayofkings from './images/WoKSample.jpg';
@@ -74,7 +72,6 @@ class Home extends Component {
         this.setState({ pageCount: pageJson });
         this.setState({ wordCount: wordJson });
         this.setState({ loading: false });
-        console.log(this.state);
     }
 
     componentDidMount() {

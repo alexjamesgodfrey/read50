@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import './styles/Search.css';
 import { FormControl, Button } from 'react-bootstrap';
 
 const Search = (props) => {
 
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user } = useAuth0();
 
   const onSubmitForm = async e => {
     e.preventDefault();
@@ -20,8 +20,6 @@ const Search = (props) => {
         headers: { "Content-Type": "application/json" },
         body: search
       });
-      console.log(search);
-      console.log(response);
     } catch (err) {
       console.error(err.message);
     }

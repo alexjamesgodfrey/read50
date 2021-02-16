@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Shelf from './components/Shelf.js';
-import Header from './components/Header.js';
 import './styles/Shelves.scss';
 
 class Shelves extends Component {
@@ -22,7 +21,6 @@ class Shelves extends Component {
     getList = async (sub, listType) => {
         const response = await fetch(`/api/booklists/${listType}/${sub}`)
         const json = await response.json();
-        console.log(json);
         if (listType === 'TBR') {
             this.setState({ TBR: [...json]})
         } else if (listType === 'CURR') {

@@ -1,7 +1,5 @@
-import react from 'react';
 import BookCard from './BookCard.js';
 import NoImage from '../images/noimage.png';
-import Pagination from 'react-bootstrap/Pagination';
 
 const CardPage = (props) => {
 

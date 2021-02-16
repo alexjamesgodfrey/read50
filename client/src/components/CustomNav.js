@@ -1,13 +1,13 @@
 import React from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import LoggedInDropdown from './LoggedInDropdown.js';
 import NotLoggedInDropdown from './NotLoggedInDropdown.js';
 import '../styles/Header.scss';
 
 const CustomNav = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { isAuthenticated } = useAuth0();
 
     return (
       <Navbar bg="danger" variant="dark" expand="sm">

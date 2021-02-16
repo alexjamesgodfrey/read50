@@ -1,32 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import amazon from '../images/amazon_logo.png';
 import bookshop from '../images/bookshop_logo.png';
 import wikipedia from '../images/wikipedia.png';
 import '../styles/BookCard.scss';
-import { render } from '@testing-library/react';
 
 const BookCard = (props) => {
   const { user, isAuthenticated, isLoading } = useAuth0(); 
   const { loginWithRedirect } = useAuth0();
-  const [boxClicks, setBoxClicks] = useState(0);
-  const latestBoxClicks = useRef(boxClicks);
-
-  console.log(props.pages);
-  console.log(props.words);
-
-  const enforceColors = async (sub) => {
-    //make sure to put in isAuthenticated block
-    //get colors from database
-    const response = await fetch(`/api/users/color/${sub}`);
-    let currentColor = await response.text();
-    const finalColor = currentColor.slice(1, -1);
-    //update all h1 colors
-    const h1Elements = document.getElementsByTagName("h1");
-    for (let i = 0; i < h1Elements.length; i++) {
-      h1Elements[i].style.color = finalColor;
-    }
-  };
 
   const renderChecks = async (sub, listType, id) => {
     //clear all checkboxes
@@ -41,12 +22,10 @@ const BookCard = (props) => {
     if (checkText === listType) {
       const box = document.getElementsByClassName(listType);
       box[props.cardNumber].checked = true;
-      console.log('box ' + props.cardNumber + 'checked');
     }
   };
 
   const showAlert = () => {
-    console.log('not authenticated');
     const login = () => loginWithRedirect();
     window.location.href = login();
   }
@@ -58,24 +37,19 @@ const BookCard = (props) => {
     //get count
     const count = await fetch(`/api/count/${listType}/${props.google_id}`)
     const countText = await count.text();
-    console.log('render counts' + countText);
     numbers[props.cardNumber].innerHTML = '(' + countText + ')';
   }
 
   const addRemoveBooklist = async (sub, id, listType, title, author, date, image, pages, words) => {
-    console.log('click registered');
     const box = document.getElementsByClassName(listType);
     const numbers = document.getElementsByClassName(listType + '-count');
     let prevNumber = numbers[props.cardNumber].innerHTML;
-    prevNumber = prevNumber[0, 1];
-    console.log(prevNumber);
     //if unchecked, add to list
     if (box[props.cardNumber].checked === true) {
       //first, do a fake count increase (so rendercounts does not have to be run again)
       prevNumber++;
       prevNumber = '(' + prevNumber + ')';
       numbers[props.cardNumber].innerHTML = prevNumber;
-      console.log('sending add request');
       const date_added = Date();
       const seconds_added = Date.now();
       //create json
@@ -92,7 +66,6 @@ const BookCard = (props) => {
         "date_added": "${date_added}",
         "seconds_added": "${seconds_added}"
       }`;
-      console.log(json);
       //send to db
       const response = await fetch("/api/booklists", {
         method: "POST",
@@ -109,11 +82,9 @@ const BookCard = (props) => {
       //step 2: get the date added from the entry (will be used in deletions table for timeline use)
       const previousAddedDate = await fetch(`/api/addeddate/${sub}/${props.google_id}/${listType}`);
       const previousAddedDateJson = await previousAddedDate.json();
-      console.log(previousAddedDateJson);
       //step 3: get the seconds added from the entry (will be used in deletions table for sorting in timeline)
       const previousAddedSeconds = await fetch(`/api/addedseconds/${sub}/${props.google_id}/${listType}`);
       const previousAddedSecondsJson = await previousAddedSeconds.json();
-      console.log(previousAddedSecondsJson);
       //send delete request
       const response = fetch(`/api/booklists/${sub}/${listType}/${id}`, {
         method: "DELETE"
@@ -136,7 +107,6 @@ const BookCard = (props) => {
         "type": "remove",
         "seconds_added": "${seconds_added}"
       }`;
-      console.log(json);
       //send to db
       const response2 = await fetch("/api/deletions", {
         method: "POST",
@@ -158,7 +128,6 @@ const BookCard = (props) => {
         "type": "add",
         "seconds_added": "${previousAddedSecondsJson}"
       }`;
-      console.log(json2);
       //send to db
       const response3 = await fetch("/api/deletions", {
         method: "POST",
@@ -178,16 +147,12 @@ const BookCard = (props) => {
   const onCheckBoxClick = (listtype) => {
     if (isAuthenticated) {
       if (listtype === 'TBR') {
-        console.log('sending to tbr');
         addToTBR();
       } else if (listtype === 'CURR') {
-        console.log('sending to curr');
         addToCURR();
       } else if (listtype === 'ARL') {
-        console.log('sending to arl');
         addToARL();
       } else if (listtype === 'DNF') {
-        console.log('sending to dnf');
         addToDNF();
       }
     } else {
@@ -207,7 +172,6 @@ const BookCard = (props) => {
     renderCounts('ARL');
     renderCounts('DNF');
     if (isAuthenticated && !isLoading) {
-      enforceColors(user.sub);
       renderChecks(user.sub, 'TBR', props.google_id);
       renderChecks(user.sub, 'CURR', props.google_id);
       renderChecks(user.sub, 'ARL', props.google_id);
