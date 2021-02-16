@@ -19,3 +19,7 @@ header {
 #dropdown-link {
   color: $primary-color;
 }
+
+#dropdown-link:active {
+  background-color: #fff;
+}
