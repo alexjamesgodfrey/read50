@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useAuth0 } from '@auth0/auth0-react';
 import Header from './Header.js';
-import Shelves from '../Shelves.js';
 import Shelf from './Shelf.js';
 import Timeline from './Timeline.js';
 import Loading from './Loading.js';
@@ -11,11 +10,10 @@ import Form from 'react-bootstrap/Form';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import '../styles/Profile.scss';
-import { getMaxListeners } from 'superagent';
 
 const Profile = (props) => {
     //fetches auth0 user information
-    const { user, isAuthenticated, isLoading } = useAuth0();
+    const { user, isAuthenticated } = useAuth0();
 
     //function to get day of year 
     const dayOfYear = date => {

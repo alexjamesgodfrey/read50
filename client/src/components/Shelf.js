@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
 import ShelfEntry from './ShelfEntry.js';
 
 const Shelf = (props) => {
-    const { user, isAuthenticated, isLoading } = useAuth0();
     let numbers = -1;
 
     console.log(props.type);

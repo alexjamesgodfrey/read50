@@ -4,7 +4,7 @@ import '../styles/SampleBookCard.scss';
 const SampleBookCard = (props) => {
 
   const plusOne = (type) => {
-    if (type == 'want' && !props.want.includes('k')) {
+    if (type === 'want' && !props.want.includes('k')) {
       let num = parseInt(props.want);
       let numberbox = document.getElementsByClassName('sample-TBR-count')[props.number];
       let checkbox = document.getElementsByClassName('sample-TBR')[props.number];
@@ -14,7 +14,7 @@ const SampleBookCard = (props) => {
         numberbox.innerHTML = num;
       }
     }
-    else if (type == 'reading' && !props.curr.includes('k')) {
+    else if (type === 'reading' && !props.curr.includes('k')) {
       let num = parseInt(props.curr);
       let numberbox = document.getElementsByClassName('sample-CURR-count')[props.number];
       let checkbox = document.getElementsByClassName('sample-CURR')[props.number];
@@ -24,7 +24,7 @@ const SampleBookCard = (props) => {
         numberbox.innerHTML = num;
       }
     }
-    else if (type == 'read' && !props.read.includes('k')) {
+    else if (type === 'read' && !props.read.includes('k')) {
       let num = parseInt(props.read);
       let numberbox = document.getElementsByClassName('sample-ARL-count')[props.number];
       let checkbox = document.getElementsByClassName('sample-ARL')[props.number];

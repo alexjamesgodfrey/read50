@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import TimelineEntry from './TimelineEntry.js';
 import '../styles/Timeline.scss';
-import { propTypes } from 'react-bootstrap/esm/Image';
 
-const Timeline = (props) => {
+const Timeline = () => {
     console.log('timeline reloaded');
-    const { user, isAuthenticated, isLoading } = useAuth0();
+    const { user } = useAuth0();
 
     const [entries, setEntries] = useState([]);
 
