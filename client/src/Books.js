@@ -11,16 +11,16 @@ class Books extends Component {
       books: [],
       searchField: '',
       searchCount: 0,
-      loading: false,
       searched: false,
-      page: 1
+      page: 1,
+      loading: false
     }
   }
 
   delay = ms => new Promise(res => setTimeout(res, ms));
 
   searchBook = async e => {
-    this.loadMe(1300);
+    this.setState({ loading: true });
     e.preventDefault();
     await request
       .get("https://www.googleapis.com/books/v1/volumes")
@@ -31,17 +31,11 @@ class Books extends Component {
         console.log(this.state.books);
         this.setState({searched: true})
       })
+    this.setState({ loading: false });
   }
 
   handleSearch = (e) => {
     this.setState({ searchField: e.target.value });
-  }
-
-  //shows loading animation for ms milliseconds
-  loadMe = async (ms) => {
-    this.setState({ loading: true });
-    await this.delay(ms);
-    this.setState({ loading: false });
   }
 
   render() {
@@ -49,9 +43,8 @@ class Books extends Component {
       <div>
         <Search searchBook={this.searchBook} handleSearch={this.handleSearch} state={this.state} />
         <div className="main">
-          {this.state.loading ? <Spinner className="spinner" animation="grow" variant="danger" size="lg" /> : <BookList state={this.state} books={this.state.books} />}
+          {this.state.loading ? <Spinner className="spinner" animation="grow" variant="danger" size="lg" /> : <BookList changeLoad={this.changeLoad} state={this.state} books={this.state.books} />}
         </div>
-        
       </div>
     );
   }

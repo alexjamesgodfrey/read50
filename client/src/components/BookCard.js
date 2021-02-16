@@ -3,7 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import amazon from '../images/amazon_logo.png';
 import bookshop from '../images/bookshop_logo.png';
 import wikipedia from '../images/wikipedia.png';
-import '../styles/BookCard.css';
+import '../styles/BookCard.scss';
 import { render } from '@testing-library/react';
 
 const BookCard = (props) => {
@@ -43,7 +43,6 @@ const BookCard = (props) => {
       box[props.cardNumber].checked = true;
       console.log('box ' + props.cardNumber + 'checked');
     }
-    console.log('checks successfully queried and rendered');
   };
 
   const showAlert = () => {
@@ -213,7 +212,6 @@ const BookCard = (props) => {
       renderChecks(user.sub, 'CURR', props.google_id);
       renderChecks(user.sub, 'ARL', props.google_id);
       renderChecks(user.sub, 'DNF', props.google_id);
-      console.log('mount');
   };
   }, [props.page])
 

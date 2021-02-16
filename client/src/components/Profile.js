@@ -26,8 +26,6 @@ const Profile = (props) => {
     const [reRun, setReRun] = useState(0);
     //main loading state -- set to false after 1250ms
     const [load, setLoad] = useState(true);
-    //set to false after a 1000 second delay to prevent user.sub error
-    const [run, setRun] = useState(false);
     //user stat state
     const [stats, setStats] = useState('books / pages / words');
     //sets state of edit button for yearly goa;
@@ -48,19 +46,6 @@ const Profile = (props) => {
     const [ARL, setARL] = useState([]);
     const [DNF, setDNF] = useState([]);
 
-    //primary loading function that controls loading screen
-    const loadingFunc = async ms => {
-        await props.sleep(ms);
-        setLoad(false);
-        console.log('loading page removed');
-    }
-
-    //function that delays so that user.sub can be loaded
-    const awaitUserID = async () => {
-        await props.sleep(1000);
-        setRun(true);
-    }
-
     //function that gets the users yearly goal and books read in current year and updates state
     const getGoals = async () => {
         await props.sleep(1000);
@@ -73,12 +58,10 @@ const Profile = (props) => {
             } else {
                 setGoal(goalJson);
             }
-            console.log('user goal loaded from database');
             //fetches books read in 2021
             const readDB = await fetch(`/api/twooneread/${user.sub}`);
             const readJson = await readDB.json();
             setRead(readJson);
-            console.log('yearly books read loaded');
         } catch (err) {
             setReRun(reRun + 1);
             console.error(err.message);
@@ -96,7 +79,6 @@ const Profile = (props) => {
             const setDB = await fetch(`/api/setgoal/${goal}/${user.sub}`, {
                 method: "PUT",
             });
-            console.log('user goal updated');
         }
     }
 
@@ -146,7 +128,6 @@ const Profile = (props) => {
             //sets stats state appropriately
             const total = booksReal + ' / ' + pagesReal + ' / ' + wordsReal;
             setStats(total);
-            console.log('stats loaded');
         } catch (err) {
             console.error(err.message);
         }
@@ -171,11 +152,11 @@ const Profile = (props) => {
             const ARLjson = await ARLResponse.json();
             const DNFResponse = await fetch(`/api/booklists/DNF/${user.sub}`)
             const DNFjson = await DNFResponse.json();
-            console.log(TBRjson);
             setTBR(TBRjson);
             setCURR(CURRjson);
             setARL(ARLjson);
             setDNF(DNFjson);
+            setLoad(false);
         } catch (err) {
             console.error(err.message);
         }
@@ -184,9 +165,6 @@ const Profile = (props) => {
     
     
     useEffect(() => {
-        console.log('useEffect');
-        loadingFunc(1250);
-        awaitUserID();
         getGoals();
         getStats();
         getLists();
