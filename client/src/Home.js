@@ -77,16 +77,7 @@ class Home extends Component {
         console.log(this.state);
     }
 
-    sleep = ms => new Promise(res => setTimeout(res, ms));
-
-    loadingFunc = async () => {
-        await this.sleep(1250);
-        this.setState({ loading: false });
-        console.log('loaded');
-    }
-
     componentDidMount() {
-        this.loadingFunc();
         this.getNumbers();
     }
 

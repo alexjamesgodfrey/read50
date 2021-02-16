@@ -18,7 +18,7 @@ class Leaderboard extends Component {
 
     loadFunc = async () => {
         await this.delay(1250);
-        this.setState({ loading: false });
+        
     }
 
     delay = ms => new Promise(res => setTimeout(res, ms));
@@ -93,11 +93,14 @@ class Leaderboard extends Component {
         });
         this.setRanks(finalArray);
         this.setState({ entries: [...finalArray] });
-        console.log(this.state.entries);
+        this.setState({ loading: false });
+    }
+
+    componentDidMount() {
+        this.getLeaderboards();
     }
 
     render() {
-        this.loadFunc();
         const loading = this.state.loading;
         if (loading) {
             return <Loading />

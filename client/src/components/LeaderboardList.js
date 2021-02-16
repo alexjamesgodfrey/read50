@@ -4,15 +4,12 @@ import Pagination from 'react-bootstrap/Pagination';
 import '../styles/pagination.scss';
 
 const LeaderboardList = (props) => {
-    window.scrollTo({
+  window.scrollTo({
     top: 0,
     left: 0,
     behavior: 'smooth'
-    });
+  });
     
-    useEffect(() => {
-        props.getLeaderboards();
-    }, [])
 
   const [page, setPage] = useState(1);
 
