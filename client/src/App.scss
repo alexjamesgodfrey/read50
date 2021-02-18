@@ -2,13 +2,15 @@
 @import "~bootstrap/scss/bootstrap";
 
 //import variables
-@import "./styles/variables.scss";
+@import "./_variables.scss";
 
-//import other scss files
+//import fonts
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 
 * {
   box-sizing: border-box;
   margin: 0;
+  font-family: "Nunito", sans-serif;
 }
 
 h1 {
