@@ -73,14 +73,10 @@ class Leaderboard extends Component {
             const username = await fetch(`/api/users/username/${auth0_id}`);
             let usernameJson = await username.json();
 
-            //get the users pen name
-            const penName = 'N/A';
-
             let object = {
                 sub: this.state.users[i],
                 rank: 0,
                 username: usernameJson,
-                penname: penName,
                 words: wordsJson,
                 threeNumSum: total
             }
@@ -107,20 +103,16 @@ class Leaderboard extends Component {
         return (
             <div className="">
                 <Header />
-                <h2 className="head">Read50 Leaderboard</h2>
-                <h5 className="tiny-head">Displays the stats of the top 100 readers on read50.com</h5>
-                <h5 className="tiny-tiny-head">*page numbers will not work until there are more than 25 registered users**</h5>
+                <h3 className="head">Read50 Leaderboard</h3>
                 <div className="leaderboard-entry">
                     <div className="entry-rank">Rank</div>
                     <div className="entry-name">Username</div>
-                    <div className="entry-part">Pen Name</div>
                     <div className="entry-meat">Books/Pages/Words</div>
                 </div>
                 <LeaderboardList delay={this.delay} state={this.state} entries={this.state.entries} getLeaderboards={this.getLeaderboards}/>
             </div>  
         )
     }
-    
 }
 
 export default Leaderboard;

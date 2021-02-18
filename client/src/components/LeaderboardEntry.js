@@ -28,7 +28,6 @@ const LeaderboardEntry = (props) => {
         <div className="leaderboard-entry">
             <div className="real-entry-rank">#{props.rank}</div>
             <div className="real-entry-name">{props.username}</div>
-            <div className="real-entry-part">{props.penname}</div>
             <div className="real-entry-meat">{props.threeNumSum}</div>
         </div>
     )

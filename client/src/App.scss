@@ -8,19 +8,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 
 * {
-  box-sizing: border-box;
+  padding: 0;
   margin: 0;
   font-family: "Nunito", sans-serif;
 }
 
-h1 {
-  color: $primary-color;
+html,
+body {
+  margin: 0;
+  padding: 0;
 }
 
-.main {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+h1 {
+  color: $primary-color;
 }
 
 .spinner {

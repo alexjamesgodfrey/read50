@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import Home from './Home.js';
+import Home from './components/Home/Home.js';
 import SearchPage from './SearchPage.js';
-import Shelves from './Shelves.js';
-import Profile from './components/Profile.js';
+import Profile from './components/Profile/Profile.js';
 import Clubs from './Clubs.js';
 import Leaderboard from './Leaderboard.js';
 import './App.scss';
@@ -57,43 +56,19 @@ class App extends Component {
     }
   };
 
-  changeColor = async (sub, color) => {
-    try {
-      //send put request to update user color
-      const input = `{"color": ` + `"` + color + `"}`;
-      const response = await fetch(`/api/users/color/${sub}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: input
-      });
-      //update colors
-      this.enforceColors(sub);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
 
   render() {
     return (
       <HashRouter>
-        <div>
-          <Switch>
-            <Route exact path="/" component={Home} exact />
-            <Route path="/search" component={(props) => <SearchPage {...props} sleep={this.sleep} addToDB={this.addToDB} checkIfDB={this.checkIfDB} />} />
-            <Route path="/shelves" component={(props) => <Shelves {...props} sleep={this.sleep} />} />
-            <Route path="/profile" component={(props) => <Profile {...props} state={this.state} sleep={this.sleep} />} />
-            <Route path="/clubs" component={(props) => <Clubs {...props} sleep={this.sleep} />} />
-            <Route path="/leaderboard" component={(props) => <Leaderboard {...props} sleep={this.sleep} />} />
-            <Route component={Error} />
-          </Switch>
-        </div> 
+        <Switch>
+          <Route exact path="/" component={Home} exact />
+          <Route path="/search" component={(props) => <SearchPage {...props} sleep={this.sleep} addToDB={this.addToDB} checkIfDB={this.checkIfDB} />} />
+          <Route path="/profile" component={(props) => <Profile {...props} state={this.state} sleep={this.sleep} />} />
+          <Route path="/clubs" component={(props) => <Clubs {...props} sleep={this.sleep} />} />
+          <Route path="/leaderboard" component={(props) => <Leaderboard {...props} sleep={this.sleep} />} />
+          <Route component={Error} />
+        </Switch>
       </HashRouter>
-      
-      // <div className="App">
-      //   <Header />
-      //   <Books />
-      // </div>
     );
   }
 }

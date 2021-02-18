@@ -1,4 +1,4 @@
-@import "./_variables.scss";
+@import "../_variables.scss";
 
 .sample-book-img {
   height: 150px;
@@ -28,7 +28,7 @@
   padding: 10px 6px 10px 14px;
   margin: 10px;
   border: 2px solid red;
-  border-color: #dc3545;
+  border-color: $primary-color;
   border-radius: 2%;
 }
 
@@ -105,7 +105,7 @@
 }
 
 .sample-add-description {
-  color: #dc3545;
+  color: $primary-color;
   margin-bottom: 0px;
   font-weight: bold;
   font-size: 11px;
@@ -139,26 +139,26 @@
   margin-bottom: 5px;
   font-size: 10px;
   font-weight: bold;
-  color: #dc3545;
+  color: $primary-color;
 }
 
 .sample-CURR-count {
   font-size: 10px;
   margin-bottom: 5px;
   font-weight: bold;
-  color: #dc3545;
+  color: $primary-color;
 }
 
 .sample-ARL-count {
   font-size: 10px;
   margin-bottom: 5px;
   font-weight: bold;
-  color: #dc3545;
+  color: $primary-color;
 }
 
 .sample-DNF-count {
   font-size: 10px;
   margin-bottom: 5px;
   font-weight: bold;
-  color: #dc3545;
+  color: $primary-color;
 }

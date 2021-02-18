@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Auth0Provider } from '@auth0/auth0-react';
@@ -9,10 +8,9 @@ ReactDOM.render(
   <Auth0Provider
     domain="dev-rtb0ue8q.us.auth0.com"
     clientId="8WjM6U2lIKjte5t7Z9FQ3G05DK0Y9wrF"
-    redirectUri="https://read50.com/#/search"
+    redirectUri="http://localhost:3000/#/search"
   >
-    
-    <App />
+  <App />
   </Auth0Provider>,
   document.getElementById('root')
 );

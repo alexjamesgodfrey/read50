@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../styles/SampleBookCard.scss';
 
 const SampleBookCard = (props) => {
@@ -45,6 +45,27 @@ const SampleBookCard = (props) => {
       }
     }
   }
+
+
+  const checkBoxes = async () => {
+    const randomInt = Math.floor(Math.random() * 4);
+    console.log(randomInt);
+    if (randomInt === 0) {
+      return null;
+    } else if (randomInt === 1) {
+      document.getElementsByClassName("sample-TBR")[props.number].checked = true;
+    } else if (randomInt === 2) {
+      document.getElementsByClassName("sample-CURR")[props.number].checked = true;
+    } else if (randomInt === 3) {
+      document.getElementsByClassName("sample-ARL")[props.number].checked = true;
+    } else if (randomInt === 4) {
+      document.getElementsByClassName("sample-DNF")[props.number].checked = true;
+    } 
+  }
+
+  useEffect(() => {
+    checkBoxes();
+  }, [])
 
   const plusWant = () => plusOne('want');
   const plusReading = () => plusOne('reading');

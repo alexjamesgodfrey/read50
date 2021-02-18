@@ -5,13 +5,6 @@ import ShelfEntry from './ShelfEntry.js';
 const Shelf = (props) => {
     let numbers = -1;
 
-    console.log(props.type);
-    console.log(props.TBR);
-    console.log(props.CURR);
-    console.log(props.ARL);
-    console.log(props.DNF);
-    
-
     if (props.type === 'Want Shelf') {
         if (props.TBR.length === 0) {
             return (
