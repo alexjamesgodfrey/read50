@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Spinner from 'react-bootstrap/Spinner'
-import Button from 'react-bootstrap/Button'
-import '../styles/Leaderboard.scss';
+import './Leaderboard.scss';
 
 
 const LeaderboardEntry = (props) => {

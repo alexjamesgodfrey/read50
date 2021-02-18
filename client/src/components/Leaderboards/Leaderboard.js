@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Header from './components/Header.js';
-import LeaderboardList from './components/LeaderboardList.js';
-import Loading from './components/Loading.js';
-import './styles/Leaderboard.scss';
+import Header from '../Header.js';
+import LeaderboardList from './LeaderboardList.js';
+import Loading from '../Loading.js';
+import './Leaderboard.scss';
 
 class Leaderboard extends Component {
     constructor(props) {

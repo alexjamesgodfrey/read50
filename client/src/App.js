@@ -4,7 +4,7 @@ import Home from './components/Home/Home.js';
 import SearchPage from './SearchPage.js';
 import Profile from './components/Profile/Profile.js';
 import Clubs from './Clubs.js';
-import Leaderboard from './Leaderboard.js';
+import Leaderboard from './components/Leaderboards/Leaderboard.js';
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 

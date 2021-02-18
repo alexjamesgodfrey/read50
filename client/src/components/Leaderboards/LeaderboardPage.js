@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import LeaderboardEntry from './LeaderboardEntry.js';
-import Pagination from 'react-bootstrap/Pagination';
-import '../styles/Leaderboard.scss';
+import './Leaderboard.scss';
 
 const LeaderboardPage = (props) => {
-
-    
     return (
         <div className="leaderboard">
         {
@@ -21,8 +18,7 @@ const LeaderboardPage = (props) => {
                     />
             })
             }
-            
-      </div>
+        </div>
     )
 }
 
