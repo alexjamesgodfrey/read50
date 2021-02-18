@@ -8,18 +8,12 @@
 }
 
 .head {
-  margin: 20px 0px 0px 0px;
-  text-align: center;
+  margin: 20px 0px;
 }
 
 .tiny-head {
   text-align: center;
   margin: 0px;
-}
-
-.tiny-tiny-head {
-  margin-bottom: 20px;
-  text-align: center;
 }
 
 .leaderboard-entry {
@@ -31,8 +25,8 @@
 }
 
 .entry-rank {
-  width: 15%;
-  min-width: 65px;
+  width: 8%;
+  min-width: 70px;
   text-align: center;
   font-weight: bold;
   border: 2px solid black;
@@ -41,7 +35,7 @@
 }
 
 .entry-name {
-  width: 25%;
+  width: 20%;
   min-width: 120px;
   text-align: center;
   font-weight: bold;
@@ -70,7 +64,7 @@
 }
 
 .real-entry-rank {
-  width: 15%;
+  width: 8%;
   min-width: 70px;
   text-align: center;
   border: 2px solid black;
@@ -80,7 +74,7 @@
 }
 
 .real-entry-name {
-  width: 25%;
+  width: 20%;
   min-width: 120px;
   text-align: center;
   border: 2px solid black;
