@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Alert from 'react-bootstrap/Alert';
-import '../styles/BetaAlert.scss';
+import './BetaAlert.scss';
 
 const BetaAlert = () => {
     const [show, setShow] = useState(true);

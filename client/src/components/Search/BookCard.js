@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import amazon from '../images/amazon_logo.png';
-import bookshop from '../images/bookshop_logo.png';
-import wikipedia from '../images/wikipedia.png';
-import '../styles/BookCard.scss';
+import amazon from '../../images/amazon_logo.png';
+import bookshop from '../../images/bookshop_logo.png';
+import wikipedia from '../../images/wikipedia.png';
+import './BookCard.scss';
 
 const BookCard = (props) => {
   const { user, isAuthenticated, isLoading } = useAuth0(); 
@@ -47,6 +47,7 @@ const BookCard = (props) => {
     //if unchecked, add to list
     if (box[props.cardNumber].checked === true) {
       //first, do a fake count increase (so rendercounts does not have to be run again)
+      prevNumber = parseInt(prevNumber[0, 1]);
       prevNumber++;
       prevNumber = '(' + prevNumber + ')';
       numbers[props.cardNumber].innerHTML = prevNumber;
@@ -76,6 +77,7 @@ const BookCard = (props) => {
     //if checked, remove from list
     if (box[props.cardNumber].checked === false) {
       //first, do a fake count decrease (so rendercounts does not have to be run again)
+      prevNumber = parseInt(prevNumber[0, 1]);
       prevNumber--;
       prevNumber = '(' + prevNumber + ')';
       numbers[props.cardNumber].innerHTML = prevNumber;

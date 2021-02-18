@@ -1,13 +1,19 @@
+@import "../../_variables.scss";
+
 #card-title {
-  font-size: max(1.3vw, 22px);
+  font-size: calc(max(1.3vw, 22px));
+  line-height: 0.8;
 }
 
 #author {
-  font-size: max(1vw, 20px);
+  font-size: calc(max(1vw, 20px));
+  line-height: 0.9;
 }
 
 #date {
-  font-size: max(0.7vw, 18px);
+  font-size: calc(max(0.7vw, 18px));
+  line-height: 0.9;
+  margin-bottom: 10px;
 }
 
 .bookcard {
@@ -17,7 +23,8 @@
   text-align: center;
   padding: 20px 10px 20px 30px;
   margin: 25px;
-  border: 3px solid #7e8079;
+  border: 2px solid black;
+  border-color: $primary-color;
   border-radius: 2%;
 }
 
@@ -37,16 +44,16 @@
 }
 
 .action-buttons {
+  margin-top: 5px;
   display: flex;
   flex-wrap: wrap;
   max-width: 250px;
-  margin-top: 10px;
   justify-content: space-around;
 }
 
 .checklist-container {
   height: 40px;
-  width: 33%;
+  width: 25%;
 }
 
 .TBR {
@@ -79,26 +86,73 @@
   background-color: #fcf6f5ff;
 }
 
+.DNF {
+  color: white;
+  width: 35px;
+  height: 35px;
+  border: 2px solid black;
+  border-radius: 5%;
+  cursor: pointer;
+  background-color: #fcf6f5ff;
+}
+
 .description-container {
-  width: 33%;
+  width: 25%;
 }
 
 .add-description {
-  color: #7e8079;
+  color: $primary-color;
+  margin-bottom: 0px;
   font-weight: bold;
   font-size: 15px;
 }
 
-.amazon {
-  padding-top: 10px;
+.external-container {
+  padding-top: 8px;
+  width: 30%;
+  height: 60px;
 }
 
-.button-image {
-  width: 40px;
-  height: 40px;
+.wikipedia-png {
+  margin-left: 5px;
+  width: 55px;
+  height: 55px;
 }
 
 .amazon-png {
+  margin-top: 6px;
+  margin-left: 2px;
   width: 50px;
   height: 50px;
+}
+
+.bookshop-png {
+  margin-top: 10px;
+  margin-left: 12px;
+  width: 38px;
+  height: 38px;
+}
+
+.TBR-count {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: $primary-color;
+}
+
+.CURR-count {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: $primary-color;
+}
+
+.ARL-count {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: $primary-color;
+}
+
+.DNF-count {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: $primary-color;
 }

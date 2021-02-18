@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useAuth0 } from '@auth0/auth0-react';
-import Header from '../Header.js';
-import Shelf from '../Shelf.js';
-import Timeline from '../Timeline.js';
+import Header from '../Header/Header.js';
+import Shelf from './Shelf.js';
+import Timeline from './Timeline.js';
 import Loading from '../Loading.js';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Button from 'react-bootstrap/Button';

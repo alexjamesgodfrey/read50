@@ -1,8 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap'
-import '../styles/Header.scss';
+import { NavDropdown } from 'react-bootstrap'
+import './Header.scss';
 
 const LoggedInDropdown = () => {
     const { logout } = useAuth0();

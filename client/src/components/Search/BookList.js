@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import CardPage from './components/CardPage';
+import CardPage from '../CardPage';
 import Pagination from 'react-bootstrap/Pagination';
-import './styles/pagination.scss';
+import '../../styles/pagination.scss';
 
 const BookList = (props) => {
   window.scrollTo({

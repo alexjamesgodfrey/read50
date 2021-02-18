@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import Header from './components/Header.js';
-import Loading from './components/Loading.js';
+import Header from '../Header/Header.js';
+import Loading from '../Loading.js';
 import Books from './Books.js';
 
 const SearchPage = (props) => {

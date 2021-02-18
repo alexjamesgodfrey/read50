@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
-import '../styles/shelfentry.scss';
+import './ShelfEntry.scss';
 
 
 const ShelfEntry = (props) => {
@@ -99,7 +99,7 @@ const ShelfEntry = (props) => {
             <img className="image" src={props.image} alt="no image found :(" />
             <p>{props.author}</p>
             <p>{props.published}</p>
-            <Button className="remove-button" variant="danger" size="sm" onClick={removeButton}>Remove</Button>
+            <Button className="remove-button" variant="info" size="sm" onClick={removeButton}>Remove</Button>
         </div>
     )
 }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Header from './components/Header.js';
-import Loading from './components/Loading.js';
-import ClubLogo from './images/clubs.png';
-import './styles/Clubs.scss';
+import Header from '../Header/Header.js';
+import Loading from '../Loading.js';
+import ClubLogo from '../../images/clubs.png';
+import './Clubs.scss';
 
 const Clubs = (props) => {
   const [load, setLoad] = useState(true);

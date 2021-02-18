@@ -1,4 +1,4 @@
-import BookCard from './BookCard.js';
+import BookCard from './Search/BookCard.js';
 import NoImage from '../images/noimage.png';
 
 const CardPage = (props) => {

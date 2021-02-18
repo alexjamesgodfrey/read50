@@ -4,7 +4,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Navbar, Nav } from 'react-bootstrap';
 import LoggedInDropdown from './LoggedInDropdown.js';
 import NotLoggedInDropdown from './NotLoggedInDropdown.js';
-import '../styles/Header.scss';
+import './Header.scss';
 
 const CustomNav = () => {
   const { isAuthenticated } = useAuth0();
