@@ -47,7 +47,7 @@ const Profile = (props) => {
     //day of year function for calculating pacing
     const [day, setDay] = useState(0);
     //sets shelf on dropdown
-    const [shelf, setShelf] = useState('Read Shelf');
+    const [shelf, setShelf] = useState('All');
     //state for shelves
     const [TBR, setTBR] = useState([]);
     const [CURR, setCURR] = useState([]);
@@ -206,12 +206,23 @@ const Profile = (props) => {
                             <Dropdown.Item as="button" onClick={() => setShelf('Currently Reading Shelf')}>Currently Reading</Dropdown.Item>
                             <Dropdown.Item as="button" onClick={() => setShelf('Read Shelf')}>Read</Dropdown.Item>
                             <Dropdown.Item as="button" onClick={() => setShelf('Did Not Finish Shelf')}>Did Not Finish</Dropdown.Item>
+                            <Dropdown.Item as="button" onClick={() => setShelf('All')}>View All</Dropdown.Item>
                         </DropdownButton>
                     </div>
-                    <div onClick={onShelfClick} className="profile-main">
-                        <Shelf profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={shelf} />
-                        <Timeline key={reRender}/>
-                    </div>
+                    {shelf === 'All' ? 
+                        <div onClick={onShelfClick} className="profile-main">
+                            <Shelf profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Want Shelf'} />
+                            <Shelf profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Currently Reading Shelf'} />
+                            <Shelf profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Read Shelf'} />
+                            <Shelf profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Did Not Finish Shelf'} />
+                            <Timeline key={reRender}/>
+                        </div>
+                        :
+                        <div onClick={onShelfClick} className="profile-main">
+                            <Shelf profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={shelf} />
+                            <Timeline key={reRender}/>
+                        </div>
+                    }
                 </div>
             </div>
         )

@@ -1,31 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import './Leaderboard.scss';
 
 
 const LeaderboardEntry = (props) => {
-    const [load, setLoad] = useState(true);
 
-    // const loading = async (ms) => {
-    //     await props.delay(ms);
-    //     setLoad(false);
-    // }
-
-    // useEffect(() => {
-    //     loading(1000);
-    // }, [])
-
-    // if (load) {
-    //     return (
-    //         <div className="shelf">
-    //             <Spinner className="shelfentry" animation="border" variant="danger" size="sm" />
-    //         </div>
-    //     )
-    // }
+    let link = `/user/${props.username}`;
 
     return (
         <div className="leaderboard-entry">
             <div className="real-entry-rank">#{props.rank}</div>
-            <div className="real-entry-name">{props.username}</div>
+            <div className="real-entry-name"><Link to={link}>{props.username}</Link></div>
             <div className="real-entry-meat">{props.threeNumSum}</div>
         </div>
     )

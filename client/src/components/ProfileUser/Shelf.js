@@ -113,12 +113,12 @@ const Shelf = (props) => {
         </div>
         
     )
-    } else {
+    } else if (props.type === 'Did Not Finish Shelf') {
         if (props.DNF.length === 0) {
             return (
                 <div className="shelf">
                     <h3>Did Not Finish Shelf</h3>
-                    {props.profile ? <p>Empty!<Link to="/search">Add books</Link></p> : <p>Empty :(</p>}
+                    {props.profile ? <p>Empty! <Link to="/search">Add books</Link></p> : <p>Empty :(</p>}
                 </div>
             )
         }
