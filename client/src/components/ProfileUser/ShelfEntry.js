@@ -99,7 +99,7 @@ const ShelfEntry = (props) => {
             <img className="image" src={props.image} alt="no image found :(" />
             <p>{props.author}</p>
             <p>{props.published}</p>
-            <Button className="remove-button" variant="info" size="sm" onClick={removeButton}>Remove</Button>
+            {props.readOnly ? <span></span> : <Button className="remove-button" variant="info" size="sm" onClick={removeButton}>Remove</Button>}
         </div>
     )
 }

@@ -10,10 +10,21 @@ import Form from 'react-bootstrap/Form';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import './Profile.scss';
+import { useParams } from 'react-router';
 
 const Profile = (props) => {
     //fetches auth0 user information
     const { user, isAuthenticated } = useAuth0();
+    let { username } = useParams();
+
+    const [sub, setSub] = useState("");
+
+    const fetchCreds = async () => {
+        //fetch auth0_id from username param
+        const getSub = await fetch(`/api/usernametosub/${username}`);
+        const subText = await getSub.json();
+        setSub(subText);
+    }
 
     //function to get day of year 
     const dayOfYear = date => {
@@ -44,11 +55,11 @@ const Profile = (props) => {
     const [DNF, setDNF] = useState([]);
 
     //function that gets the users yearly goal and books read in current year and updates state
-    const getGoals = async () => {
+    const getGoals = async (sub) => {
         await props.sleep(1000);
         try {
             //fetches yearly goal
-            const goal = await fetch(`/api/goal/${user.sub}`);
+            const goal = await fetch(`/api/goal/${sub}`);
             const goalJson = await goal.json();
             if (goalJson === null) {
                 setGoal('NO GOAL SET');
@@ -56,7 +67,7 @@ const Profile = (props) => {
                 setGoal(goalJson);
             }
             //fetches books read in 2021
-            const readDB = await fetch(`/api/twooneread/${user.sub}`);
+            const readDB = await fetch(`/api/twooneread/${sub}`);
             const readJson = await readDB.json();
             setRead(readJson);
         } catch (err) {
@@ -66,14 +77,14 @@ const Profile = (props) => {
     }
 
     //function that is run on the click of the edit yearly goal button
-    const onEdit = async () => {
+    const onEdit = async (sub) => {
         //changes button text
         if (edit === 'Edit') {
             setEdit('Save');
         } else {
             setEdit('Edit');
             //sends new goal to database
-            const setDB = await fetch(`/api/setgoal/${goal}/${user.sub}`, {
+            const setDB = await fetch(`/api/setgoal/${goal}/${sub}`, {
                 method: "PUT",
             });
         }
@@ -109,17 +120,17 @@ const Profile = (props) => {
     }
 
     //gets the users stats (books read, pages read, words read) and converts to readable form
-    const getStats = async () => {
+    const getStats = async (sub) => {
         await props.sleep(1000);
         try {
             //fetch books, pages, and words information and converts to json
-            const books = await fetch(`/api/3numsum/books/${user.sub}`);
+            const books = await fetch(`/api/3numsum/books/${sub}`);
             let booksJson = await books.json();
             let booksReal = numConverter(parseInt(booksJson));
-            const pages = await fetch(`/api/3numsum/pages/${user.sub}`);
+            const pages = await fetch(`/api/3numsum/pages/${sub}`);
             let pagesJson = await pages.json();
             let pagesReal = numConverter(parseInt(pagesJson));
-            const words = await fetch(`/api/3numsum/words/${user.sub}`);
+            const words = await fetch(`/api/3numsum/words/${sub}`);
             let wordsJson = await words.json();
             let wordsReal = numConverter(parseInt(wordsJson));
             //sets stats state appropriately
@@ -138,16 +149,16 @@ const Profile = (props) => {
         setReRender(reRender + 1);
     }
 
-    const getLists = async () => {
+    const getLists = async (sub) => {
         await props.sleep(1000);
         try {
-            const TBRResponse = await fetch(`/api/booklists/TBR/${user.sub}`)
+            const TBRResponse = await fetch(`/api/booklists/TBR/${sub}`)
             const TBRjson = await TBRResponse.json();
-            const CURRResponse = await fetch(`/api/booklists/CURR/${user.sub}`)
+            const CURRResponse = await fetch(`/api/booklists/CURR/${sub}`)
             const CURRjson = await CURRResponse.json();
-            const ARLResponse = await fetch(`/api/booklists/ARL/${user.sub}`)
+            const ARLResponse = await fetch(`/api/booklists/ARL/${sub}`)
             const ARLjson = await ARLResponse.json();
-            const DNFResponse = await fetch(`/api/booklists/DNF/${user.sub}`)
+            const DNFResponse = await fetch(`/api/booklists/DNF/${sub}`)
             const DNFjson = await DNFResponse.json();
             setTBR(TBRjson);
             setCURR(CURRjson);
@@ -162,9 +173,10 @@ const Profile = (props) => {
     
     
     useEffect(() => {
-        getGoals();
-        getStats();
-        getLists();
+        fetchCreds();
+        getGoals(sub);
+        getStats(sub);
+        getLists(sub);
         dayOfYear(new Date());
     }, [reRun])
     
@@ -181,22 +193,12 @@ const Profile = (props) => {
             <div className="profile-all">
                 <Header />
                 <div className="profile">
-                    <div className="progress-box">
-                        <h3>Yearly Goal: </h3>
-                        {(edit === 'Edit') ? <h3 className="goal">{goal} books</h3> : <Form.Group>
-                            <Form.Control onChange={handleChange} placeholder={goal} id="goal-enter" />
-                                                                                    </Form.Group> 
-                        }
-                        <Button id="edit-button" variant="light" onClick={onEdit}>{edit}</Button>
-                    </div>
-                    <h3>Pace: {((goal - read) / ((365-day) / 7)).toFixed(3)} books / week to meet goal</h3>
-                    <ProgressBar id="goal-progress" variant="danger" now={read / goal * 100} label={(read / goal * 100) + '%'} />
-                    <div className="profile-top">
-                        <img className="profile-pic" src={user.picture}></img>
-                        <div className="profile-info">
-                            <p className="profile-piece">Welcome, {user['https://www.read50.com/username']}</p>
-                            <p className="profile-piece" id="stats">{stats}</p>
-                        </div>
+                    <h2>{username}'s read50 | {stats}</h2>
+                    <div className="divider"></div>
+                    <div>
+                        <h3>Yearly Goal: {goal} books</h3>
+                        <h3>Pace: {((goal - read) / ((365-day) / 7)).toFixed(3)} books / week to meet goal</h3>
+                        <ProgressBar id="goal-progress-user" variant="danger" now={read / goal * 100} label={(read / goal * 100) + '%'} />
                     </div>
                     <div className="shelf-dropdown">
                         <DropdownButton variant="danger" id="dropdown-item-button" title={shelf}>
@@ -207,7 +209,7 @@ const Profile = (props) => {
                         </DropdownButton>
                     </div>
                     <div onClick={onShelfClick} className="profile-main">
-                        <Shelf TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={shelf} />
+                        <Shelf profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={shelf} />
                         <Timeline key={reRender}/>
                     </div>
                 </div>

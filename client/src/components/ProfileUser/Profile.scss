@@ -112,6 +112,11 @@ p {
   width: 80%;
 }
 
+#goal-progress-user {
+  margin: 0px auto 40px auto;
+  width: 60%;
+}
+
 h3 {
   text-align: center;
 }
@@ -139,4 +144,23 @@ h3 {
 
 .shelf-dropdown {
   margin: 30px auto 0px auto;
+}
+
+h2 {
+  text-align: center;
+}
+
+.divider {
+  background-color: #e9ecef;
+  height: 10px;
+  width: 80%;
+  margin: 0px auto 15px auto;
+}
+
+.user-goals {
+  .progress-box {
+    h3 {
+      text-align: center;
+    }
+  }
 }

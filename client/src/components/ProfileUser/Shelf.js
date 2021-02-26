@@ -10,7 +10,7 @@ const Shelf = (props) => {
             return (
                 <div className="shelf">
                     <h3>Want Shelf</h3>
-                    <p>Empty! <Link to="/search">Add books</Link></p>
+                    {props.profile ? <p>Empty! <Link to="/search">Add books</Link></p> : <p>Empty :(</p>}
                 </div>
             )
         }
@@ -22,6 +22,7 @@ const Shelf = (props) => {
             props.TBR.map((book, i) => {
                 numbers++;
                 return <ShelfEntry
+                            readOnly={!props.profile}
                             key={i}
                             entryNumber={numbers}
                             google_id={book.google_id}
@@ -45,7 +46,7 @@ const Shelf = (props) => {
             return (
                 <div className="shelf">
                     <h3>Currently Reading Shelf</h3>
-                    <p>Empty! <Link to="/search">Add books</Link></p>
+                    {props.profile ? <p>Empty! <Link to="/search">Add books</Link></p> : <p>Empty :(</p>}
                 </div>
             )
         }
@@ -57,6 +58,7 @@ const Shelf = (props) => {
             props.CURR.map((book, i) => {
                 numbers++;
                 return <ShelfEntry
+                            readOnly={!props.profile}
                             key={i}
                             entryNumber={numbers}
                             google_id={book.google_id}
@@ -80,7 +82,7 @@ const Shelf = (props) => {
             return (
                 <div className="shelf">
                     <h3>Read Shelf</h3>
-                    <p>Empty! <Link to="/search">Add books</Link></p>
+                    {props.profile ? <p>Empty! <Link to="/search">Add books</Link></p> : <p>Empty :(</p>}
                 </div>
             )
         }
@@ -92,6 +94,7 @@ const Shelf = (props) => {
             props.ARL.map((book, i) => {
                 numbers++;
                 return <ShelfEntry
+                            readOnly={!props.profile}
                             key={i}
                             entryNumber={numbers}
                             google_id={book.google_id}
@@ -115,7 +118,7 @@ const Shelf = (props) => {
             return (
                 <div className="shelf">
                     <h3>Did Not Finish Shelf</h3>
-                    <p>Empty! <Link to="/search">Add books</Link></p>
+                    {props.profile ? <p>Empty!<Link to="/search">Add books</Link></p> : <p>Empty :(</p>}
                 </div>
             )
         }
@@ -127,6 +130,7 @@ const Shelf = (props) => {
             props.DNF.map((book, i) => {
                 numbers++;
                 return <ShelfEntry
+                            readOnly={!props.profile}
                             key={i}
                             entryNumber={numbers}
                             google_id={book.google_id}

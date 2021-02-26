@@ -31,13 +31,12 @@ module.exports = function (app) {
         }
     })
 
-    //get a user by user_id
-        app.get("/api/users/:auth0_id", async (req, res) => {
+    //get a auth0_id by username
+        app.get("/api/usernametosub/:uname", async (req, res) => {
             try {
-                const { auth0_id } = req.params;
-                const user = await pool.query("SELECT user_id FROM users WHERE auth0_id = $1", [auth0_id]);
-                console.log(user.rows[0].user_id);
-                res.json(user.rows[0]);
+                const { uname } = req.params;
+                const user = await pool.query("SELECT auth0_id FROM users WHERE username = $1", [uname]);
+                res.json(user.rows[0].auth0_id);
             } catch (err) {
                 console.error(err.message);
             }
