@@ -192,7 +192,7 @@ const Profile = (props) => {
                         <Button id="edit-button" variant="light" onClick={onEdit}>{edit}</Button>
                     </div>
                     <h3>Pace: {((goal - read) / ((365-day) / 7)).toFixed(3)} books / week to meet goal</h3>
-                    <ProgressBar id="goal-progress" variant="danger" now={Math.max((read / goal * 100), 3)} label={(read / goal * 100).toFixed(2) + '%'} />
+                    <ProgressBar id="goal-progress" variant="danger" now={Math.max((read / goal * 100), 4)} label={(read / goal * 100).toFixed(2) + '%'} />
                     <div className="profile-top">
                         <img className="profile-pic" src={user.picture}></img>
                         <div className="profile-info">
