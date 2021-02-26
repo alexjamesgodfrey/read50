@@ -190,7 +190,7 @@ const Profile = (props) => {
                     <div>
                         <h3>Yearly Goal: {goal} books</h3>
                         <h3>Pace: {((goal - read) / ((365-day) / 7)).toFixed(3)} books / week to meet goal</h3>
-                        <ProgressBar id="goal-progress-user" variant="danger" now={read / goal * 100} label={(read / goal * 100) + '%'} />
+                        <ProgressBar id="goal-progress" variant="danger" now={Math.max((read / goal * 100), 3)} label={(read / goal * 100).toFixed(2) + '%'} />
                     </div>
                     <div className="shelf-dropdown">
                         <DropdownButton variant="danger" id="dropdown-item-button" title={shelf}>
