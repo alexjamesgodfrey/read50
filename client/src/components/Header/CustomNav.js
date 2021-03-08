@@ -15,9 +15,8 @@ const CustomNav = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav bg="danger">
-          <Link to="/"><Navbar.Text id="nav-link">home</Navbar.Text></Link>
           <Link to="/search"><Navbar.Text id="nav-link">search</Navbar.Text></Link>
-          <Link to="/clubs"><Navbar.Text id="nav-link">clubs</Navbar.Text></Link>
+          {/* <Link to="/clubs"><Navbar.Text id="nav-link">clubs</Navbar.Text></Link> */}
           <Link to="/leaderboard"><Navbar.Text id="nav-link">leaderboard</Navbar.Text></Link>
           <Link to="/search"><Navbar.Text id="nav-link">about</Navbar.Text></Link>
           {(isAuthenticated ? <LoggedInDropdown /> : <NotLoggedInDropdown />)}
