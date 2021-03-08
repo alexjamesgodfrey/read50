@@ -104,6 +104,10 @@
 }
 
 .validation-text-2 {
+  line-height: 1.4;
+}
+
+.validation-text-3 {
   line-height: 0.9;
 }
 
@@ -147,7 +151,7 @@ h3 {
 }
 
 .shelf-dropdown {
-  margin: 30px auto 0px auto;
+  margin: 0px auto;
 }
 
 h2 {
@@ -167,4 +171,10 @@ h2 {
       text-align: center;
     }
   }
+}
+
+.shelves-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
