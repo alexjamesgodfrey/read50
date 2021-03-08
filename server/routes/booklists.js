@@ -31,10 +31,10 @@ module.exports = function (app) {
     //create a booklist entry
     app.post("/api/booklists", async (req, res) => {
         try {
-            const { auth0_id, google_id, listtype, title, author, date, image, pages, words, date_added, seconds_added } = req.body;
+            const { auth0_id, google_id, listtype, title, author, date, image, pages, words, date_added, seconds_added, month_read, year_read, review, recommend } = req.body;
             const newBookList = await pool.query(
-                "INSERT INTO booklists (auth0_id, google_id, listtype, title, author, date, image, pages, words, date_added, type, seconds_added) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 'add', $11) RETURNING *",
-                [auth0_id, google_id, listtype, title, author, date, image, pages, words, date_added, seconds_added]
+                "INSERT INTO booklists (auth0_id, google_id, listtype, title, author, date, image, pages, words, date_added, type, seconds_added, month_read, year_read, review, recommend) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 'add', $11, $12, $13, $14, $15) RETURNING *",
+                [auth0_id, google_id, listtype, title, author, date, image, pages, words, date_added, seconds_added, month_read, year_read, review, recommend]
             );
             res.json(newBookList.rows[0]);
         } catch (err) {

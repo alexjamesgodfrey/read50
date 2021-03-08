@@ -19,7 +19,7 @@
 .bookcard {
   display: flex;
   align-items: center;
-  max-width: 600px;
+  width: 400px;
   text-align: center;
   padding: 20px 10px 20px 30px;
   margin: 25px;
@@ -28,8 +28,16 @@
   border-radius: 2%;
 }
 
+.innards {
+  display: flex;
+}
+
 .bookcard img {
   margin-right: 10px;
+}
+
+#cover {
+  margin-top: 10px;
 }
 
 #right-side {
@@ -134,25 +142,58 @@
 }
 
 .TBR-count {
+  display: none;
+  line-height: 1;
   margin-bottom: 5px;
   font-weight: bold;
   color: $primary-color;
 }
 
 .CURR-count {
+  display: none;
+  line-height: 1;
   margin-bottom: 5px;
   font-weight: bold;
   color: $primary-color;
 }
 
 .ARL-count {
+  display: none;
+  line-height: 1;
   margin-bottom: 5px;
   font-weight: bold;
   color: $primary-color;
 }
 
 .DNF-count {
+  display: none;
+  line-height: 1;
   margin-bottom: 5px;
   font-weight: bold;
   color: $primary-color;
+}
+
+#spinny {
+  margin-bottom: 6px;
+}
+
+#arl-entry {
+  display: flex;
+  flex-direction: column;
+}
+
+#year {
+  margin-left: 30px;
+  width: 100px;
+}
+
+#recommend {
+  margin-left: 30px;
+  width: 120px;
+}
+
+.submitting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

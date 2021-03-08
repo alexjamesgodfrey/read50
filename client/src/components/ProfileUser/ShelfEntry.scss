@@ -1,6 +1,7 @@
 @import "../../_variables.scss";
 
 .shelf {
+  margin: 20px;
   width: 500px;
   height: 400px;
   p {
@@ -32,8 +33,7 @@
 }
 
 .TBRshelf {
-  border: 2px solid #cad1d9;
-  border-radius: 5%;
+  margin-bottom: 20px;
   width: 200px;
   display: flex;
   align-items: center;
@@ -49,8 +49,7 @@
 }
 
 .CURRshelf {
-  border: 2px solid #cad1d9;
-  border-radius: 5%;
+  margin-bottom: 20px;
   width: 200px;
   display: flex;
   align-items: center;
@@ -66,8 +65,7 @@
 }
 
 .ARLshelf {
-  border: 2px solid #cad1d9;
-  border-radius: 5%;
+  margin-bottom: 20px;
   width: 200px;
   display: flex;
   align-items: center;
@@ -83,8 +81,7 @@
 }
 
 .DNFshelf {
-  border: 2px solid #cad1d9;
-  border-radius: 5%;
+  margin-bottom: 20px;
   width: 200px;
   display: flex;
   align-items: center;
@@ -120,4 +117,8 @@
 
 .shelf-title {
   width: 100%;
+}
+
+#remove {
+  margin-top: 5px;
 }

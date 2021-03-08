@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import Spinner from 'react-bootstrap/Spinner'
-import Button from 'react-bootstrap/Button'
+import Spinner from 'react-bootstrap/Spinner';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 import './ShelfEntry.scss';
 
 
 const ShelfEntry = (props) => {
     const { user } = useAuth0(); 
     const [load, setLoad] = useState(true);
+    const [thoughts, setThoughts] = useState(false);
     const shelfName = props.listType + 'shelf';
 
     const loading = async (ms) => {
@@ -95,11 +97,8 @@ const ShelfEntry = (props) => {
 
     return (
         <div className={shelfName}>
-            <p>{props.title}</p>
-            <img className="image" src={props.image} alt="no image found :(" />
-            <p>{props.author}</p>
-            <p>{props.published}</p>
-            {props.readOnly ? <span></span> : <Button className="remove-button" variant="info" size="sm" onClick={removeButton}>Remove</Button>}
+            <img onClick={() => setThoughts(true)} className="image" src={props.image} alt="no image found :(" />
+            {props.readOnly ? <span></span> : <Button id="remove" className="remove-button" variant="info" size="sm" onClick={removeButton}>Remove</Button>}
         </div>
     )
 }
