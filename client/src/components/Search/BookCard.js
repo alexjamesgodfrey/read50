@@ -13,6 +13,8 @@ const BookCard = (props) => {
   const { user, isAuthenticated, isLoading } = useAuth0(); 
   const { loginWithRedirect } = useAuth0();
 
+  const [page, setPage] = useState(props.page);
+
   const [thoughts, setThoughts] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [complete, setComplete] = useState(false);
@@ -40,13 +42,45 @@ const BookCard = (props) => {
     window.location.href = login();
   }
 
-  const renderCounts = async() => {
-    //not in is authenticated block
-    //get html elements
+  //run on change of props.page to hide the counts and show the loading spinners
+  const showSpinners = () => {
+    //get html elements that show count
     let TBRnumbers = document.getElementsByClassName('TBR' + '-count');
     let CURRnumbers = document.getElementsByClassName('CURR' + '-count');
     let ARLnumbers = document.getElementsByClassName('ARL' + '-count');
     let DNFnumbers = document.getElementsByClassName('DNF' + '-count');
+    //get html elements that show spinner
+    let TBRspinner = document.getElementsByClassName("tbr-spin");
+    let CURRspinner = document.getElementsByClassName("curr-spin");
+    let ARLspinner = document.getElementsByClassName("arl-spin");
+    let DNFspinner = document.getElementsByClassName("dnf-spin");
+    //if not on the first page, the default counts must be re-hidden and the spinners must be shown
+    if (props.page !== 1) {
+      TBRnumbers[props.cardNumber].style.display = 'none';
+      CURRnumbers[props.cardNumber].style.display = 'none';
+      ARLnumbers[props.cardNumber].style.display = 'none';
+      DNFnumbers[props.cardNumber].style.display = 'none';
+      TBRspinner[props.cardNumber].style.display = 'inline-block';
+      CURRspinner[props.cardNumber].style.display = 'inline-block';
+      ARLspinner[props.cardNumber].style.display = 'inline-block';
+      DNFspinner[props.cardNumber].style.display = 'inline-block';
+    }
+  }
+
+  const renderCounts = async () => {
+    //run this function regardless of whether the user is logged in
+    //get html elements that show count
+    let TBRnumbers = document.getElementsByClassName('TBR' + '-count');
+    let CURRnumbers = document.getElementsByClassName('CURR' + '-count');
+    let ARLnumbers = document.getElementsByClassName('ARL' + '-count');
+    let DNFnumbers = document.getElementsByClassName('DNF' + '-count');
+    //get html elements that show spinner
+    let TBRspinner = document.getElementsByClassName("tbr-spin");
+    let CURRspinner = document.getElementsByClassName("curr-spin");
+    let ARLspinner = document.getElementsByClassName("arl-spin");
+    let DNFspinner = document.getElementsByClassName("dnf-spin");
+    //hide the counts and show spinners
+    showSpinners();
     //check if user has item in TBR
     const TBRcount = await fetch(`/api/count/TBR/${props.google_id}`);
     const TBRcountText = await TBRcount.text();
@@ -59,16 +93,16 @@ const BookCard = (props) => {
     //check if user has item in dnf
     const DNFcount = await fetch(`/api/count/DNF/${props.google_id}`);
     const DNFcountText = await DNFcount.text();
-    document.getElementsByClassName("tbr-spin")[props.cardNumber].style.display = "none";
+    TBRspinner[props.cardNumber].style.display = "none";
     TBRnumbers[props.cardNumber].style.display = "block";
     TBRnumbers[props.cardNumber].innerHTML = '(' + TBRcountText + ')';
-    document.getElementsByClassName("curr-spin")[props.cardNumber].style.display = "none";
+    CURRspinner[props.cardNumber].style.display = "none";
     CURRnumbers[props.cardNumber].style.display = "block";
     CURRnumbers[props.cardNumber].innerHTML = '(' + CURRcountText + ')';
-    document.getElementsByClassName("arl-spin")[props.cardNumber].style.display = "none";
+    ARLspinner[props.cardNumber].style.display = "none";
     ARLnumbers[props.cardNumber].style.display = "block";
     ARLnumbers[props.cardNumber].innerHTML = '(' + ARLcountText + ')';
-    document.getElementsByClassName("dnf-spin")[props.cardNumber].style.display = "none";
+    DNFspinner[props.cardNumber].style.display = "none";
     DNFnumbers[props.cardNumber].style.display = "block";
     DNFnumbers[props.cardNumber].innerHTML = '(' + DNFcountText + ')';
   }
@@ -361,7 +395,7 @@ const BookCard = (props) => {
           <div id="right-side">
             <div className="desc">
               <h1 id="card-title">{props.title}</h1>
-              <i><h1 id="author">{props.author}</h1></i>
+              <h1 id="author">{props.author}</h1>
               <h1 id="date">{props.published}</h1>
             </div>
             <div className="action-buttons">

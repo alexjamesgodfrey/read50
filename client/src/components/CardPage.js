@@ -6,11 +6,11 @@ const CardPage = (props) => {
     const stringTrimmer = (string) => {
     if (string) {
       if (string.length < 20) {
-        return string.toUpperCase();
+        return string;
       } else {
         string = string.substring(0, 14);
         string += '...';
-        return string.toUpperCase();
+        return string;
       }
     } else {
       return 'No Title Found :(';

@@ -5,8 +5,6 @@ import Shelf from './Shelf.js';
 import Timeline from './Timeline.js';
 import Loading from '../Loading.js';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import './Profile.scss';
