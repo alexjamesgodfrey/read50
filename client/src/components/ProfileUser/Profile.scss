@@ -8,6 +8,11 @@
   justify-content: center;
 }
 
+.color {
+  color: $primary-color;
+  font-weight: bold;
+}
+
 .profile-top {
   margin: 0 auto;
   display: flex;
@@ -78,29 +83,28 @@
 }
 
 .profile-piece {
+  line-height: 0.9;
   text-align: center;
 }
 
-#red {
-  margin-left: 0px;
-  margin-right: 3px;
-  background-color: #dc3545;
+.clubsfriends {
+  width: 150px;
+  margin: 25px auto;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  line-height: 0.4;
 }
 
-#green {
-  background-color: #30bf7a;
+.validation-text {
+  color: $primary-color;
+  font-weight: bold;
+  font-size: 25px;
+  text-decoration: underline;
 }
 
-#blue {
-  background-color: #49a1c9;
-}
-
-#orange {
-  background-color: #e88351;
-}
-
-#purple {
-  background-color: #d649c3;
+.validation-text-2 {
+  line-height: 0.9;
 }
 
 p {

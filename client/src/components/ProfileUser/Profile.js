@@ -24,7 +24,9 @@ const Profile = (props) => {
     //main loading state -- set to false after 1250ms
     const [load, setLoad] = useState(true);
     //user stat state
-    const [stats, setStats] = useState('books / pages / words');
+    const [books, setBooks] = useState('books');
+    const [pages, setPages] = useState('pages');
+    const [words, setWords] = useState('words');
     //sets state of edit button for yearly goa;
     const [edit, setEdit] = useState('Edit');
     //state that is set after fetch of books read since start of 2021
@@ -118,15 +120,15 @@ const Profile = (props) => {
             const books = await fetch(`/api/3numsum/books/${user.sub}`);
             let booksJson = await books.json();
             let booksReal = numConverter(parseInt(booksJson));
+            setBooks(booksReal);
             const pages = await fetch(`/api/3numsum/pages/${user.sub}`);
             let pagesJson = await pages.json();
             let pagesReal = numConverter(parseInt(pagesJson));
+            setPages(pagesReal);
             const words = await fetch(`/api/3numsum/words/${user.sub}`);
             let wordsJson = await words.json();
             let wordsReal = numConverter(parseInt(wordsJson));
-            //sets stats state appropriately
-            const total = booksReal + ' / ' + pagesReal + ' / ' + wordsReal;
-            setStats(total);
+            setWords(wordsReal);
         } catch (err) {
             console.error(err.message);
         }
@@ -191,13 +193,25 @@ const Profile = (props) => {
                         }
                         <Button id="edit-button" variant="light" onClick={onEdit}>{edit}</Button>
                     </div>
-                    <h3>Pace: {((goal - read) / ((365-day) / 7)).toFixed(3)} books / week to meet goal</h3>
+                    <h3>Pace: {((goal - read) / ((365-day) / 7)).toFixed(3)} books per week to meet goal</h3>
                     <ProgressBar id="goal-progress" variant="danger" now={Math.max((read / goal * 100), 4)} label={(read / goal * 100).toFixed(2) + '%'} />
                     <div className="profile-top">
                         <img className="profile-pic" src={user.picture}></img>
                         <div className="profile-info">
-                            <p className="profile-piece">Welcome, {user['https://www.read50.com/username']}</p>
-                            <p className="profile-piece" id="stats">{stats}</p>
+                            <p className="profile-piece">Welcome, <span className="color">{user['https://www.read50.com/username']}</span></p>
+                            <p className="profile-piece" id="stats">{books} books</p>
+                            <p className="profile-piece" id="stats">{pages} pages</p>
+                            <p className="profile-piece" id="stats">{words} words</p>
+                        </div>
+                    </div>
+                    <div className="clubsfriends">
+                        <div className="social-container">
+                            <p className="validation-text">0</p>
+                            <p className="validation-text-2">clubs</p>
+                        </div>
+                        <div className="social-container">
+                            <p className="validation-text">0</p>
+                            <p className="validation-text-2">supporting characters</p>
                         </div>
                     </div>
                     <div className="shelf-dropdown">
