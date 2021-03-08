@@ -4,6 +4,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Alert from 'react-bootstrap/Alert';
 import amazon from '../../images/amazon_logo.png';
 import bookshop from '../../images/bookshop_logo.png';
 import wikipedia from '../../images/wikipedia.png';
@@ -13,11 +14,13 @@ const BookCard = (props) => {
   const { user, isAuthenticated, isLoading } = useAuth0(); 
   const { loginWithRedirect } = useAuth0();
 
-  const [page, setPage] = useState(props.page);
-
+  const [format, setFormat] = useState('paper');
   const [thoughts, setThoughts] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [complete, setComplete] = useState(false);
+
+  //date object that will be used to set current year and month
+  const date = new Date();
 
   const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -36,6 +39,43 @@ const BookCard = (props) => {
       box[props.cardNumber].checked = true;
     }
   };
+
+  //generates a review to be used as a placeholder when the user adds the book to their TBR list
+  const generateReview = (sentiment) => {
+    let randy = Math.floor(Math.random() * 3);
+    console.log(randy);
+    if (randy === 0 && sentiment === 'Yes') {
+      let ret = props.title + ' is by far my favorite book this year.';
+      return ret;
+    }
+    else if (randy === 1 && sentiment === 'Yes') {
+      let ret = props.author + ' produced another hit.';
+      return ret;
+    }
+    else if (randy === 2 && sentiment === 'Yes') {
+      let ret = props.published + ' is a day to be remembered.';
+      return ret;
+    }
+    else if (randy === 0 && sentiment === 'No') {
+      let ret = props.title + ' is by far my LEAST favorite book this year.';
+      return ret;
+    }
+    else if (randy === 1 && sentiment === 'No') {
+      let ret = props.author + ' should be ashamed of this novel.';
+      return ret;
+    }
+    else {
+      let ret = props.published + ' is to be remembered as one of the worst days in history.';
+      return ret;
+    }
+  }
+
+  //changes the placeholder text, aided by generateReview
+  const changeReview = () => {
+    const review = document.getElementById('review-entry');
+    review.placeholder = generateReview(document.getElementById('recommend-entry').value);
+  }
+
 
   const showAlert = () => {
     const login = () => loginWithRedirect();
@@ -304,7 +344,8 @@ const BookCard = (props) => {
         "month_read": "${month}",
         "year_read": "${year}",
         "review": "${review}",
-        "recommend": "${recommend}"
+        "recommend": "${recommend}",
+        "format": "${format}"
       }`;
       //send to db
       const response = await fetch("/api/booklists", {
@@ -330,16 +371,16 @@ const BookCard = (props) => {
                   :
                   <div className="submitting">
                     <h3>Submitting...</h3>
-                    <Spinner animation="border" variant="success" />
+                    <Spinner animation="border" variant="danger" />
                   </div>
                 }
               </div>
               :
               <Form id="arl-entry">
-                <Form.Row id="formrow">
+                <Form.Row>
                   <Form.Group id="month">
                     <Form.Label>Month</Form.Label>
-                    <Form.Control id="month-entry" as="select" defaultValue="January">
+                    <Form.Control id="month-entry" as="select" defaultValue={props.months[date.getMonth()]}>
                       <option value="January">January</option>
                       <option value="February">February</option>
                       <option value="March">March</option>
@@ -358,26 +399,29 @@ const BookCard = (props) => {
                     <Form.Label>Year</Form.Label>
                     <Form.Control
                       id="year-entry"
-                      placeholder="Year"
+                      value={date.getFullYear()}
                       controlId="year"
                     />
                   </Form.Group>
                   <Form.Group id="recommend">
                     <Form.Label>Recommend?</Form.Label>
-                    <Form.Control
-                      id="recommend-entry"
-                      as="select"
-                      className="mr-sm-2"
-                    >
+                    <Form.Control onChange={() => changeReview()} id="recommend-entry" as="select" className="mr-sm-2">
                       <option value="Yes">Yes</option>
                       <option value="No">No</option>
                     </Form.Control>
                   </Form.Group>
                 </Form.Row>
-              
+                <Form.Group>
+                  <Form.Label>Format</Form.Label>
+                  <div id="format">
+                    <Form.Check onClick={() => setFormat('paper')} type="radio" label="paper" name="formHorizontalRadios" />
+                    <Form.Check onClick={() => setFormat('ebook')} type="radio" label="ebook" name="formHorizontalRadios" />
+                    <Form.Check onClick={() => setFormat('audio')} type="radio" label="audio" name="formHorizontalRadios" />
+                  </div>
+                </Form.Group>
                 <Form.Group >
                   <Form.Label>Notes // Review // Final Thoughts</Form.Label>
-                  <Form.Control id="review-entry" controlId="review" as="textarea" rows={4} />
+                  <Form.Control id="review-entry" controlId="review" as="textarea" placeholder={props.author + ' hit it out of the park.'} rows={4} />
                 </Form.Group>
               </Form>
             }
@@ -435,8 +479,8 @@ const BookCard = (props) => {
               <div className="external-container"><a href={props.amazon_link} target="_blank" rel="noreferrer"><img className="amazon-png" src={amazon} alt="amazon" /></a></div>
               <div className="external-container"><a href={props.bookshop_link} target="_blank" rel="noreferrer"><img className="bookshop-png" src={bookshop} alt="bookshop" /></a></div>
             </div>
-          </div>
         </div>
+      </div>
       </div>
   )
 

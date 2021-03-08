@@ -2,8 +2,10 @@ import BookCard from './Search/BookCard.js';
 import NoImage from '../images/noimage.png';
 
 const CardPage = (props) => {
-
-    const stringTrimmer = (string) => {
+  
+  //months array to be used to in bookcard to fetch current month
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const stringTrimmer = (string) => {
     if (string) {
       if (string.length < 20) {
         return string;
@@ -42,7 +44,9 @@ const CardPage = (props) => {
             } catch (err) {
                 image = NoImage;
             }
-            return <BookCard
+              return <BookCard
+                        months={months}
+                        alert={props.state.alert}
                         page={props.page}
                         hidden={props.state.hidden}
                         key={i}

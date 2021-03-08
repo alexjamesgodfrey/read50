@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Search from './Search.js';
 import BookList from './BookList.js';
+import Alert from 'react-bootstrap/Alert';
 import request from 'superagent';
 import { Spinner } from 'react-bootstrap';
+import '../../App.scss';
 
 class Books extends Component {
   constructor(props) {
