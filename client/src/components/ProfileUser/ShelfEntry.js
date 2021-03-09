@@ -98,7 +98,7 @@ const ShelfEntry = (props) => {
     return (
         <div className={shelfName}>
             <img onClick={() => setThoughts(true)} className="image" src={props.image} alt="no image found :(" />
-            {props.readOnly ? <span></span> : <Button id="remove" className="remove-button" variant="info" size="sm" onClick={removeButton}>Remove</Button>}
+            {props.readOnly ? <span></span> : <Button id="remove" className="remove-button" variant="warning" size="sm" onClick={removeButton}>Remove</Button>}
         </div>
     )
 }

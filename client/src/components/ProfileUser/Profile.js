@@ -176,7 +176,7 @@ const Profile = (props) => {
     //controls primary loading state
     if (load) {
         return (
-            <Loading />
+            <Loading title={'loading your profile'} />
         )
     }
 

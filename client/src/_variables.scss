@@ -1,11 +1,11 @@
 $primary-color: #6bcf9f;
-$font-color: #5ebf90;
+$font-color: #6bcf9f;
 $secondary-color: white;
-$leaderboard-entry-color: #5ebf90;
+$leaderboard-entry-color: #6bcf9f;
 
 $theme-colors: (
   "danger": $primary-color,
-  "warning": $font-color,
+  "warning": #dc3545,
 );
 
 @import "~bootstrap/scss/bootstrap";
