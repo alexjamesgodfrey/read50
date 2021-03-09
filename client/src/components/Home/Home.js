@@ -48,7 +48,7 @@ class Home extends Component {
         let words = this.state.wordCount;
         let users = this.state.userCount;
         if (loading) {
-            return <Loading />
+            return <Loading title={'loading home page. just a sec'}/>
         }
         return (
             <div className="sample-total">

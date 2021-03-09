@@ -1,31 +1,56 @@
 @import "../../_variables.scss";
+$barrier: 800px;
 
 #card-title {
-  font-size: calc(max(1.3vw, 22px));
   line-height: 0.8;
+  @media screen and (max-width: $barrier) {
+    font-size: 20px;
+  }
+  @media screen and (min-width: $barrier) {
+    font-size: 22px;
+  }
 }
 
 #author {
   font-size: calc(max(1vw, 20px));
   line-height: 0.9;
+  @media screen and (max-width: $barrier) {
+    font-size: 20px;
+  }
+  @media screen and (min-width: $barrier) {
+    font-size: 22px;
+  }
 }
 
 #date {
-  font-size: calc(max(0.7vw, 18px));
   line-height: 0.9;
-  margin-bottom: 10px;
+  @media screen and (max-width: $barrier) {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  @media screen and (min-width: $barrier) {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
 }
 
 .bookcard {
   display: flex;
   align-items: center;
-  width: 400px;
   text-align: center;
-  padding: 20px 10px 20px 30px;
-  margin: 25px;
   border: 2px solid black;
   border-color: $font-color;
   border-radius: 2%;
+  @media screen and (max-width: $barrier) {
+    width: 340px;
+    padding: 15px 5px 8px 22px;
+    margin: 20px;
+  }
+  @media screen and (min-width: $barrier) {
+    width: 400px;
+    padding: 20px 10px 20px 30px;
+    margin: 20px;
+  }
 }
 
 .innards {
@@ -37,7 +62,13 @@
 }
 
 #cover {
-  margin-top: 10px;
+  @media screen and (max-width: $barrier) {
+    margin-top: 5px;
+    width: 100px;
+  }
+  @media screen and (min-width: $barrier) {
+    margin-top: 10px;
+  }
 }
 
 #right-side {
@@ -52,11 +83,15 @@
 }
 
 .action-buttons {
-  margin-top: 5px;
   display: flex;
   flex-wrap: wrap;
-  max-width: 250px;
   justify-content: space-around;
+  @media screen and (max-width: $barrier) {
+    margin-top: 0px;
+  }
+  @media screen and (min-width: $barrier) {
+    margin-top: 5px;
+  }
 }
 
 .checklist-container {
@@ -103,13 +138,21 @@
 .add-description {
   margin-bottom: 0px;
   font-weight: bold;
-  font-size: 15px;
+
+  @media screen and (max-width: $barrier) {
+    font-size: 14px;
+  }
+  @media screen and (min-width: $barrier) {
+    font-size: 15px;
+  }
 }
 
 .external-container {
-  padding-top: 8px;
   width: 30%;
   height: 60px;
+  @media screen and (min-width: $barrier) {
+    padding-top: 8px;
+  }
 }
 
 .wikipedia-png {

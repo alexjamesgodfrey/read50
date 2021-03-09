@@ -14,7 +14,7 @@ const LoginButton = (props) => {
         )
     } else {
         return (
-            <Button variant="success" size="lg" onClick={() => loginWithRedirect()}>{props.text}</Button>
+            <Button variant="danger" size="lg" onClick={() => loginWithRedirect()}>{props.text}</Button>
         );
     }
     

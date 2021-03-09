@@ -463,22 +463,22 @@ const BookCard = (props) => {
               <div className="description-container">
                 <p className="add-description">Want</p>
                 <p className="TBR-count">( )</p>
-                <Spinner className="tbr-spin" id="spinny" animation="border" variant="danger" size="sm" />
+                <Spinner className="tbr-spin" id="spinny" animation="border" variant="warning" size="sm" />
               </div>
               <div className="description-container">
                 <p className="add-description">Reading</p>
                 <p className="CURR-count">( )</p>
-                <Spinner className="curr-spin" id="spinny" animation="border" variant="danger" size="sm" />
+                <Spinner className="curr-spin" id="spinny" animation="border" variant="warning" size="sm" />
               </div>
               <div className="description-container">
                 <p className="add-description">Read</p>
                 <p className="ARL-count">( )</p>
-                <Spinner className="arl-spin" id="spinny" animation="border" variant="danger" size="sm" />
+                <Spinner className="arl-spin" id="spinny" animation="border" variant="warning" size="sm" />
               </div>
               <div className="description-container">
                 <p className="add-description">DNF</p>
                 <p className="DNF-count">( )</p>
-                <Spinner className="dnf-spin" id="spinny" animation="border" variant="danger" size="sm" />
+                <Spinner className="dnf-spin" id="spinny" animation="border" variant="warning" size="sm" />
               </div>
               <div className="checklist-container">
                 <input disabled="true" type="checkbox" className="TBR" onClick={TBRonCheck}></input>
