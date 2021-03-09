@@ -82,43 +82,55 @@ const BookCard = (props) => {
     window.location.href = login();
   }
 
-  //run on change of props.page to hide the counts and show the loading spinners
+  //run on change of props.page to hide the counts show the loading spinners, and disable the checkboxes
   const showSpinners = () => {
     //get html elements that show count
-    let TBRnumbers = document.getElementsByClassName('TBR' + '-count');
-    let CURRnumbers = document.getElementsByClassName('CURR' + '-count');
-    let ARLnumbers = document.getElementsByClassName('ARL' + '-count');
-    let DNFnumbers = document.getElementsByClassName('DNF' + '-count');
+    let TBRnumbers = document.getElementsByClassName('TBR' + '-count')[props.cardNumber];
+    let CURRnumbers = document.getElementsByClassName('CURR' + '-count')[props.cardNumber];
+    let ARLnumbers = document.getElementsByClassName('ARL' + '-count')[props.cardNumber];
+    let DNFnumbers = document.getElementsByClassName('DNF' + '-count')[props.cardNumber];
     //get html elements that show spinner
-    let TBRspinner = document.getElementsByClassName("tbr-spin");
-    let CURRspinner = document.getElementsByClassName("curr-spin");
-    let ARLspinner = document.getElementsByClassName("arl-spin");
-    let DNFspinner = document.getElementsByClassName("dnf-spin");
-    //if not on the first page, the default counts must be re-hidden and the spinners must be shown
-    if (props.page !== 1) {
-      TBRnumbers[props.cardNumber].style.display = 'none';
-      CURRnumbers[props.cardNumber].style.display = 'none';
-      ARLnumbers[props.cardNumber].style.display = 'none';
-      DNFnumbers[props.cardNumber].style.display = 'none';
-      TBRspinner[props.cardNumber].style.display = 'inline-block';
-      CURRspinner[props.cardNumber].style.display = 'inline-block';
-      ARLspinner[props.cardNumber].style.display = 'inline-block';
-      DNFspinner[props.cardNumber].style.display = 'inline-block';
-    }
+    let TBRspinner = document.getElementsByClassName("tbr-spin")[props.cardNumber];
+    let CURRspinner = document.getElementsByClassName("curr-spin")[props.cardNumber];
+    let ARLspinner = document.getElementsByClassName("arl-spin")[props.cardNumber];
+    let DNFspinner = document.getElementsByClassName("dnf-spin")[props.cardNumber];
+    //get html elements that control checkboxes
+    let TBRbox = document.getElementsByClassName('TBR')[props.cardNumber];
+    let CURRbox = document.getElementsByClassName('CURR')[props.cardNumber];
+    let ARLbox = document.getElementsByClassName('ARL')[props.cardNumber];
+    let DNFbox = document.getElementsByClassName('DNF')[props.cardNumber];
+    //execute
+    TBRnumbers.style.display = 'none';
+    CURRnumbers.style.display = 'none';
+    ARLnumbers.style.display = 'none';
+    DNFnumbers.style.display = 'none';
+    TBRspinner.style.display = 'inline-block';
+    CURRspinner.style.display = 'inline-block';
+    ARLspinner.style.display = 'inline-block';
+    DNFspinner.style.display = 'inline-block';
+    TBRbox.disabled = true;
+    CURRbox.disabled = true;
+    ARLbox.disabled = true;
+    DNFbox.disabled = true;
   }
 
   const renderCounts = async () => {
     //run this function regardless of whether the user is logged in
     //get html elements that show count
-    let TBRnumbers = document.getElementsByClassName('TBR' + '-count');
-    let CURRnumbers = document.getElementsByClassName('CURR' + '-count');
-    let ARLnumbers = document.getElementsByClassName('ARL' + '-count');
-    let DNFnumbers = document.getElementsByClassName('DNF' + '-count');
+    let TBRnumbers = document.getElementsByClassName('TBR' + '-count')[props.cardNumber];
+    let CURRnumbers = document.getElementsByClassName('CURR' + '-count')[props.cardNumber];
+    let ARLnumbers = document.getElementsByClassName('ARL' + '-count')[props.cardNumber];
+    let DNFnumbers = document.getElementsByClassName('DNF' + '-count')[props.cardNumber];
     //get html elements that show spinner
-    let TBRspinner = document.getElementsByClassName("tbr-spin");
-    let CURRspinner = document.getElementsByClassName("curr-spin");
-    let ARLspinner = document.getElementsByClassName("arl-spin");
-    let DNFspinner = document.getElementsByClassName("dnf-spin");
+    let TBRspinner = document.getElementsByClassName("tbr-spin")[props.cardNumber];
+    let CURRspinner = document.getElementsByClassName("curr-spin")[props.cardNumber];
+    let ARLspinner = document.getElementsByClassName("arl-spin")[props.cardNumber];
+    let DNFspinner = document.getElementsByClassName("dnf-spin")[props.cardNumber];
+    //get html elements that control checkboxes
+    let TBRbox = document.getElementsByClassName('TBR')[props.cardNumber];
+    let CURRbox = document.getElementsByClassName('CURR')[props.cardNumber];
+    let ARLbox = document.getElementsByClassName('ARL')[props.cardNumber];
+    let DNFbox = document.getElementsByClassName('DNF')[props.cardNumber];
     //hide the counts and show spinners
     showSpinners();
     //check if user has item in TBR
@@ -133,18 +145,23 @@ const BookCard = (props) => {
     //check if user has item in dnf
     const DNFcount = await fetch(`/api/count/DNF/${props.google_id}`);
     const DNFcountText = await DNFcount.text();
-    TBRspinner[props.cardNumber].style.display = "none";
-    TBRnumbers[props.cardNumber].style.display = "block";
-    TBRnumbers[props.cardNumber].innerHTML = '(' + TBRcountText + ')';
-    CURRspinner[props.cardNumber].style.display = "none";
-    CURRnumbers[props.cardNumber].style.display = "block";
-    CURRnumbers[props.cardNumber].innerHTML = '(' + CURRcountText + ')';
-    ARLspinner[props.cardNumber].style.display = "none";
-    ARLnumbers[props.cardNumber].style.display = "block";
-    ARLnumbers[props.cardNumber].innerHTML = '(' + ARLcountText + ')';
-    DNFspinner[props.cardNumber].style.display = "none";
-    DNFnumbers[props.cardNumber].style.display = "block";
-    DNFnumbers[props.cardNumber].innerHTML = '(' + DNFcountText + ')';
+    //hide spinner, show count, enable checkbox
+    TBRspinner.style.display = "none";
+    TBRnumbers.style.display = "block";
+    TBRnumbers.innerHTML = '(' + TBRcountText + ')';
+    TBRbox.disabled = false;
+    CURRspinner.style.display = "none";
+    CURRnumbers.style.display = "block";
+    CURRnumbers.innerHTML = '(' + CURRcountText + ')';
+    CURRbox.disabled = false;
+    ARLspinner.style.display = "none";
+    ARLnumbers.style.display = "block";
+    ARLnumbers.innerHTML = '(' + ARLcountText + ')';
+    ARLbox.disabled = false;
+    DNFspinner.style.display = "none";
+    DNFnumbers.style.display = "block";
+    DNFnumbers.innerHTML = '(' + DNFcountText + ')';
+    DNFbox.disabled = false;
   }
 
   const addRemoveBooklist = async (sub, id, listType, title, author, date, image, pages, words) => {
@@ -464,16 +481,16 @@ const BookCard = (props) => {
                 <Spinner className="dnf-spin" id="spinny" animation="border" variant="danger" size="sm" />
               </div>
               <div className="checklist-container">
-                <input type="checkbox" className="TBR" onClick={TBRonCheck}></input>
+                <input disabled="true" type="checkbox" className="TBR" onClick={TBRonCheck}></input>
               </div>
               <div className="checklist-container">
-                <input type="checkbox" className="CURR" onClick={CURRonCheck}></input>
+                <input disabled="true" type="checkbox" className="CURR" onClick={CURRonCheck}></input>
               </div>
               <div className="checklist-container">
-                <input type="checkbox" className="ARL" onClick={() => ARLSetup()}></input>
+                <input disabled="true" type="checkbox" className="ARL" onClick={() => ARLSetup()}></input>
               </div>
               <div className="checklist-container">
-                <input type="checkbox" className="DNF" onClick={DNFonCheck}></input>
+                <input disabled="true" type="checkbox" className="DNF" onClick={DNFonCheck}></input>
               </div>
               <div className="external-container"><a href={props.wikipedia_link} target="_blank" rel="noreferrer"><img className="wikipedia-png" src={wikipedia} alt="amazon" /></a></div>
               <div className="external-container"><a href={props.amazon_link} target="_blank" rel="noreferrer"><img className="amazon-png" src={amazon} alt="amazon" /></a></div>

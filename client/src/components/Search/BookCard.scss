@@ -24,7 +24,7 @@
   padding: 20px 10px 20px 30px;
   margin: 25px;
   border: 2px solid black;
-  border-color: $primary-color;
+  border-color: $font-color;
   border-radius: 2%;
 }
 
@@ -65,43 +65,35 @@
 }
 
 .TBR {
-  color: white;
   width: 35px;
   height: 35px;
   border: 2px solid black;
   border-radius: 5%;
   cursor: pointer;
-  background-color: #fcf6f5ff;
 }
 
 .CURR {
-  color: white;
   width: 35px;
   height: 35px;
   border: 2px solid black;
   border-radius: 5%;
   cursor: pointer;
-  background-color: #fcf6f5ff;
 }
 
 .ARL {
-  color: white;
   width: 35px;
   height: 35px;
   border: 2px solid black;
   border-radius: 5%;
   cursor: pointer;
-  background-color: #fcf6f5ff;
 }
 
 .DNF {
-  color: white;
   width: 35px;
   height: 35px;
   border: 2px solid black;
   border-radius: 5%;
   cursor: pointer;
-  background-color: #fcf6f5ff;
 }
 
 .description-container {
@@ -109,7 +101,6 @@
 }
 
 .add-description {
-  color: $primary-color;
   margin-bottom: 0px;
   font-weight: bold;
   font-size: 15px;
@@ -146,7 +137,6 @@
   line-height: 1;
   margin-bottom: 5px;
   font-weight: bold;
-  color: $primary-color;
 }
 
 .CURR-count {
@@ -154,7 +144,6 @@
   line-height: 1;
   margin-bottom: 5px;
   font-weight: bold;
-  color: $primary-color;
 }
 
 .ARL-count {
@@ -162,7 +151,6 @@
   line-height: 1;
   margin-bottom: 5px;
   font-weight: bold;
-  color: $primary-color;
 }
 
 .DNF-count {
@@ -170,7 +158,6 @@
   line-height: 1;
   margin-bottom: 5px;
   font-weight: bold;
-  color: $primary-color;
 }
 
 #spinny {

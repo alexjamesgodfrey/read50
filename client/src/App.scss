@@ -20,7 +20,11 @@ body {
 }
 
 h1 {
-  color: $primary-color;
+  color: $font-color;
+}
+
+p {
+  color: $font-color !important;
 }
 
 .spinner {

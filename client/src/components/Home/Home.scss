@@ -3,7 +3,7 @@
 $barrier: 800px;
 
 .sample-total {
-  background: radial-gradient(#6b5b95 10%, #fff);
+  background: radial-gradient($primary-color 4%, #fff);
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -29,7 +29,7 @@ $barrier: 800px;
   }
 
   @media screen and (max-width: $barrier) {
-    background: radial-gradient(#6b5b95 30%, #fff);
+    background: radial-gradient($primary-color 4%, #fff);
     p {
       font-size: 40px;
     }
