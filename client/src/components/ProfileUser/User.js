@@ -74,25 +74,6 @@ const Profile = (props) => {
         }
     }
 
-    //function that is run on the click of the edit yearly goal button
-    const onEdit = async (sub) => {
-        //changes button text
-        if (edit === 'Edit') {
-            setEdit('Save');
-        } else {
-            setEdit('Edit');
-            //sends new goal to database
-            const setDB = await fetch(`/api/setgoal/${goal}/${sub}`, {
-                method: "PUT",
-            });
-        }
-    }
-
-    //is run on change of goal
-    const handleChange = e => {
-        setGoal(e.target.value);
-    }
-
     
     //helper function used in getStats to convert stats to user friendly form
     const numConverter = num => {
@@ -174,7 +155,7 @@ const Profile = (props) => {
     //controls primary loading state
     if (load) {
         return (
-            <Loading />
+            <Loading title={`loading ${username}'s read50`} />
         )
     }
 

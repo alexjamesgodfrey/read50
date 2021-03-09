@@ -12,6 +12,9 @@ const Loading = (props) => {
             <div className="spinner-container">
                 <Spinner animation="border" variant="danger" size="xl" />
             </div>
+            <div className="header-container">
+                {props.desc ? <h5>{props.desc}</h5> : <h3></h3>}
+            </div>
         </div> 
     )
     

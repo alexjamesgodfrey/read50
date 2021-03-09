@@ -97,7 +97,7 @@ class Leaderboard extends Component {
     render() {
         const loading = this.state.loading;
         if (loading) {
-            return <Loading />
+            return <Loading title={'loading the leaderboards'} desc={'this can take a few seconds; it\'ll be worth the wait'}/>
         }
     
         return (
