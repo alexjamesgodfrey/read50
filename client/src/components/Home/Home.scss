@@ -3,7 +3,7 @@
 $barrier: 800px;
 
 .sample-total {
-  background: radial-gradient($primary-color 4%, #fff);
+  background: radial-gradient($primary-color 15%, #e5f7e4);
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -19,17 +19,18 @@ $barrier: 800px;
   }
 
   p {
-    color: white;
+    color: white !important;
   }
 
   .call-to-action {
     p {
       text-align: center;
+      color: white !important;
     }
   }
 
   @media screen and (max-width: $barrier) {
-    background: radial-gradient($primary-color 4%, #fff);
+    background: radial-gradient($primary-color 15%, #e5f7e4);
     p {
       font-size: 45px;
     }
