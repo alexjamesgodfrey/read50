@@ -77,6 +77,10 @@ $barrier: 800px;
     font-size: 18px;
     width: 200px;
   }
+
+  @media screen and (max-width: $barrier) {
+    margin: 20px 10px;
+  }
 }
 
 .ARLshelf {
@@ -93,6 +97,10 @@ $barrier: 800px;
     font-size: 18px;
     width: 200px;
   }
+
+  @media screen and (max-width: $barrier) {
+    margin: 20px 10px;
+  }
 }
 
 .DNFshelf {
@@ -108,6 +116,10 @@ $barrier: 800px;
     text-align: center;
     font-size: 18px;
     width: 200px;
+  }
+
+  @media screen and (max-width: $barrier) {
+    margin: 20px 10px;
   }
 }
 
