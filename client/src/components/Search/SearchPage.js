@@ -15,7 +15,7 @@ const SearchPage = (props) => {
   }
 
   useEffect(() => { 
-    loadingFunc(1250);
+    loadingFunc(1500);
     if (isAuthenticated) {
       props.checkIfDB(user.sub, user.email, user['https://www.read50.com/username'], user.picture, user['https://www.read50.com/logincount']);
     }
@@ -25,7 +25,7 @@ const SearchPage = (props) => {
   //controls loading state
   if (load) {
     return (
-      <Loading />
+      <Loading title={'loading search page'} desc={'we utilize the google books api, which contains over 40 million books'}/>
     )
   }
   

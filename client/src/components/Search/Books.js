@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import Search from './Search.js';
 import BookList from './BookList.js';
-import Alert from 'react-bootstrap/Alert';
 import request from 'superagent';
 import { Spinner } from 'react-bootstrap';
-import '../../App.scss';
+import './Search.scss';
 
 class Books extends Component {
   constructor(props) {
@@ -33,6 +32,7 @@ class Books extends Component {
         console.log(this.state.books);
         this.setState({searched: true})
       })
+    await this.delay(1750);
     this.setState({ loading: false });
   }
 
@@ -42,10 +42,17 @@ class Books extends Component {
 
   render() {
     return (
-      <div>
+      <div id="aggregation">
         <Search searchBook={this.searchBook} handleSearch={this.handleSearch} state={this.state} />
-        <div className="main">
-          {this.state.loading ? <Spinner className="spinner" animation="grow" variant="danger" size="lg" /> : <BookList changeLoad={this.changeLoad} state={this.state} books={this.state.books} />}
+        <div>
+          {this.state.loading ?
+            <div className="await">
+              <h4 id="agg">searching over 40 million books for "{this.state.searchField}"</h4>
+              <Spinner className="spinner" animation="grow" variant="danger" size="lg" />
+            </div>
+            :
+            <BookList changeLoad={this.changeLoad} state={this.state} books={this.state.books} />
+          }
         </div>
       </div>
     );
