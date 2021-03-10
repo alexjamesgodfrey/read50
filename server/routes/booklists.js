@@ -42,6 +42,21 @@ module.exports = function (app) {
         }
     })
 
+    //edit a booklist entry
+    app.put("/api/booklists/:id", async (req, res) => {
+        try {
+            const { id } = req.params;
+            const { month_read, year_read, review, recommend, format } = req.body;
+            const editBook = await pool.query(
+                "UPDATE booklists SET month_read=$1, year_read=$2, review=$3, recommend=$4, format=$5 WHERE id=$6",
+                [month_read, year_read, review, recommend, format, id]
+            );
+            res.json(editBook.rows[0]);
+        } catch (err) {
+            console.error(err.message);
+        }
+    })
+
     //delete a booklist entry
     app.delete("/api/booklists/:auth0_id/:listtype/:google_id", async (req, res) => {
         try {

@@ -106,6 +106,13 @@ const Shelf = (props) => {
                             image={book.image}
                             pages={props.pages}
                             words={props.pages * 300}
+                            month_read={book.month_read}
+                            year_read={book.year_read}
+                            review={book.review}
+                            recommend={book.recommend}
+                            format={book.format}
+                            read_count={book.read_count}
+                            id={book.id}
                         />
             })
                     }

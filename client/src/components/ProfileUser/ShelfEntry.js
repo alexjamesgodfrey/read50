@@ -3,13 +3,22 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Spinner from 'react-bootstrap/Spinner';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import './ShelfEntry.scss';
-
+import '../Search/BookCard.scss';
 
 const ShelfEntry = (props) => {
     const { user } = useAuth0(); 
     const [load, setLoad] = useState(true);
     const [thoughts, setThoughts] = useState(false);
+
+    //used to handle the displayed details of a book on the ARL shelf
+    const [month, setMonth] = useState(props.month_read);
+    const [year, setYear] = useState(props.year_read);
+    const [recommend, setRecommend] = useState(props.recommend);
+    const [format, setFormat] = useState(props.format);
+    const [review, setReview] = useState(props.review);
+    
     const shelfName = props.listType + 'shelf';
 
     const loading = async (ms) => {
@@ -83,6 +92,34 @@ const ShelfEntry = (props) => {
         });
     }
     const removeButton = () => remove(user.sub, props.listType, props.google_id);
+
+    const editDeets = async () => {
+        setThoughts(false);
+        const newMonth = document.getElementById('month-entry').value;
+        setMonth(newMonth);
+        let newYear = parseInt(document.getElementById('year-entry').value);
+        setYear(newYear);
+        const newRecommend = document.getElementById('recommend-entry').value;
+        setRecommend(newRecommend);
+        const newReview = document.getElementById('review-entry').value;
+        setReview(newReview);
+
+        const editJson = `{
+            "month_read": "${newMonth}",
+            "year_read": "${newYear}",
+            "review": "${newReview}",
+            "recommend": "${newRecommend}",
+            "format": "${format}"
+        }`;
+        console.log(editJson);
+
+        const editResponse = await fetch(`/api/booklists/${props.id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: editJson
+        });
+        console.log(editResponse);
+    }
     
 
 
@@ -91,7 +128,78 @@ const ShelfEntry = (props) => {
             <div className="shelfspinner">
                 <Spinner id="spin" animation="border" variant="danger" size="sm" />
             </div>
-            
+        )
+    }
+    
+    if (props.listType === 'ARL') {
+        return (
+            <div className={shelfName}>
+                <img onClick={() => setThoughts(true)} className="image" src={props.image} alt="no image found :(" />
+                {thoughts ?
+                    <Modal show={thoughts} onHide={() => setThoughts(false)} keyboard="true">
+                    <Modal.Header closeButton>
+                        <Modal.Title id="modal-title">{props.title} -- @{user['https://www.read50.com/username']}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form id="arl-entry">
+                            <Form.Row>
+                            <Form.Group id="month">
+                                <Form.Label>Month</Form.Label>
+                                <Form.Control id="month-entry" as="select" defaultValue={month}>
+                                <option value="January">January</option>
+                                <option value="February">February</option>
+                                <option value="March">March</option>
+                                <option value="April">April</option>
+                                <option value="May">May</option>
+                                <option value="June">June</option>
+                                <option value="July">July</option>
+                                <option value="August">August</option>
+                                <option value="September">September</option>
+                                <option value="October">October</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
+                                </Form.Control>
+                            </Form.Group>
+                            <Form.Group id="year">
+                                <Form.Label>Year</Form.Label>
+                                <Form.Control
+                                id="year-entry"
+                                defaultValue={props.year_read}
+                                controlId="year"
+                                />
+                            </Form.Group>
+                            <Form.Group id="recommend">
+                                <Form.Label>Recommend?</Form.Label>
+                                    <Form.Control defaultValue={recommend} id="recommend-entry" as="select" className="mr-sm-2">
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </Form.Control>
+                            </Form.Group>
+                            </Form.Row>
+                            <Form.Group>
+                            <Form.Label>Format</Form.Label>
+                            <div id="format">
+                                {format === 'paper' ? <Form.Check onClick={() => setFormat('paper')} type="radio" checked="true" label="paper" name="formHorizontalRadios" /> : <Form.Check onClick={() => setFormat('paper')} type="radio" label="paper" name="formHorizontalRadios" /> } 
+                                {format === 'ebook' ? <Form.Check onClick={() => setFormat('ebook')} type="radio" checked="true" label="ebook" name="formHorizontalRadios" /> : <Form.Check onClick={() => setFormat('ebook')} type="radio" label="ebook" name="formHorizontalRadios" /> }
+                                {format === 'audio' ? <Form.Check onClick={() => setFormat('audio')} type="radio" checked="true" label="audio" name="formHorizontalRadios" /> : <Form.Check onClick={() => setFormat('audio')} type="radio" label="audio" name="formHorizontalRadios" /> }
+                            </div>
+                            </Form.Group>
+                            <Form.Group >
+                            <Form.Label>Notes // Review // Final Thoughts</Form.Label>
+                                <Form.Control id="review-entry" controlId="review" as="textarea" defaultValue={review} rows={4} />
+                            </Form.Group>
+                        </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setThoughts(false)}>exit</Button>
+                        <Button variant="danger" onClick={() => editDeets()}>save</Button>
+                    </Modal.Footer>
+                    </Modal>
+                    :
+                    <span></span>
+                }
+                {props.readOnly ? <span></span> : <Button id="remove" className="remove-button" variant="warning" size="sm" onClick={removeButton}>Remove</Button>}
+            </div>
         )
     }
 

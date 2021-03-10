@@ -4,7 +4,6 @@ import Spinner from 'react-bootstrap/Spinner';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Alert from 'react-bootstrap/Alert';
 import amazon from '../../images/amazon_logo.png';
 import bookshop from '../../images/bookshop_logo.png';
 import wikipedia from '../../images/wikipedia.png';
@@ -340,9 +339,9 @@ const BookCard = (props) => {
   return (
     <div className="bookcard">
       {thoughts ?
-        <Modal show={thoughts} onHide={() => ARLCancel()}>
+        <Modal show={thoughts} onHide={() => ARLCancel()} keyboard="true">
           <Modal.Header closeButton>
-            <Modal.Title>Add {props.title} to Read Shelf</Modal.Title>
+            <Modal.Title id="modal-title">Add {props.title} to Read Shelf</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {submitting ?
@@ -380,7 +379,7 @@ const BookCard = (props) => {
                     <Form.Label>Year</Form.Label>
                     <Form.Control
                       id="year-entry"
-                      value={date.getFullYear()}
+                      defaultValue={date.getFullYear()}
                       controlId="year"
                     />
                   </Form.Group>
@@ -409,7 +408,7 @@ const BookCard = (props) => {
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={() => ARLCancel()}>Cancel</Button>
-            <Button variant="success" onClick={() => ARLSubmit()}>Add</Button>
+            <Button variant="danger" onClick={() => ARLSubmit()}>Add</Button>
           </Modal.Footer>
         </Modal>
         :
