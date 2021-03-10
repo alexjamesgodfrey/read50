@@ -104,6 +104,12 @@ const ShelfEntry = (props) => {
         const newReview = document.getElementById('review-entry').value;
         setReview(newReview);
 
+        //makes sure that year is in number format
+        if (!year || typeof(year) != 'integer') {
+            newYear = 2021;
+            setYear(newYear);
+        }
+
         const editJson = `{
             "month_read": "${newMonth}",
             "year_read": "${newYear}",
