@@ -82,55 +82,28 @@ const BookCard = (props) => {
     window.location.href = login();
   }
 
-  //run on change of props.page to hide the counts show the loading spinners, and disable the checkboxes
+  //run on change of props.page to hide the counts show loading spinner
   const showSpinners = () => {
-    //get html elements that show count
-    let TBRnumbers = document.getElementsByClassName('TBR' + '-count')[props.cardNumber];
-    let CURRnumbers = document.getElementsByClassName('CURR' + '-count')[props.cardNumber];
-    let ARLnumbers = document.getElementsByClassName('ARL' + '-count')[props.cardNumber];
-    let DNFnumbers = document.getElementsByClassName('DNF' + '-count')[props.cardNumber];
-    //get html elements that show spinner
-    let TBRspinner = document.getElementsByClassName("tbr-spin")[props.cardNumber];
-    let CURRspinner = document.getElementsByClassName("curr-spin")[props.cardNumber];
-    let ARLspinner = document.getElementsByClassName("arl-spin")[props.cardNumber];
-    let DNFspinner = document.getElementsByClassName("dnf-spin")[props.cardNumber];
-    //get html elements that control checkboxes
-    let TBRbox = document.getElementsByClassName('TBR')[props.cardNumber];
-    let CURRbox = document.getElementsByClassName('CURR')[props.cardNumber];
-    let ARLbox = document.getElementsByClassName('ARL')[props.cardNumber];
-    let DNFbox = document.getElementsByClassName('DNF')[props.cardNumber];
+    //get html element that shows spinner
+    let spinner = document.getElementById('loading-spinner');
+    //get check and count box
+    let countsChecksBox = document.getElementsByClassName('counts-and-checks')[props.cardNumber];
     //execute
-    TBRnumbers.style.display = 'none';
-    CURRnumbers.style.display = 'none';
-    ARLnumbers.style.display = 'none';
-    DNFnumbers.style.display = 'none';
-    TBRspinner.style.display = 'inline-block';
-    CURRspinner.style.display = 'inline-block';
-    ARLspinner.style.display = 'inline-block';
-    DNFspinner.style.display = 'inline-block';
-    TBRbox.disabled = true;
-    CURRbox.disabled = true;
-    ARLbox.disabled = true;
-    DNFbox.disabled = true;
+    countsChecksBox.style.display = 'none';
+    spinner.style.display = 'inline-block';
   }
 
   const renderCounts = async () => {
     //run this function regardless of whether the user is logged in
-    //get html elements that show count
+    //get count elements
     let TBRnumbers = document.getElementsByClassName('TBR' + '-count')[props.cardNumber];
     let CURRnumbers = document.getElementsByClassName('CURR' + '-count')[props.cardNumber];
     let ARLnumbers = document.getElementsByClassName('ARL' + '-count')[props.cardNumber];
     let DNFnumbers = document.getElementsByClassName('DNF' + '-count')[props.cardNumber];
-    //get html elements that show spinner
-    let TBRspinner = document.getElementsByClassName("tbr-spin")[props.cardNumber];
-    let CURRspinner = document.getElementsByClassName("curr-spin")[props.cardNumber];
-    let ARLspinner = document.getElementsByClassName("arl-spin")[props.cardNumber];
-    let DNFspinner = document.getElementsByClassName("dnf-spin")[props.cardNumber];
-    //get html elements that control checkboxes
-    let TBRbox = document.getElementsByClassName('TBR')[props.cardNumber];
-    let CURRbox = document.getElementsByClassName('CURR')[props.cardNumber];
-    let ARLbox = document.getElementsByClassName('ARL')[props.cardNumber];
-    let DNFbox = document.getElementsByClassName('DNF')[props.cardNumber];
+    //get check and count box
+    let countsChecksBox = document.getElementsByClassName('counts-and-checks')[props.cardNumber];
+    //get html element that shows spinner
+    let spinner = document.getElementsByClassName('loading-spinner-container')[props.cardNumber];
     //hide the counts and show spinners
     showSpinners();
     //check if user has item in TBR
@@ -146,22 +119,12 @@ const BookCard = (props) => {
     const DNFcount = await fetch(`/api/count/DNF/${props.google_id}`);
     const DNFcountText = await DNFcount.text();
     //hide spinner, show count, enable checkbox
-    TBRspinner.style.display = "none";
-    TBRnumbers.style.display = "block";
+    spinner.style.display = 'none';
+    countsChecksBox.style.display = 'flex';
     TBRnumbers.innerHTML = '(' + TBRcountText + ')';
-    TBRbox.disabled = false;
-    CURRspinner.style.display = "none";
-    CURRnumbers.style.display = "block";
     CURRnumbers.innerHTML = '(' + CURRcountText + ')';
-    CURRbox.disabled = false;
-    ARLspinner.style.display = "none";
-    ARLnumbers.style.display = "block";
     ARLnumbers.innerHTML = '(' + ARLcountText + ')';
-    ARLbox.disabled = false;
-    DNFspinner.style.display = "none";
-    DNFnumbers.style.display = "block";
     DNFnumbers.innerHTML = '(' + DNFcountText + ')';
-    DNFbox.disabled = false;
   }
 
   const addRemoveBooklist = async (sub, id, listType, title, author, date, image, pages, words) => {
@@ -271,6 +234,7 @@ const BookCard = (props) => {
 
   //add/remove from db, else show sign up function
   const onCheckBoxClick = (listtype) => {
+    console.log('clicked');
     if (isAuthenticated) {
       if (listtype === 'TBR') {
         addToTBR();
@@ -460,37 +424,38 @@ const BookCard = (props) => {
               <h1 id="date">{props.published}</h1>
             </div>
             <div className="action-buttons">
-              <div className="description-container">
-                <p className="add-description">Want</p>
-                <p className="TBR-count">( )</p>
-                <Spinner className="tbr-spin" id="spinny" animation="border" variant="danger" size="sm" />
+              <div className="loading-spinner-container">
+                <Spinner id="loading-spinner" animation="border" variant="danger" />
               </div>
-              <div className="description-container">
-                <p className="add-description">Reading</p>
-                <p className="CURR-count">( )</p>
-                <Spinner className="curr-spin" id="spinny" animation="border" variant="danger" size="sm" />
-              </div>
-              <div className="description-container">
-                <p className="add-description">Read</p>
-                <p className="ARL-count">( )</p>
-                <Spinner className="arl-spin" id="spinny" animation="border" variant="danger" size="sm" />
-              </div>
-              <div className="description-container">
-                <p className="add-description">DNF</p>
-                <p className="DNF-count">( )</p>
-                <Spinner className="dnf-spin" id="spinny" animation="border" variant="danger" size="sm" />
-              </div>
-              <div className="checklist-container">
-                <input disabled="true" type="checkbox" className="TBR" onClick={TBRonCheck}></input>
-              </div>
-              <div className="checklist-container">
-                <input disabled="true" type="checkbox" className="CURR" onClick={CURRonCheck}></input>
-              </div>
-              <div className="checklist-container">
-                <input disabled="true" type="checkbox" className="ARL" onClick={() => ARLSetup()}></input>
-              </div>
-              <div className="checklist-container">
-                <input disabled="true" type="checkbox" className="DNF" onClick={DNFonCheck}></input>
+              <div className="counts-and-checks">
+                <div className="description-container">
+                  <p className="add-description">Want</p>
+                  <p className="TBR-count">( )</p>
+                </div>
+                <div className="description-container">
+                  <p className="add-description">Reading</p>
+                  <p className="CURR-count">( )</p>
+                </div>
+                <div className="description-container">
+                  <p className="add-description">Read</p>
+                  <p className="ARL-count">( )</p>
+                </div>
+                <div className="description-container">
+                  <p className="add-description">DNF</p>
+                  <p className="DNF-count">( )</p>
+                </div>
+                <div className="checklist-container">
+                  <div onClick={TBRonCheck}><input type="checkbox" className="TBR"></input></div>
+                </div>
+                <div className="checklist-container">
+                  <div onClick={CURRonCheck}><input type="checkbox" className="CURR"></input></div>
+                </div>
+                <div className="checklist-container">
+                  <div onClick={() => ARLSetup()}><input type="checkbox" className="ARL"></input></div>
+                </div>
+                <div className="checklist-container">
+                  <div onClick={DNFonCheck}><input type="checkbox" className="DNF"></input></div>
+                </div>
               </div>
               <div className="external-container"><a href={props.wikipedia_link} target="_blank" rel="noreferrer"><img className="wikipedia-png" src={wikipedia} alt="amazon" /></a></div>
               <div className="external-container"><a href={props.amazon_link} target="_blank" rel="noreferrer"><img className="amazon-png" src={amazon} alt="amazon" /></a></div>
