@@ -89,7 +89,7 @@ const ShelfEntry = (props) => {
     if (load) {
         return (
             <div className="shelfspinner">
-                <Spinner className="shelfentry" animation="border" variant="danger" size="sm" />
+                <Spinner id="spin" animation="border" variant="danger" size="sm" />
             </div>
             
         )

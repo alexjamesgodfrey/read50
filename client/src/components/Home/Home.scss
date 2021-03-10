@@ -11,7 +11,10 @@ $barrier: 800px;
   justify-content: space-around;
 
   .counts {
-    width: 100%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     p {
       text-align: center;
@@ -22,23 +25,13 @@ $barrier: 800px;
     color: white !important;
   }
 
-  .call-to-action {
-    p {
-      text-align: center;
-      color: white !important;
-    }
-  }
-
   @media screen and (max-width: $barrier) {
     background: radial-gradient($primary-color 15%, #e5f7e4);
     p {
       font-size: 45px;
     }
-
-    .call-to-action {
-      p {
-        font-size: 35px;
-      }
+    .smaller {
+      font-size: 35px;
     }
   }
 
@@ -46,12 +39,12 @@ $barrier: 800px;
     p {
       font-size: 50px;
     }
-
-    .call-to-action {
-      width: 50%;
-      p {
-        font-size: 50px;
-      }
+    .smaller {
+      font-size: 45px;
+    }
+    .desc {
+      margin-top: 50px;
+      width: 80%;
     }
   }
 }

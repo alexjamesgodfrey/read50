@@ -222,11 +222,19 @@ $barrier: 800px;
 #year {
   margin-left: 30px;
   width: 100px;
+  @media screen and (max-width: $barrier) {
+    margin-left: 20px;
+    width: 85px;
+  }
 }
 
 #recommend {
   margin-left: 30px;
   width: 120px;
+  @media screen and (max-width: $barrier) {
+    margin-left: 20px;
+    width: 100px;
+  }
 }
 
 .submitting {
