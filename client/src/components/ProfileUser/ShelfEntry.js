@@ -137,9 +137,82 @@ const ShelfEntry = (props) => {
         )
     }
     
-    if (props.listType === 'ARL') {
+    if (props.listType === 'ARL' && props.readOnly === true) {
         return (
             <div className={shelfName}>
+                <img onClick={() => setThoughts(true)} className="image" src={props.image} alt="no image found :(" />
+                {thoughts ?
+                    <Modal show={thoughts} onHide={() => setThoughts(false)} keyboard="true">
+                    <Modal.Header closeButton>
+                        <Modal.Title id="modal-title">{props.title} -- @{user['https://www.read50.com/username']}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form id="arl-entry">
+                            <Form.Row>
+                            <Form.Group id="month">
+                                <Form.Label>Month</Form.Label>
+                                <Form.Control id="month-entry" as="select" defaultValue={month} readOnly>
+                                <option value="January">January</option>
+                                <option value="February">February</option>
+                                <option value="March">March</option>
+                                <option value="April">April</option>
+                                <option value="May">May</option>
+                                <option value="June">June</option>
+                                <option value="July">July</option>
+                                <option value="August">August</option>
+                                <option value="September">September</option>
+                                <option value="October">October</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
+                                </Form.Control>
+                            </Form.Group>
+                            <Form.Group id="year">
+                                <Form.Label>Year</Form.Label>
+                                <Form.Control
+                                id="year-entry"
+                                defaultValue={props.year_read}
+                                controlId="year"
+                                readOnly
+                                />
+                            </Form.Group>
+                            <Form.Group id="recommend">
+                                <Form.Label>Recommend?</Form.Label>
+                                    <Form.Control defaultValue={recommend} id="recommend-entry" as="select" className="mr-sm-2" readOnly>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </Form.Control>
+                            </Form.Group>
+                            </Form.Row>
+                            <Form.Group>
+                            <Form.Label>Format</Form.Label>
+                            <div id="format">
+                                {format === 'paper' ? <Form.Check onClick={() => setFormat('paper')} type="radio" checked="true" disabled="true" label="paper" name="formHorizontalRadios" /> : <Form.Check onClick={() => setFormat('paper')} type="radio" label="paper" disabled="true" name="formHorizontalRadios" /> } 
+                                {format === 'ebook' ? <Form.Check onClick={() => setFormat('ebook')} type="radio" checked="true" disabled="true" label="ebook" name="formHorizontalRadios" /> : <Form.Check onClick={() => setFormat('ebook')} type="radio" label="ebook" disabled="true" name="formHorizontalRadios" /> }
+                                {format === 'audio' ? <Form.Check onClick={() => setFormat('audio')} type="radio" checked="true" disabled="true" label="audio" name="formHorizontalRadios" /> : <Form.Check onClick={() => setFormat('audio')} type="radio" label="audio" disabled="true" name="formHorizontalRadios" /> }
+                            </div>
+                            </Form.Group>
+                            <Form.Group >
+                            <Form.Label>Notes // Review // Final Thoughts</Form.Label>
+                                <Form.Control id="review-entry" controlId="review" as="textarea" defaultValue={review} rows={4} readOnly/>
+                            </Form.Group>
+                        </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setThoughts(false)}>exit</Button>
+                    </Modal.Footer>
+                    </Modal>
+                    :
+                    <span></span>
+                }
+                {props.readOnly ? <span></span> : <Button id="remove" className="remove-button" variant="warning" size="sm" onClick={removeButton}>Remove</Button>}
+            </div>
+        )
+    }
+
+    if (props.listType === 'ARL' && props.readOnly === false) {
+        return (
+            <div className={shelfName}>
+                <p>{month} {year}</p>
                 <img onClick={() => setThoughts(true)} className="image" src={props.image} alt="no image found :(" />
                 {thoughts ?
                     <Modal show={thoughts} onHide={() => setThoughts(false)} keyboard="true">
@@ -212,7 +285,7 @@ const ShelfEntry = (props) => {
     return (
         <div className={shelfName}>
             <img onClick={() => setThoughts(true)} className="image" src={props.image} alt="no image found :(" />
-            {props.readOnly ? <span></span> : <Button id="remove" className="remove-button" variant="warning" size="sm" onClick={removeButton}>Remove</Button>}
+            {props.readOnly ? <span></span> : <Button id="remove" className="remove-button" variant="warning" size="sm" onClick={removeButton}>remove</Button>}
         </div>
     )
 }

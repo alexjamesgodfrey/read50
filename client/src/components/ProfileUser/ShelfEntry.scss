@@ -1,15 +1,10 @@
 @import "../../_variables.scss";
 $barrier: 800px;
+$middle-barrier: 1200px;
 
 .shelf {
-  margin: 20px;
-  width: 80%;
-  height: 400px;
-  p {
-    text-align: center;
-    color: $primary-color;
-    font-weight: 600;
-  }
+  width: 90%;
+  height: 300px;
   a {
     color: $primary-color;
     font-weight: 600;
@@ -23,28 +18,104 @@ $barrier: 800px;
   }
 }
 
+#add-link {
+  color: $primary-color !important;
+  text-decoration: underline !important;
+}
+
+.sample {
+  width: 90%;
+  max-height: 350px;
+  overflow: none;
+}
+
+.sample-empty {
+  width: 90%;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.sample-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 22px;
+  line-height: 0.3;
+  border-bottom: 1px solid grey;
+
+  @media screen and (max-width: $barrier) {
+    font-size: 18px;
+  }
+}
+
+#shelf-header {
+  font-size: 22px;
+  line-height: 0.3;
+  font-weight: 400;
+
+  @media screen and (max-width: $barrier) {
+    font-size: 18px;
+  }
+}
+
+.see {
+  font-size: 18px;
+
+  @media screen and (max-width: $barrier) {
+    font-size: 15px;
+  }
+}
+
 .items {
   height: 350px;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sample-items {
+  height: 300px;
+  justify-content: center;
+  flex-wrap: none;
+  overflow: none;
+  display: flex;
   @media screen and (max-width: $barrier) {
-    display: flex;
-    overflow-x: scroll;
+    height: 250px;
   }
-  @media screen and (min-width: $barrier) {
-    align-items: center;
-    justify-content: space-around;
-    display: flex;
-    flex-wrap: wrap;
-    overflow-y: scroll;
-  }
+  // @media screen and (max-width: $barrier) {
+  //   display: flex;
+  //   overflow-x: scroll;
+  // }
+  // @media screen and (min-width: $barrier) {
+  //   align-items: center;
+  //   display: flex;
+  //   flex-wrap: wrap;
+  //   overflow-y: scroll;
+  // }
+}
+
+.overline {
+  margin: 0px !important;
 }
 
 .shelfspinner {
   display: flex;
   width: 200px;
+
+  @media screen and (max-width: $middle-barrier) {
+    height: 170px;
+  }
+
+  @media screen and (max-width: $barrier) {
+    margin: 20px 10px;
+    width: 110px;
+    height: 225px;
+  }
 }
 
 .TBRshelf {
-  margin-bottom: 20px;
   width: 200px;
   display: flex;
   align-items: center;
@@ -58,13 +129,19 @@ $barrier: 800px;
     width: 200px;
   }
 
+  @media screen and (max-width: $middle-barrier) {
+    margin-top: 20px;
+    width: 160px;
+  }
+
   @media screen and (max-width: $barrier) {
     margin: 20px 10px;
+    width: 110px;
+    height: 225px;
   }
 }
 
 .CURRshelf {
-  margin-bottom: 20px;
   width: 200px;
   display: flex;
   align-items: center;
@@ -78,13 +155,19 @@ $barrier: 800px;
     width: 200px;
   }
 
+  @media screen and (max-width: $middle-barrier) {
+    margin-top: 20px;
+    width: 160px;
+  }
+
   @media screen and (max-width: $barrier) {
     margin: 20px 10px;
+    width: 110px;
+    height: 225px;
   }
 }
 
 .ARLshelf {
-  margin-bottom: 20px;
   width: 200px;
   display: flex;
   align-items: center;
@@ -98,13 +181,19 @@ $barrier: 800px;
     width: 200px;
   }
 
+  @media screen and (max-width: $middle-barrier) {
+    margin-top: 20px;
+    width: 160px;
+  }
+
   @media screen and (max-width: $barrier) {
     margin: 20px 10px;
+    width: 110px;
+    height: 225px;
   }
 }
 
 .DNFshelf {
-  margin-bottom: 20px;
   width: 200px;
   display: flex;
   align-items: center;
@@ -118,8 +207,15 @@ $barrier: 800px;
     width: 200px;
   }
 
+  @media screen and (max-width: $middle-barrier) {
+    margin-top: 20px;
+    width: 160px;
+  }
+
   @media screen and (max-width: $barrier) {
     margin: 20px 10px;
+    width: 110px;
+    height: 225px;
   }
 }
 
@@ -139,7 +235,13 @@ $barrier: 800px;
 }
 
 .image {
-  height: 200px;
+  height: 220px;
+  @media screen and (max-width: $middle-barrier) {
+    height: 200px;
+  }
+  @media screen and (max-width: $barrier) {
+    height: 150px;
+  }
 }
 
 .shelf-title {
@@ -149,7 +251,7 @@ $barrier: 800px;
 #remove {
   margin-top: 5px;
   @media screen and (max-width: $barrier) {
-    margin-top: 20px;
+    margin-top: 10px;
   }
 }
 

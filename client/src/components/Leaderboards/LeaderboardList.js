@@ -9,7 +9,8 @@ const LeaderboardList = (props) => {
     left: 0,
     behavior: 'smooth'
   });
-    
+  
+  console.log(props.users)
 
   const [page, setPage] = useState(1);
 
@@ -21,7 +22,7 @@ const LeaderboardList = (props) => {
   if (page === 1) {
     return (
       <div>
-        <LeaderboardPage state={props.state} page={page} entries={props.entries.slice((page-1 * 25), (page * 25))} delay={props.delay} />
+        <LeaderboardPage state={props.state} page={page} users={props.users.slice((page-1 * 25), (page * 25))} delay={props.delay} />
         <div className="pagination-box">
           <Pagination size="md" className="pagination">
             <Pagination.Prev id="non-active" onClick={four} />
@@ -37,7 +38,7 @@ const LeaderboardList = (props) => {
   } else if (page === 2) {
     return (
       <div>
-        <LeaderboardPage state={props.state} page={page} entries={props.entries.slice((page-1 * 25), (page * 25))} delay={props.delay} />
+        <LeaderboardPage state={props.state} page={page} users={props.users.slice((page-1 * 25), (page * 25))} delay={props.delay} />
         <div className="pagination-box">
           <Pagination size="md" className="pagination">
             <Pagination.Prev id="non-active" onClick={one} />
@@ -53,7 +54,7 @@ const LeaderboardList = (props) => {
   } else if (page === 3) {
     return (
       <div>
-        <LeaderboardPage state={props.state} page={page} entries={props.entries.slice((page-1 * 25), (page * 25))} delay={props.delay} />
+        <LeaderboardPage state={props.state} page={page} users={props.users.slice((page-1 * 25), (page * 25))} delay={props.delay} />
         <div className="pagination-box">
           <Pagination size="md" className="pagination">
             <Pagination.Prev id="non-active" onClick={two} />
@@ -69,7 +70,7 @@ const LeaderboardList = (props) => {
   } else if (page === 4) {
     return (
       <div>
-        <LeaderboardPage state={props.state} page={page} entries={props.entries.slice((page-1 * 25), (page * 25))} delay={props.delay} />
+        <LeaderboardPage state={props.state} page={page} users={props.users.slice((page-1 * 25), (page * 25))} delay={props.delay} />
         <div className="pagination-box">
           <Pagination size="md" className="pagination">
             <Pagination.Prev id="non-active" onClick={three} />

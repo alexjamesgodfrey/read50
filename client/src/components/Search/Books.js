@@ -32,7 +32,6 @@ class Books extends Component {
         console.log(this.state.books);
         this.setState({searched: true})
       })
-    await this.delay(1750);
     this.setState({ loading: false });
   }
 
@@ -47,8 +46,7 @@ class Books extends Component {
         <div>
           {this.state.loading ?
             <div className="await">
-              <h4 id="agg">searching over 40 million books for "{this.state.searchField}"</h4>
-              <Spinner className="spinner" animation="grow" variant="danger" size="lg" />
+              <Spinner className="spinner" animation="border" variant="danger" size="lg" />
             </div>
             :
             <BookList changeLoad={this.changeLoad} state={this.state} books={this.state.books} />

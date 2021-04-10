@@ -1,28 +1,63 @@
 @import "../../_variables.scss";
 
+$barrier: 800px;
+
 .profile {
   width: 100%;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 .color {
-  color: $primary-color;
-  font-weight: bold;
+  text-align: left !important;
 }
 
 .profile-top {
-  margin: 0 auto;
+  width: 90%;
+  margin: 0px auto;
   display: flex;
+
+  justify-content: left;
+
+  @media screen and (max-width: $barrier) {
+    flex-wrap: wrap;
+  }
+}
+
+.profile-rest-small {
+  @media screen and (min-width: $barrier) {
+    display: none;
+  }
+  min-width: 470px;
+  width: 90%;
+  margin: 0 auto;
+  max-height: 350px;
+  overflow: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 22px;
+  line-height: 0.3;
+  border-bottom: 1px solid grey;
+  @media screen and (max-width: $barrier) {
+    font-size: 18px;
+  }
 }
 
 .profile-main {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin-top: 30px;
+  margin-top: 10px;
+}
+
+.name {
+  font-size: 60px;
 }
 
 .book {
@@ -43,6 +78,10 @@
     flex-direction: column;
   }
 
+  .underlined {
+    text-decoration: underline !important;
+  }
+
   #added {
     max-width: 200px;
     margin: 0 auto;
@@ -60,12 +99,32 @@
   }
 }
 
+.picture-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .profile-pic {
+  margin-bottom: 10px;
+  height: 115px;
   border-radius: 50%;
 }
 
 .profile-info {
+  margin-top: 15px;
+  margin-left: 25px;
+}
+
+.profile-rest {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 2500px;
   margin-left: 15px;
+  @media screen and (max-width: $barrier) {
+    display: none;
+  }
 }
 
 .color-picker {
@@ -82,14 +141,37 @@
   margin: 10px 3px;
 }
 
+.user-desc {
+  font-size: 20px;
+  margin-left: 5px !important;
+}
+
+.nav-list {
+  width: 90%;
+  margin: 20px auto;
+  color: $primary-color;
+  font-size: 25px;
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+
+  @media screen and (max-width: $barrier) {
+    width: 100%;
+    font-size: 20px;
+  }
+}
+
+.nav-item {
+  cursor: pointer;
+}
+
 .profile-piece {
-  line-height: 0.9;
-  text-align: center;
+  line-height: 0.8;
 }
 
 .clubsfriends {
   width: 150px;
-  margin: 25px auto;
+  margin: 20px auto 0px auto;
   display: flex;
   justify-content: space-around;
   text-align: center;
@@ -116,8 +198,13 @@ p {
 }
 
 #goal-progress {
-  margin: 0px auto 40px auto;
-  width: 80%;
+  margin: 0px auto 10px auto;
+  width: 90%;
+}
+
+#goal-progress-small {
+  margin: 15px auto 10px auto;
+  width: 90%;
 }
 
 #goal-progress-user {
@@ -130,7 +217,7 @@ h3 {
 }
 
 .progress-box {
-  margin: 0 auto;
+  margin: 0px auto;
   display: flex;
 }
 
@@ -141,8 +228,8 @@ h3 {
 
 #goal-enter {
   width: 50px;
-  height: 30px;
-  margin-left: 10px;
+  height: 25px;
+  margin-left: 15px;
   margin-top: 3px;
 }
 
@@ -177,4 +264,20 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+}
+
+.stats {
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.numsum {
+  display: flex;
+  justify-content: space-around;
+  width: 300px;
+}
+
+.under {
+  text-decoration: underline !important;
 }

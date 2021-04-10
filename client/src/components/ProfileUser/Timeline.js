@@ -39,7 +39,7 @@ const Timeline = () => {
 
     return (
         <div className="timelines">
-            <h4 className="title">Timeline</h4>
+            <h4 className="title">Recent Actions</h4>
             {
                 entries.map((entry, i) => {
                     return <TimelineEntry

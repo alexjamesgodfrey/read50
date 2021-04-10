@@ -10,7 +10,7 @@ module.exports = function (app) {
     //get all users + their info
     app.get("/api/users", async (req, res) => {
         try {
-            const allUsers = await pool.query("SELECT * FROM users");
+            const allUsers = await pool.query("SELECT * FROM users WHERE (words IS NOT NULL) ORDER BY words DESC LIMIT 100");
             res.json(allUsers.rows);
         } catch (err) {
             console.error(err.message);
@@ -53,12 +53,11 @@ module.exports = function (app) {
     })
     
     //get user color
-        app.get("/api/users/color/:auth0_id", async (req, res) => {
+        app.get("/api/users/:auth0_id", async (req, res) => {
             try {
                 const { auth0_id } = req.params;
-                const user = await pool.query("SELECT color FROM users WHERE auth0_id = $1", [auth0_id]);
-                console.log(user.rows[0].color);
-                res.json(user.rows[0].color);
+                const user = await pool.query("SELECT * FROM users WHERE auth0_id = $1", [auth0_id]);
+                res.json(user.rows);
             } catch (err) {
                 console.error(err.message);
             }

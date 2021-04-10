@@ -1,27 +1,33 @@
 import React, { useState, useEffect } from 'react'
 import { useAuth0 } from '@auth0/auth0-react';
+import { useCookies  } from 'react-cookie';
 import Header from '../Header/Header.js';
 import Shelf from './Shelf.js';
 import Timeline from './Timeline.js';
 import Loading from '../Loading.js';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import './Profile.scss';
 import { useParams } from 'react-router';
 
-const Profile = (props) => {
+const User = (props) => {
     //fetches auth0 user information
     const { user, isAuthenticated } = useAuth0();
     let { username } = useParams();
-
     const [sub, setSub] = useState("");
 
     const fetchCreds = async () => {
-        //fetch auth0_id from username param
-        const getSub = await fetch(`/api/usernametosub/${username}`);
-        const subText = await getSub.json();
-        setSub(subText);
+        console.log('fetch creds');
+        try {
+            //fetch auth0_id from username param
+            const getSub = await fetch(`/api/usernametosub/${username}`);
+            const subText = await getSub.json();
+            console.log(subText);
+            setSub(subText);
+        } catch (err) {
+            console.log('failed')
+            console.error(err.message);
+            setReRun(reRun + 1);
+        }
     }
 
     //function to get day of year 
@@ -33,11 +39,14 @@ const Profile = (props) => {
     //main loading state -- set to false after 1250ms
     const [load, setLoad] = useState(true);
     //user stat state
-    const [stats, setStats] = useState('books / pages / words');
+    const [books, setBooks] = useState('books');
+    const [pages, setPages] = useState('pages');
+    const [words, setWords] = useState('words');
+    const [total, setTotal] = useState('--/--/--');
     //sets state of edit button for yearly goa;
     const [edit, setEdit] = useState('Edit');
     //state that is set after fetch of books read since start of 2021
-    const [read, setRead] = useState(0);
+    const [readYear, setReadYear] = useState(0);
     //state that is set after fetch of yearly goal
     const [goal, setGoal] = useState('...');
     //change this to rerender a component that has it as a prop
@@ -52,75 +61,7 @@ const Profile = (props) => {
     const [ARL, setARL] = useState([]);
     const [DNF, setDNF] = useState([]);
 
-    //function that gets the users yearly goal and books read in current year and updates state
-    const getGoals = async (sub) => {
-        await props.sleep(1000);
-        try {
-            //fetches yearly goal
-            const goal = await fetch(`/api/goal/${sub}`);
-            const goalJson = await goal.json();
-            if (goalJson === null) {
-                setGoal('NO GOAL SET');
-            } else {
-                setGoal(goalJson);
-            }
-            //fetches books read in 2021
-            const readDB = await fetch(`/api/twooneread/${sub}`);
-            const readJson = await readDB.json();
-            setRead(readJson);
-        } catch (err) {
-            setReRun(reRun + 1);
-            console.error(err.message);
-        }
-    }
-
-    
-    //helper function used in getStats to convert stats to user friendly form
-    const numConverter = num => {
-        //billion control
-        if (num > 999999999) {
-            num /= 1000000000;
-            num = num.toFixed(2);
-            num += 'bn';
-        }
-        //million control
-        else if (num > 999999) {
-            num /= 1000000;
-            num = num.toFixed(2);
-            num += 'm';
-        }
-        //thousand control
-        else if (num > 999) {
-            num /= 1000;
-            num = num.toFixed(2);
-            num += 'k';
-        }
-        return num;
-    }
-
-    //gets the users stats (books read, pages read, words read) and converts to readable form
-    const getStats = async (sub) => {
-        await props.sleep(1000);
-        try {
-            //fetch books, pages, and words information and converts to json
-            const books = await fetch(`/api/3numsum/books/${sub}`);
-            let booksJson = await books.json();
-            let booksReal = numConverter(parseInt(booksJson));
-            const pages = await fetch(`/api/3numsum/pages/${sub}`);
-            let pagesJson = await pages.json();
-            let pagesReal = numConverter(parseInt(pagesJson));
-            const words = await fetch(`/api/3numsum/words/${sub}`);
-            let wordsJson = await words.json();
-            let wordsReal = numConverter(parseInt(wordsJson));
-            //sets stats state appropriately
-            const total = booksReal + ' / ' + pagesReal + ' / ' + wordsReal;
-            setStats(total);
-        } catch (err) {
-            console.error(err.message);
-        }
-    }
-
-    const getLists = async (sub) => {
+    const getLists = async () => {
         await props.sleep(1000);
         try {
             const TBRResponse = await fetch(`/api/booklists/TBR/${sub}`)
@@ -141,15 +82,25 @@ const Profile = (props) => {
         }
     }
 
-    
+    const getInfo = async () => {
+        const info = await fetch(`/api/users/${sub}`);
+        const infoJson = await info.json();
+        const person = infoJson[0];
+        setBooks(person.books);
+        setPages(person.pages);
+        setWords(person.words);
+        setTotal(person.total);
+        setGoal(person.goal);
+        setReadYear(person.read_year);
+    }
+
+    fetchCreds();
     
     useEffect(() => {
-        fetchCreds();
-        getGoals(sub);
-        getStats(sub);
-        getLists(sub);
+        getInfo();
+        getLists();
         dayOfYear(new Date());
-    }, [reRun])
+    }, [sub])
     
 
     //controls primary loading state
@@ -164,34 +115,83 @@ const Profile = (props) => {
             <div className="profile-all">
                 <Header />
                 <div className="profile">
-                    <h2>{username}'s read50 | {stats}</h2>
-                    <div className="divider"></div>
-                    <div>
-                        <h3>Yearly Goal: {goal} books</h3>
-                        <h3>Pace: {((goal - read) / ((365-day) / 7)).toFixed(3)} books / week to meet goal</h3>
-                        <ProgressBar id="goal-progress" variant="danger" now={Math.max((read / goal * 100), 4)} label={(read / goal * 100).toFixed(2) + '%'} />
+                    <div className="profile-top">
+                        <div className="picture-section">
+                            <img className="profile-pic" src={user.picture}></img>
+                        </div>
+                        
+                        <div className="profile-info">
+                            <p className="user-desc"><span id="user">USER</span></p>
+                            <p className="profile-piece"><span className="name">{username}</span></p>
+                        </div>
+
+                        <div className="profile-rest">
+                            <ProgressBar id="goal-progress" variant="danger" now={Math.max((readYear / goal * 100), 7)} label={(readYear / goal * 100).toFixed(2) + '%'} />
+                            <div className="progress-box">
+                                <h4>Yearly Goal: </h4>
+                                <h4 className="goal">{goal} books</h4>
+                            </div>
+                            
+                            <div className="stats">
+                                <div className="numsum">
+                                    <p className="profile-piece" id="stats"><strong>{parseInt(books).toLocaleString()}</strong> books</p>
+                                    <p className="profile-piece" id="stats"><strong>{parseInt(pages).toLocaleString()}</strong> pages</p>
+                                    <p className="profile-piece" id="stats"><strong>{parseInt(words).toLocaleString()}</strong> words</p>
+                                </div>
+                                <div className="numsum">
+                                    <p className="under" id="stats">view friends</p>
+                                    <p className="under" id="stats">view clubs</p>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
-                    <div className="shelf-dropdown">
-                        <DropdownButton variant="danger" id="dropdown-item-button" title={shelf}>
-                            <Dropdown.Item as="button" onClick={() => setShelf('Want Shelf')}>Want</Dropdown.Item>
-                            <Dropdown.Item as="button" onClick={() => setShelf('Currently Reading Shelf')}>Currently Reading</Dropdown.Item>
-                            <Dropdown.Item as="button" onClick={() => setShelf('Read Shelf')}>Read</Dropdown.Item>
-                            <Dropdown.Item as="button" onClick={() => setShelf('Did Not Finish Shelf')}>Did Not Finish</Dropdown.Item>
-                            <Dropdown.Item as="button" onClick={() => setShelf('All')}>View All</Dropdown.Item>
-                        </DropdownButton>
+                    <div className="navigation">
+                            <ul className="nav-list">
+                            <li className="nav-item" onClick={() => setShelf('All')}>OVERVIEW</li>
+                                <li className="nav-item" onClick={() => setShelf('Want Shelf')}>WANT</li>
+                                <li className="nav-item" onClick={() => setShelf('Currently Reading Shelf')}>CURRENT</li>
+                                <li className="nav-item" onClick={() => setShelf('Read Shelf')}>READ</li>
+                                <li className="nav-item" onClick={() => setShelf('Did Not Finish Shelf')}>DIDN'T FINISH</li>
+                            </ul>
                     </div>
+                    {shelf === 'All' ?
+                        <div className="profile-rest-small">
+                            <div className="profile-header">
+                                <p>About</p>
+                            </div>
+                            <ProgressBar id="goal-progress-small" variant="danger" now={Math.max((readYear / goal * 100), 10)} label={(readYear / goal * 100).toFixed(2) + '%'} />
+                            <div className="progress-box">
+                                <h4>Yearly Goal: </h4>
+                                <h4 className="goal">{goal} books</h4>
+                            </div>
+                                
+                            <div className="stats">
+                                <div className="numsum">
+                                    <p className="profile-piece" id="stats"><strong>{parseInt(books).toLocaleString()}</strong> books</p>
+                                    <p className="profile-piece" id="stats"><strong>{parseInt(pages).toLocaleString()}</strong> pages</p>
+                                    <p className="profile-piece" id="stats"><strong>{parseInt(words).toLocaleString()}</strong> words</p>
+                                </div>
+                                <div className="numsum">
+                                    <p className="under" id="stats">view friends</p>
+                                    <p className="under" id="stats">view clubs</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        :
+                        <span></span>
+                    }
                     {shelf === 'All' ? 
                         <div className="profile-main">
-                            <Shelf profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Want Shelf'} />
-                            <Shelf profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Currently Reading Shelf'} />
-                            <Shelf profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Read Shelf'} />
-                            <Shelf profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Did Not Finish Shelf'} />
-                            <Timeline key={reRender}/>
+                            <Shelf sample={true} profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Want Shelf'} />
+                            <Shelf sample={true} profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Currently Reading Shelf'} />
+                            <Shelf sample={true} profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Read Shelf'} />
+                            <Shelf sample={true} profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Did Not Finish Shelf'} />
                         </div>
                         :
                         <div className="profile-main">
                             <Shelf profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={shelf} />
-                            <Timeline key={reRender}/>
                         </div>
                     }
                 </div>
@@ -201,4 +201,4 @@ const Profile = (props) => {
 }
 
 
-export default Profile;
+export default User;

@@ -3,14 +3,17 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Auth0Provider } from '@auth0/auth0-react';
+import { CookiesProvider } from 'react-cookie';
 
 ReactDOM.render(
   <Auth0Provider
     domain="dev-rtb0ue8q.us.auth0.com"
     clientId="8WjM6U2lIKjte5t7Z9FQ3G05DK0Y9wrF"
-    redirectUri="http://localhost:3000/#/search"
+    redirectUri="https://read50.com/#/search"
   >
-  <App />
+    <CookiesProvider>
+    <App />
+    </CookiesProvider>
   </Auth0Provider>,
   document.getElementById('root')
 );

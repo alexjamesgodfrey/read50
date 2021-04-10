@@ -7,27 +7,24 @@ import Books from './Books.js';
 const SearchPage = (props) => {
   const { user, isAuthenticated  } = useAuth0();
 
-  const [load, setLoad] = useState(true);
+  // const [load, setLoad] = useState(true);
 
-  const loadingFunc = async ms => {
-    await props.sleep(ms);
-    setLoad(false);
-  }
+  // const loadingFunc = async ms => {
+  //   await props.sleep(ms);
+  //   setLoad(false);
+  // }
 
-  useEffect(() => { 
-    loadingFunc(1500);
-    if (isAuthenticated) {
-      props.checkIfDB(user.sub, user.email, user['https://www.read50.com/username'], user.picture, user['https://www.read50.com/logincount']);
-    }
-  }, [])
+  // useEffect(() => { 
+  //   loadingFunc(500);
+  // }, [])
 
 
-  //controls loading state
-  if (load) {
-    return (
-      <Loading title={'loading search page'} desc={'we utilize the google books api, which contains over 40 million books'}/>
-    )
-  }
+  // //controls loading state
+  // if (load) {
+  //   return (
+  //     <Loading title={'loading search page'} desc={'we utilize the google books api, which contains over 40 million books'}/>
+  //   )
+  // }
   
   return (
     <div className="App">
