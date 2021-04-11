@@ -42,8 +42,7 @@ const Shelf = (props) => {
                                         pages={props.pages}
                                         words={props.pages * 300}
                                     />
-                        })
-                                }
+                        })}
                                 </div>
                     </div>
             )

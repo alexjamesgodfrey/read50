@@ -6,12 +6,15 @@ import Shelf from './Shelf.js';
 import Timeline from './Timeline.js';
 import Loading from '../Loading.js';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import OverlayTrigger from 'react-bootstrap/Overlay';
-import Popover from 'react-bootstrap/Popover'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
+import PopoverContent from 'react-bootstrap/PopoverContent';
+import PopoverTitle from 'react-bootstrap/PopoverTitle';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import Notification from '../../images/notification.svg';
 import './Profile.scss';
 import './ShelfEntry.scss';
 
@@ -35,7 +38,7 @@ const Profile = (props) => {
     const [pages, setPages] = useState('pages');
     const [words, setWords] = useState('words');
     const [total, setTotal] = useState('--/--/--');
-    //sets state of edit button for yearly goa;
+    //sets state of edit button for yearly goal;
     const [edit, setEdit] = useState('Edit');
     //state that is set after fetch of books read since start of 2021
     const [readYear, setReadYear] = useState(0);
@@ -47,6 +50,8 @@ const Profile = (props) => {
     const [day, setDay] = useState(0);
     //sets shelf on dropdown
     const [shelf, setShelf] = useState('All');
+    //state for requests
+    const [frequests, setFrequests] = useState([]);
     //state for shelves
     const [TBR, setTBR] = useState([]);
     const [CURR, setCURR] = useState([]);
@@ -94,11 +99,13 @@ const Profile = (props) => {
         setReadYear(person.read_year);
     }
 
-    //function to be run upon each click of the shelves div - it will update timeline and progress bar if an entry is to be removed
-    const onShelfClick = async () => {
-        getInfo();
-        await props.sleep(500);
-        setReRender(reRender + 1);
+    const getRequests = async () => {
+        const incoming = await fetch(`/api/friends/incoming/${cookies.auth0}`);
+        const incomingJson = await incoming.json();
+        console.log(incomingJson)
+        setFrequests([incomingJson])
+        //setFrequests(frequests => [...frequests, incomingJson]);
+        console.log(frequests);
     }
 
     const getLists = async () => {
@@ -111,6 +118,7 @@ const Profile = (props) => {
             const ARLjson = await ARLResponse.json();
             const DNFResponse = await fetch(`/api/booklists/DNF/${cookies.auth0}`)
             const DNFjson = await DNFResponse.json();
+            console.log(TBRjson)
             setTBR(TBRjson);
             setCURR(CURRjson);
             setARL(ARLjson);
@@ -121,12 +129,19 @@ const Profile = (props) => {
         }
     }
 
+    //function to be run upon each click of the shelves div - it will update timeline and progress bar if an entry is to be removed
+    const onShelfClick = async () => {
+        getInfo();
+        await props.sleep(500);
+        setReRender(reRender + 1);
+    }
+
     useEffect(() => {
         getInfo();
+        getRequests();
         getLists();
         dayOfYear(new Date());
-    }, [])
-    
+    }, []);
 
     //controls primary loading state
     if (load) {
@@ -157,7 +172,26 @@ const Profile = (props) => {
                         </div>
                         
                         <div className="profile-info">
-                            <p className="user-desc"><span id="user">USER</span></p>
+                            <div className="user-notif">
+                                <p className="user-desc"><span id="user">USER</span></p>
+                                <OverlayTrigger trigger="click" placement="right" overlay={
+                                    <Popover id="popover-basic">
+                                        <Popover.Title>Notifications</Popover.Title>
+                                        {frequests[0].map((friend, i) => {
+                                            return <PopoverContent id="request-line">
+                                                {friend.username_a}
+                                                <div>
+                                                    <Button id="request-text" variant="warning" size="sm">deny</Button>
+                                                    <Button id="request-text" variant="danger" size="sm">accept</Button>
+                                                </div>
+                                            </PopoverContent>
+                                        })}
+                                  </Popover>
+                                }>
+                                    <img id="notification-bell" src={Notification}></img>
+                                </OverlayTrigger>
+                                
+                            </div>
                             <p className="profile-piece"><span className="name">{user['https://www.read50.com/username']}</span></p>
                             {/* <p className="profile-piece" id="stats"><strong>{books}</strong> books</p>
                             <p className="profile-piece" id="stats"><strong>{pages}</strong> pages</p>

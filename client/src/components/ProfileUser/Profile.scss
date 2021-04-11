@@ -281,3 +281,32 @@ h2 {
 .under {
   text-decoration: underline !important;
 }
+
+#notification-bell {
+  color: $primary-color;
+  height: 25px;
+  margin-left: 15px;
+  transition: transform .2s ease-in-out;
+}
+
+#notification-bell:hover {
+  transform: rotate(-20deg);
+  cursor: pointer;
+}
+
+.user-notif {
+  display: flex;
+}
+
+#request-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+}
+
+#request-text {
+  color: white;
+  font-size:12px;
+  margin-left: 3px;
+}

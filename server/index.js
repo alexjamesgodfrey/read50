@@ -16,6 +16,7 @@ require('./routes/users.js')(app);
 require('./routes/booklists.js')(app);
 require('./routes/shelves.js')(app);
 require('./routes/leaderboards.js')(app);
+require('./routes/friends.js')(app);
 require('./routes/deletions.js')(app);
 require('./routes/searches.js')(app);
 
