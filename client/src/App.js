@@ -10,13 +10,6 @@ import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      inDB: false,
-      color: "#eb3b3b"
-    }
-  }
   
   //sleep function
   sleep = ms => new Promise(res => setTimeout(res, ms));

@@ -19,8 +19,8 @@ const Home = () => {
         const usersText = await users.json();
         
         setUsers(usersText);
-        setBooks(countsText.books);
-        setPages(countsText.pages);
+        setBooks(parseInt(countsText.books).toLocaleString());
+        setPages(parseInt(countsText.pages));
         setWords(countsText.words);
         setLoading(false);
     }
@@ -38,10 +38,10 @@ const Home = () => {
     return (
         <div className="sample-total">
             <div className="counts">
-                <p><CountUp end={books} duration={3} /> books.</p>
-                <p><CountUp end={pages} duration={2} /> pages.</p>
-                <p><CountUp end={words} duration={2} /> words.</p>
-                <p>Read by <CountUp end={users} duration={3} /> users.</p>
+                <p><CountUp suffix=" books." end={books} duration={3} separator="," /></p>
+                <p><CountUp suffix=" pages." end={pages} duration={2} separator="," /></p>
+                <p><CountUp suffix=" words." end={words} duration={2} separator="," /></p>
+                <p><CountUp prefix="Read by "suffix=" users" end={users} duration={3} separator="," /></p>
                 <div className="desc"><p className="smaller">Challenge friends, join clubs, and climb the leaderboards. Registration only takes 30 seconds.</p></div>
                 <LoginButton text="Get Started" />
             </div>

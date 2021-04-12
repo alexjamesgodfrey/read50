@@ -102,10 +102,8 @@ const Profile = (props) => {
     const getRequests = async () => {
         const incoming = await fetch(`/api/friends/incoming/${cookies.auth0}`);
         const incomingJson = await incoming.json();
-        console.log(incomingJson)
         setFrequests([incomingJson])
         //setFrequests(frequests => [...frequests, incomingJson]);
-        console.log(frequests);
     }
 
     const getLists = async () => {
@@ -118,7 +116,6 @@ const Profile = (props) => {
             const ARLjson = await ARLResponse.json();
             const DNFResponse = await fetch(`/api/booklists/DNF/${cookies.auth0}`)
             const DNFjson = await DNFResponse.json();
-            console.log(TBRjson)
             setTBR(TBRjson);
             setCURR(CURRjson);
             setARL(ARLjson);
@@ -134,6 +131,12 @@ const Profile = (props) => {
         getInfo();
         await props.sleep(500);
         setReRender(reRender + 1);
+    }
+
+    const denyRequest = async (username) => {
+        const deny = await fetch(`/api/friends/rejectrequest/${cookies.auth0}/${username}`, {
+            method: "DELETE"
+        });
     }
 
     useEffect(() => {
@@ -181,7 +184,7 @@ const Profile = (props) => {
                                             return <PopoverContent id="request-line">
                                                 {friend.username_a}
                                                 <div>
-                                                    <Button id="request-text" variant="warning" size="sm">deny</Button>
+                                                    <Button id="request-text" variant="warning" size="sm" onClick={() => denyRequest(friend.username_a)}>deny</Button>
                                                     <Button id="request-text" variant="danger" size="sm">accept</Button>
                                                 </div>
                                             </PopoverContent>

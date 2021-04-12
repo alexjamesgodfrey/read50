@@ -82,3 +82,13 @@ p {
 h4 {
   color: $primary-color;
 }
+
+.navigation {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  justify-content: center;
+
+  h3 {
+  }
+}

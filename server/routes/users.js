@@ -17,6 +17,17 @@ module.exports = function (app) {
         }
     })
 
+    //get top 10 users levenshtein
+    app.get("/api/users/levenshtein/:uname", async (req, res) => {
+        try {
+            const { uname } = req.params;
+            const levenshtein = await pool.query("SELECT username, auth0_id FROM users ORDER BY SIMILARITY(username, $1) DESC LIMIT 10", [uname]);
+            res.json(levenshtein.rows);
+        } catch (err) {
+            console.error(err.message);
+        }
+    })
+
     //get all auth0 subs
     app.get("/api/getsubs", async (req, res) => {
         try {

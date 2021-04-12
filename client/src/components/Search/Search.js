@@ -28,7 +28,7 @@ const Search = (props) => {
   return (
     <div className="search">
       <form onSubmit={props.searchBook} actions="">
-        <FormControl id="input" type="text" placeholder="enter title or author" onChange={props.handleSearch}/>
+        <FormControl id="input" type="text" placeholder="enter title, author, or username" onChange={props.handleSearch}/>
         <Button id="button" variant="danger" onMouseOver={onSubmitForm} type="submit">go</Button>
       </form>
     </div>

@@ -6,11 +6,13 @@ import './Header.scss';
 
 const LoggedInDropdown = () => {
     const { user, logout } = useAuth0();
-    const [cookies, setCookie] = useCookies(['auth0']);
+    const [cookies, setCookie] = useCookies(['auth0', 'username']);
 
     const setAuth = async () => {
-        setCookie('auth0', user.sub, { path: '/', maxAge: 3600 });
-        console.log(cookies.auth0);
+      setCookie('auth0', user.sub, { path: '/', maxAge: 3600 });
+      setCookie('username', user['https://www.read50.com/username'], { path: '/', maxAge: 3600 });
+      console.log('auth0 cookie set to ' + cookies.auth0);
+      console.log('username cookie set to ' + cookies.username);
     }
 
     const addToDB = async (sub, email, username, picture, logcount) => {

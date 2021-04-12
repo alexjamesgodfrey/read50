@@ -8,9 +8,10 @@ $barrier: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
 
   .counts {
+    margin-top: 35px;
+    height: 70%;
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -36,16 +37,11 @@ $barrier: 800px;
   }
 
   @media screen and (min-width: $barrier) {
-    p {
+    p { 
       font-size: 50px;
     }
     .smaller {
       font-size: 45px;
-    }
-    .desc {
-      margin-top: 50px;
-      margin-bottom: 35px;
-      width: 80%;
     }
   }
 }
