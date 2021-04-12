@@ -11,7 +11,8 @@ const BookList = (props) => {
     behavior: 'smooth'
   });
   const [page, setPage] = useState(1);
-  const [books, setBooks] = useState(true);
+
+  console.log('booklist users ' + props.users);
 
   const one = () => setPage(1);
   const two = () => setPage(2);

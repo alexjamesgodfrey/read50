@@ -17,7 +17,7 @@ class Books extends Component {
       searchCount: 0,
       searched: false,
       page: 1,
-      users: sessionStorage.getItem('users') || false,
+      users: false,
       loading: false
     }
   }
@@ -45,17 +45,16 @@ class Books extends Component {
   }
 
   changeUser = (value) => {
-    sessionStorage.setItem('users', value);
     this.setState({ users: value });
-    console.log(this.state)
   }
 
   componentDidMount() {
-    console.log(sessionStorage.getItem('users'))
-    console.log(this.state.users);
+    console.log('main users ' + this.state.users);
   }
 
   render() {
+    let users = this.state.users;
+    let searchField = this.state.searchField;
     return (
       <div id="aggregation">
         <div className="search-total">
@@ -67,7 +66,7 @@ class Books extends Component {
           </div>
           {this.state.searchField !== "" ? 
             <div className="alt-container">
-              {this.state.users ? <p onClick={() => this.changeUser(false)}>search books for "{this.state.searchField}"</p> : <p onClick={() => this.changeUser(true)}>search users for "{this.state.searchField}"</p>}
+              {(users === true) ? <p onClick={() => this.changeUser(false)}>search books for "{searchField}"</p> : <p onClick={() => this.changeUser(true)}>search users for "{searchField}"</p>}
             </div>
           :
             <span></span>
