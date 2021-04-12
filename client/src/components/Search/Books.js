@@ -8,9 +8,11 @@ import './Search.scss';
 class Books extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
+      previousBooks: JSON.parse(sessionStorage.getItem('books')) || [],
       books: [],
-      searchField: '',
+      searchField: sessionStorage.getItem('searchField') || '',
       searchCount: 0,
       searched: false,
       page: 1,
@@ -27,16 +29,17 @@ class Books extends Component {
       .get("https://www.googleapis.com/books/v1/volumes")
       .query({ q: this.state.searchField, maxResults: 40})
       .then((data) => {
-        console.log(data)
+        sessionStorage.setItem('books', JSON.stringify(data.body.items));
         this.setState({ books: [...data.body.items] })
-        console.log(this.state.books);
         this.setState({searched: true})
       })
     this.setState({ loading: false });
   }
 
   handleSearch = (e) => {
-    this.setState({ searchField: e.target.value });
+    let change = e.target.value;
+    sessionStorage.setItem('searchField', change);
+    this.setState({ searchField: change });
   }
 
   render() {
