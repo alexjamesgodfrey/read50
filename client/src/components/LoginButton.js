@@ -10,11 +10,11 @@ const LoginButton = (props) => {
 
     if (isAuthenticated) {
         return (
-            <Link to="/search"> <Button variant="danger" size="lg">{props.text}</Button> </Link> 
+            <Link to="/search"> <Button id="loginbutton" variant="danger" size="lg">{props.text}</Button> </Link> 
         )
     } else {
         return (
-            <Button variant="danger" size="lg" onClick={() => loginWithRedirect()}>{props.text}</Button>
+            <Button id="loginbutton" variant="danger" size="lg" onClick={() => loginWithRedirect()}>{props.text}</Button>
         );
     }
     

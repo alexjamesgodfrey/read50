@@ -31,24 +31,12 @@ p {
   color: $font-color !important;
 }
 
-.loginbutton {
-  font-size: 20px;
-  padding: 5px;
-  background-color: #30bf7a;
-  color: #fcf6f5ff;
-  border: none;
-  border-radius: 10%;
-  cursor: pointer;
+#loginbutton {
+  color: #403939;
 }
 
-.logoutbutton {
-  font-size: 20px;
-  padding: 5px;
-  background-color: #db5e56;
-  color: #fcf6f5ff;
-  border: none;
-  border-radius: 10%;
-  cursor: pointer;
+#loginbutton:hover {
+  color: #f2eded;
 }
 
 .booklist {
