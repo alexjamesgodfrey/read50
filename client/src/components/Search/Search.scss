@@ -4,7 +4,7 @@ $barrier: 800px;
 .search {
   width: 100%;
   display: flex;
-  margin: 40px 0px;
+  margin-top: 40px;
   justify-content: center;
 }
 
@@ -45,4 +45,24 @@ form {
 #agg {
   color: $primary-color;
   margin-bottom: 60px;
+}
+
+.search-total {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.alt-container {
+  width: 385px;
+
+  p {
+    font-size: 17px;
+    text-decoration: underline;
+  }
+
+  @media screen and (max-width: $barrier) {
+    width: 320px;
+  }
 }

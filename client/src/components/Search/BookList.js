@@ -23,12 +23,8 @@ const BookList = (props) => {
     if (page === 1 && props.state.searched === true) {
       return (
         <div>
-          <div className="navigation">
-            <h3 onClick={() => setBooks(true)} style={{ 'margin-right': '20px' }}>books</h3>
-            <h3 onClick={() => setBooks(false)}>users</h3>
-          </div>
-          {books ? <CardPage state={props.state} books={props.books.slice(0, 10)} page={page} /> : <UserPage state={props.state} />}
-          {books ?
+          {!props.users ? <CardPage state={props.state} books={props.books.slice(0, 10)} page={page} /> : <UserPage state={props.state} />}
+          {!props.users ?
             <div className="pagination-box">
               <Pagination size="lg" className="pagination">
                 <Pagination.Prev id="non-active" onClick={four} />
@@ -47,12 +43,8 @@ const BookList = (props) => {
     } else if (page === 2 && props.state.searched === true) {
       return (
         <div>
-          <div className="navigation">
-            <h3 onClick={() => setBooks(true)} style={{ 'margin-right': '20px' }}>books</h3>
-            <h3 onClick={() => setBooks(false)}>users</h3>
-          </div>
-          {books ? <CardPage state={props.state} books={props.books.slice(10, 20)} page={page} /> : <UserPage state={props.state} />}
-          {books ?
+          {!props.users ? <CardPage state={props.state} books={props.books.slice(10, 20)} page={page} /> : <UserPage state={props.state} />}
+          {!props.users ?
             <div className="pagination-box">
               <Pagination size="lg" className="pagination">
                 <Pagination.Prev id="non-active" onClick={one} />
@@ -71,12 +63,8 @@ const BookList = (props) => {
     } else if (page === 3 && props.state.searched === true) {
       return (
         <div>
-          <div className="navigation">
-            <h3 onClick={() => setBooks(true)} style={{ 'margin-right': '20px' }}>books</h3>
-            <h3 onClick={() => setBooks(false)}>users</h3>
-          </div>
-          {books ? <CardPage state={props.state} books={props.books.slice(20, 30)} page={page} /> : <UserPage state={props.state} />}
-          {books ?
+          {!props.users ? <CardPage state={props.state} books={props.books.slice(20, 30)} page={page} /> : <UserPage state={props.state} />}
+          {!props.users ?
             <div className="pagination-box">
               <Pagination size="lg" className="pagination">
                 <Pagination.Prev id="non-active" onClick={two} />
@@ -95,12 +83,8 @@ const BookList = (props) => {
     } else if (page === 4 && props.state.searched === true) {
       return (
         <div>
-          <div className="navigation">
-            <h3 onClick={() => setBooks(true)} style={{ 'margin-right': '20px' }}>books</h3>
-            <h3 onClick={() => setBooks(false)}>users</h3>
-          </div>
-          {books ? <CardPage state={props.state} books={props.books.slice(30, 40)} page={page} /> : <UserPage state={props.state} />}
-          {books ?
+          {!props.users ? <CardPage state={props.state} books={props.books.slice(30, 40)} page={page} /> : <UserPage state={props.state} />}
+          {!props.users ?
             <div className="pagination-box">
               <Pagination size="lg" className="pagination">
                 <Pagination.Prev id="non-active" onClick={three} />
@@ -124,12 +108,8 @@ const BookList = (props) => {
     if (page === 1) {
       return (
         <div>
-          <div className="navigation">
-            <h3 onClick={() => setBooks(true)} style={{ 'margin-right': '20px' }}>books</h3>
-            <h3 onClick={() => setBooks(false)}>users</h3>
-          </div>
-          {books ? <CardPage state={props.state} books={props.state.previousBooks.slice(0, 10)} page={page} /> : <UserPage state={props.state} />}
-          {books ?
+          {!props.users ? <CardPage state={props.state} books={props.state.previousBooks.slice(0, 10)} page={page} /> : <UserPage state={props.state} />}
+          {!props.users ?
             <div className="pagination-box">
               <Pagination size="lg" className="pagination">
                 <Pagination.Prev id="non-active" onClick={four} />
@@ -148,12 +128,8 @@ const BookList = (props) => {
     } else if (page === 2 && props.state.searched === true) {
       return (
         <div>
-          <div className="navigation">
-            <h3 onClick={() => setBooks(true)} style={{ 'margin-right': '20px' }}>books</h3>
-            <h3 onClick={() => setBooks(false)}>users</h3>
-          </div>
-          {books ? <CardPage state={props.state} books={props.books.slice(10, 20)} page={page} /> : <UserPage state={props.state} />}
-          {books ?
+          {!props.users ? <CardPage state={props.state} books={props.state.previousBooks.slice(10, 20)} page={page} /> : <UserPage state={props.state} />}
+          {!props.users ?
             <div className="pagination-box">
               <Pagination size="lg" className="pagination">
                 <Pagination.Prev id="non-active" onClick={one} />
@@ -172,12 +148,8 @@ const BookList = (props) => {
     } else if (page === 3 && props.state.searched === true) {
       return (
         <div>
-          <div className="navigation">
-            <h3 onClick={() => setBooks(true)} style={{ 'margin-right': '20px' }}>books</h3>
-            <h3 onClick={() => setBooks(false)}>users</h3>
-          </div>
-          {books ? <CardPage state={props.state} books={props.books.slice(20, 30)} page={page} /> : <UserPage state={props.state} />}
-          {books ?
+          {!props.users ? <CardPage state={props.state} books={props.state.previousBooks.slice(20, 30)} page={page} /> : <UserPage state={props.state} />}
+          {!props.users ?
             <div className="pagination-box">
               <Pagination size="lg" className="pagination">
                 <Pagination.Prev id="non-active" onClick={two} />
@@ -196,12 +168,8 @@ const BookList = (props) => {
     } else if (page === 4 && props.state.searched === true) {
       return (
         <div>
-          <div className="navigation">
-            <h3 onClick={() => setBooks(true)} style={{ 'margin-right': '20px' }}>books</h3>
-            <h3 onClick={() => setBooks(false)}>users</h3>
-          </div>
-          {books ? <CardPage state={props.state} books={props.books.slice(30, 40)} page={page} /> : <UserPage state={props.state} />}
-          {books ?
+          {!props.users ? <CardPage state={props.state} books={props.state.previousBooks.slice(30, 40)} page={page} /> : <UserPage state={props.state} />}
+          {!props.users ?
             <div className="pagination-box">
               <Pagination size="lg" className="pagination">
                 <Pagination.Prev id="non-active" onClick={three} />

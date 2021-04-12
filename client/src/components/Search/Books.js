@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Search from './Search.js';
+import { FormControl, Button } from 'react-bootstrap';
 import BookList from './BookList.js';
 import request from 'superagent';
 import { Spinner } from 'react-bootstrap';
@@ -16,6 +17,7 @@ class Books extends Component {
       searchCount: 0,
       searched: false,
       page: 1,
+      users: sessionStorage.getItem('users') || false,
       loading: false
     }
   }
@@ -42,17 +44,42 @@ class Books extends Component {
     this.setState({ searchField: change });
   }
 
+  changeUser = (value) => {
+    sessionStorage.setItem('users', value);
+    this.setState({ users: value });
+    console.log(this.state)
+  }
+
+  componentDidMount() {
+    console.log(sessionStorage.getItem('users'))
+    console.log(this.state.users);
+  }
+
   render() {
     return (
       <div id="aggregation">
-        <Search searchBook={this.searchBook} handleSearch={this.handleSearch} state={this.state} />
+        <div className="search-total">
+          <div className="search">
+            <form actions="">
+              <FormControl id="input" type="text" placeholder="enter title, author, or username" onChange={this.handleSearch} value={this.state.searchField} />
+              <Button id="button" variant="danger" type="submit" onClick={this.searchBook}>go</Button>
+            </form>
+          </div>
+          {this.state.searchField !== "" ? 
+            <div className="alt-container">
+              {this.state.users ? <p onClick={() => this.changeUser(false)}>search books for "{this.state.searchField}"</p> : <p onClick={() => this.changeUser(true)}>search users for "{this.state.searchField}"</p>}
+            </div>
+          :
+            <span></span>
+          }
+        </div>
         <div>
           {this.state.loading ?
             <div className="await">
               <Spinner className="spinner" animation="border" variant="danger" size="lg" />
             </div>
             :
-            <BookList changeLoad={this.changeLoad} state={this.state} books={this.state.books} />
+            <BookList users={this.state.users} changeLoad={this.changeLoad} state={this.state} books={this.state.books} />
           }
         </div>
       </div>
