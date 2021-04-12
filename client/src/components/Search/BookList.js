@@ -125,7 +125,7 @@ const BookList = (props) => {
           }
         </div>
       )
-    } else if (page === 2 && props.state.searched === true) {
+    } else if (page === 2) {
       return (
         <div>
           {!props.users ? <CardPage state={props.state} books={props.state.previousBooks.slice(10, 20)} page={page} /> : <UserPage state={props.state} />}
@@ -145,7 +145,7 @@ const BookList = (props) => {
           }
         </div>
       )
-    } else if (page === 3 && props.state.searched === true) {
+    } else if (page === 3) {
       return (
         <div>
           {!props.users ? <CardPage state={props.state} books={props.state.previousBooks.slice(20, 30)} page={page} /> : <UserPage state={props.state} />}
@@ -165,7 +165,7 @@ const BookList = (props) => {
           }
         </div>
       )
-    } else if (page === 4 && props.state.searched === true) {
+    } else if (page === 4) {
       return (
         <div>
           {!props.users ? <CardPage state={props.state} books={props.state.previousBooks.slice(30, 40)} page={page} /> : <UserPage state={props.state} />}
