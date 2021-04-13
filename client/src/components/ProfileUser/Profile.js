@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useCookies  } from 'react-cookie';
 import Header from '../Header/Header.js';
 import Shelf from './Shelf.js';
+import FriendRequest from './FriendRequest.js';
 import Timeline from './Timeline.js';
 import Loading from '../Loading.js';
 import ProgressBar from 'react-bootstrap/ProgressBar';
@@ -11,12 +13,12 @@ import Form from 'react-bootstrap/Form';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import PopoverContent from 'react-bootstrap/PopoverContent';
-import PopoverTitle from 'react-bootstrap/PopoverTitle';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Notification from '../../images/notification.svg';
 import './Profile.scss';
 import './ShelfEntry.scss';
+import { get } from 'superagent';
 
 const Profile = (props) => {
     
@@ -102,7 +104,7 @@ const Profile = (props) => {
     const getRequests = async () => {
         const incoming = await fetch(`/api/friends/incoming/${cookies.auth0}`);
         const incomingJson = await incoming.json();
-        setFrequests([incomingJson])
+        await setFrequests([...incomingJson]);
         //setFrequests(frequests => [...frequests, incomingJson]);
     }
 
@@ -133,16 +135,24 @@ const Profile = (props) => {
         setReRender(reRender + 1);
     }
 
-    const denyRequest = async (username) => {
+    const denyRequest = async (username, i) => {
         const deny = await fetch(`/api/friends/rejectrequest/${cookies.auth0}/${username}`, {
             method: "DELETE"
         });
+        getRequests();
+    }
+
+    const acceptRequest = async (username) => {
+        const accept = await fetch(`/api/friends/acceptrequest/${cookies.auth0}/${username}`, {
+            method: "PUT"
+        });
+        getRequests();
     }
 
     useEffect(() => {
         getInfo();
-        getRequests();
         getLists();
+        getRequests();
         dayOfYear(new Date());
     }, []);
 
@@ -180,16 +190,22 @@ const Profile = (props) => {
                                 <OverlayTrigger trigger="click" placement="right" overlay={
                                     <Popover id="popover-basic">
                                         <Popover.Title>Notifications</Popover.Title>
-                                        {frequests[0].map((friend, i) => {
-                                            return <PopoverContent id="request-line">
-                                                {friend.username_a}
-                                                <div>
-                                                    <Button id="request-text" variant="warning" size="sm" onClick={() => denyRequest(friend.username_a)}>deny</Button>
-                                                    <Button id="request-text" variant="danger" size="sm">accept</Button>
-                                                </div>
-                                            </PopoverContent>
+                                        {frequests.map((friend, i) => {
+                                            return (
+                                                <PopoverContent className="request-line">
+                                                        {friend.username_a}
+                                                        <div className="contents">
+                                                            <div className="denied"><Button className="denied" id="canceled" variant="outline-warning" size="sm">denied</Button></div>
+                                                            <div className="removables">
+                                                                    <Button id="request-text" variant="warning" size="sm" onClick={() => denyRequest(friend.username_a)}>deny</Button>
+                                                                    <Button id="request-text" variant="danger" size="sm" onClick={() => acceptRequest(friend.username_a)}>accept</Button>
+                                                            </div>
+                                                        </div>
+                                                </PopoverContent>
+                                            )     
                                         })}
-                                  </Popover>
+                                        {frequests.length === 0 ? <PopoverContent className="request-line">nothing yet :( <Link to="/search">find friends</Link></PopoverContent> : <span></span>}
+                                    </Popover>
                                 }>
                                     <img id="notification-bell" src={Notification}></img>
                                 </OverlayTrigger>

@@ -6,7 +6,7 @@
  const pool = require("../db.js");
 
  module.exports = function (app) {
-     //view outoing (pending) requests by sub
+     //view outgoing (pending) requests by sub
      app.get("/api/friends/outgoing/:sub", async (req, res) => {
         try {
             const { sub } = req.params;
@@ -16,7 +16,7 @@
             console.error(err.message);
         }
     });
-    //view outoing (complete) requests by sub
+    //view outgoing (complete) requests by sub
     app.get("/api/friends/:sub", async (req, res) => {
         try {
             const { sub } = req.params;
@@ -26,7 +26,7 @@
             console.error(err.message);
         }
     });
-    //cancel an outoging request
+    //cancel an outgping request
     app.delete("/api/friends/cancel/:sub/:uname", async (req, res) => {
         try {
             const { sub, uname } = req.params;
@@ -43,7 +43,7 @@
      app.get("/api/friends/incoming/:sub", async (req, res) => {
         try {
             const { sub } = req.params;
-            const incoming = await pool.query("SELECT username_a FROM friends WHERE auth0_b = $1", [sub]);
+            const incoming = await pool.query("SELECT username_a FROM friends WHERE auth0_b = $1 AND pending = true", [sub]);
             res.json(incoming.rows);
         } catch (err) {
             console.error(err.message);
@@ -67,10 +67,23 @@
         try {
             const { sub, uname } = req.params;
             const deleteRequest = await pool.query(
-                "DELETE FROM friends WHERE (auth0_b = $1) AND (username_a = $2)", 
+                "DELETE FROM friends WHERE (auth0_b = $1) AND (username_a = $2) AND (pending = true)", 
                 [sub, uname]
             );
             res.json(deleteRequest.rows);
+        } catch (err) {
+            console.error(err.message);
+        }
+    })
+    //accept a request
+    app.put("/api/friends/acceptrequest/:sub/:uname", async (req, res) => {
+        try {
+            const { sub, uname } = req.params;
+            const acceptRequest = await pool.query(
+                "UPDATE friends SET pending = false, accepted = true WHERE auth0_b = $1 AND username_a = $2", 
+                [sub, uname]
+            );
+            res.json(acceptRequest.rows);
         } catch (err) {
             console.error(err.message);
         }

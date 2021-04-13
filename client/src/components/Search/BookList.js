@@ -11,13 +11,24 @@ const BookList = (props) => {
     behavior: 'smooth'
   });
   const [page, setPage] = useState(1);
+  console.log(page);
 
-  console.log('booklist users ' + props.users);
-
-  const one = () => setPage(1);
-  const two = () => setPage(2);
-  const three = () => setPage(3);
-  const four = () => setPage(4);
+  const one = () => {
+    setPage(1);
+    sessionStorage.setItem('page', 1);
+  }
+  const two = () => {
+    setPage(2);
+    sessionStorage.setItem('page', 2);
+  }
+  const three = () => {
+    setPage(3);
+    sessionStorage.setItem('page', 3);
+  }
+  const four = () => {
+    setPage(4);
+    sessionStorage.setItem('page', 4);
+  }
 
   //runs if the user has no book sessionStorage or has clicked the search button
   if (props.state.previousBooks.length < 1 || props.state.searched === true) {

@@ -286,7 +286,7 @@ h2 {
   color: $primary-color;
   height: 25px;
   margin-left: 15px;
-  transition: transform .2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 }
 
 #notification-bell:hover {
@@ -298,15 +298,24 @@ h2 {
   display: flex;
 }
 
-#request-line {
+.request-line {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 200px;
+  width: 225px;
 }
 
 #request-text {
   color: white;
-  font-size:12px;
+  font-size: 12px;
   margin-left: 3px;
+}
+
+#canceled {
+  font-size: 12px;
+  color: rgb(220, 53, 69);
+}
+
+.denied {
+  display: none;
 }

@@ -16,7 +16,7 @@ class Books extends Component {
       searchField: sessionStorage.getItem('searchField') || '',
       searchCount: 0,
       searched: false,
-      page: 1,
+      page: sessionStorage.getItem('page') || 1,
       users: false,
       loading: false
     }
@@ -26,6 +26,9 @@ class Books extends Component {
 
   searchBook = async e => {
     this.setState({ loading: true });
+    if (this.state.searchField === "") {
+      await this.setState({ searchField: 'brandon sanderson' });
+    }
     e.preventDefault();
     await request
       .get("https://www.googleapis.com/books/v1/volumes")
@@ -78,7 +81,7 @@ class Books extends Component {
               <Spinner className="spinner" animation="border" variant="danger" size="lg" />
             </div>
             :
-            <BookList users={this.state.users} changeLoad={this.changeLoad} state={this.state} books={this.state.books} />
+            <BookList page={this.state.page} users={this.state.users} changeLoad={this.changeLoad} state={this.state} books={this.state.books} />
           }
         </div>
       </div>
