@@ -16,6 +16,7 @@ import PopoverContent from 'react-bootstrap/PopoverContent';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Notification from '../../images/notification.svg';
+import Reddot from '../../images/reddot.svg';
 import './Profile.scss';
 import './ShelfEntry.scss';
 import { get } from 'superagent';
@@ -105,7 +106,6 @@ const Profile = (props) => {
         const incoming = await fetch(`/api/friends/incoming/${cookies.auth0}`);
         const incomingJson = await incoming.json();
         await setFrequests([...incomingJson]);
-        //setFrequests(frequests => [...frequests, incomingJson]);
     }
 
     const getLists = async () => {
@@ -204,12 +204,14 @@ const Profile = (props) => {
                                                 </PopoverContent>
                                             )     
                                         })}
-                                        {frequests.length === 0 ? <PopoverContent className="request-line">nothing yet :( <Link to="/search">find friends</Link></PopoverContent> : <span></span>}
-                                    </Popover>
-                                }>
-                                    <img id="notification-bell" src={Notification}></img>
+                                            {frequests.length === 0 ? <PopoverContent className="request-line">nothing yet :( <Link to="/search">find friends</Link></PopoverContent> : <span></span>}
+                                        </Popover>
+                                        }>
+                                    <div className="notification-center">
+                                        <img id="notification-bell" src={Notification}></img>
+                                        {frequests.length !== 0 ? <img id="has-notification" src={Reddot}></img> : <span></span>}
+                                    </div>
                                 </OverlayTrigger>
-                                
                             </div>
                             <p className="profile-piece"><span className="name">{user['https://www.read50.com/username']}</span></p>
                             {/* <p className="profile-piece" id="stats"><strong>{books}</strong> books</p>

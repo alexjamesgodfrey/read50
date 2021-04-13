@@ -24,12 +24,11 @@ class Books extends Component {
 
   delay = ms => new Promise(res => setTimeout(res, ms));
 
-  searchBook = async e => {
+  searchBook = async () => {
     this.setState({ loading: true });
     if (this.state.searchField === "") {
       await this.setState({ searchField: 'brandon sanderson' });
     }
-    e.preventDefault();
     await request
       .get("https://www.googleapis.com/books/v1/volumes")
       .query({ q: this.state.searchField, maxResults: 40})
@@ -47,9 +46,14 @@ class Books extends Component {
     this.setState({ searchField: change });
   }
 
-  changeUser = (value) => {
+  changeUser = (value, e) => {
+    if (this.state.searched === false) {
+      this.searchBook(e);
+    }
     this.setState({ users: value });
   }
+
+
 
   componentDidMount() {
     console.log('main users ' + this.state.users);

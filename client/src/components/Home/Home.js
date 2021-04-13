@@ -1,10 +1,16 @@
-import React, { useState, useEffect, Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 import CountUp from 'react-countup';
+import Button from 'react-bootstrap/Button';
 import Loading from '../Loading.js';
 import LoginButton from '../LoginButton.js';
 import './Home.scss';
  
 const Home = () => {
+    //user checks
+    const { loginWithRedirect, user, isAuthenticated } = useAuth0();
+
     const [users, setUsers] = useState(0);
     const [books, setBooks] = useState(0);
     const [pages, setPages] = useState(0);
@@ -43,7 +49,7 @@ const Home = () => {
                 <p><CountUp suffix=" words." end={words} duration={2} separator="," /></p>
                 <p><CountUp prefix="Read by "suffix=" users" end={users} duration={3} separator="," /></p>
                 <div className="desc"><p className="smaller">Challenge friends, join clubs, and climb the leaderboards. Registration only takes 30 seconds.</p></div>
-                <LoginButton text="Get Started" />
+                {isAuthenticated ? <Link to="/search"> <Button id="loginbutton" variant="danger" size="lg">welcome, {user['https://www.read50.com/username']}</Button> </Link> : <Button id="loginbutton" variant="danger" size="lg" onClick={() => loginWithRedirect()}>get started</Button>}
             </div>
         </div>
     )

@@ -298,6 +298,15 @@ h2 {
   display: flex;
 }
 
+.notification-center {
+  display: flex;
+  align-items: flex-start;
+}
+
+#has-notification {
+  width: 8px;
+}
+
 .request-line {
   display: flex;
   justify-content: space-between;

@@ -13,35 +13,51 @@ const UserPage = (props) => {
   //users array
   const [usersArray, setUsersArray] = useState([]);
   //outgoing friends
-  const [pendings, setPendings] = useState([]);
+  const [outgoings, setOutgoings] = useState([]);
+  //incoming friends
+  const [incomings, setIncomings] = useState([]);
   //complete friends
   const [friends, setFriends] = useState([]);
 
+  //gets a list of users based on input
   const getUsers = async () => {
     setLoading(true);
     const users = await fetch(`/api/users/levenshtein/${props.state.searchField}`);
     const usersJson = await users.json();
-    console.log(usersJson);
-    setUsersArray(usersJson);
-    console.log(usersArray);
-    setLoading(false);
+    await setUsersArray(usersJson);
+    
   }
 
-  const getPendings = async () => {
-    const response = await fetch(`/api/friends/outgoing/${cookies.auth0}`);
-    const responseJson = await response.json();
-    setPendings(responseJson);
+  //gets a list of friends who you have sent requests to
+  const getOutgoing = async () => {
+    const out = await fetch(`/api/friends/outgoing/${cookies.auth0}`);
+    const outJson = await out.json();
+    await setOutgoings(outJson);
   }
 
+  //gets a list of friend who you have gotten requests
+  const getIncoming = async () => {
+    const inc = await fetch(`/api/friends/incoming/${cookies.auth0}`)
+    const incJson = await inc.json();
+    await setIncomings(incJson);
+  }
+
+  //gets a list of completed friend requests
   const getFriends = async () => {
-    const response = await fetch(`/api/friends/${cookies.auth0}`);
-    const responseJson = await response.json();
-    setFriends(responseJson);
+    let empty = [];
+    const to = await fetch(`/api/friends/tome/${cookies.auth0}`);
+    const toJson = await to.json();
+    const from = await fetch(`/api/friends/fromme/${cookies.auth0}`);
+    const fromJson = await from.json();
+    empty = empty.concat(toJson).concat(fromJson);
+    await setFriends(empty);
+    setLoading(false);
   }
 
   useEffect(() => {
     getUsers();
-    getPendings();
+    getIncoming();
+    getOutgoing();
     getFriends();
   }, []);
 
@@ -56,7 +72,7 @@ const UserPage = (props) => {
         {
             usersArray.map((user, i) => {
             return (
-                <UserLine key={i} info={user} pend={pendings} comp={friends} />
+              <UserLine key={i} info={user} incoming={incomings} outgoing={outgoings} accepted={friends} />
             )
             })
         }
