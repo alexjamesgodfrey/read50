@@ -114,15 +114,18 @@ const UserLine = props => {
 
 
     useEffect(() => {
-        checkIncoming();
-        checkOutgoing();
+        if (props.profile === false) {
+            checkIncoming();
+            checkOutgoing();
+        }
         checkFriend();
     });
+    
 
     if (received === true) {
         return (
             <div className="line">
-                <Link to={`/user/${props.info.username}`}><h4 style={{ 'text-decoration': 'underline' }}>{props.info.username}</h4></Link>
+                <Link to={`/user/${props.info.username}`}><h4 className="username" style={props.sty}>{props.info.username}</h4></Link>
                 {loading === false ? 
                     <div>  
                         <Button id="request-text" variant="warning" size="md" onClick={() => denyRequest()}>deny</Button>
@@ -137,7 +140,7 @@ const UserLine = props => {
 
     return (
         <div className="line">
-            {(props.info.username !== cookies.username) ? <Link to={`/user/${props.info.username}`}><h4 style={{'text-decoration': 'underline'}}>{props.info.username}</h4></Link> : <Link to={`/profile`}><h4 style={{'text-decoration': 'underline'}}>{props.info.username} (you)</h4></Link>}
+            {(props.info.username !== cookies.username) ? <Link to={`/user/${props.info.username}`}><h4 className="username" style={props.sty}>{props.info.username}</h4></Link> : <Link to={`/profile`}><h4 className="username" style={props.sty}>{props.info.username} (you)</h4></Link>}
             {((props.info.username !== cookies.username) && loading === false) ?
                 <div>
                     {(sent === true) ? 

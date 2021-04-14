@@ -280,6 +280,7 @@ h2 {
 
 .under {
   text-decoration: underline !important;
+  cursor: pointer !important;
 }
 
 #notification-bell {
@@ -327,4 +328,14 @@ h2 {
 
 .denied {
   display: none;
+}
+
+#friends-title {
+  font-size: 30px;
+  color: $tertiary-color;
+}
+
+#no-friends {
+  text-align: center;
+  color: $tertiary-color !important;
 }

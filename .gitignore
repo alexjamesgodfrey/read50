@@ -2,13 +2,11 @@
 
 # dependencies
 /client/node_modules
-/server/node_modules
+/functions/node_modules
 
 #environment variables
-/server/.env
+/functions/.env
 
 #firebase
-/functions
 /.firebase
 .firebaserc
-firebase.json

@@ -72,7 +72,7 @@ const UserPage = (props) => {
         {
             usersArray.map((user, i) => {
             return (
-              <UserLine key={i} info={user} incoming={incomings} outgoing={outgoings} accepted={friends} />
+              <UserLine key={i} info={user} profile={false} sty={{'text-decoration': 'underline'}, {'font-size': '26px'}} incoming={incomings} outgoing={outgoings} accepted={friends} />
             )
             })
         }

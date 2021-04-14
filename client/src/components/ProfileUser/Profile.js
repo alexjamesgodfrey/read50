@@ -4,6 +4,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useCookies  } from 'react-cookie';
 import Header from '../Header/Header.js';
 import Shelf from './Shelf.js';
+import UserLine from './UserLine.js';
 import FriendRequest from './FriendRequest.js';
 import Timeline from './Timeline.js';
 import Loading from '../Loading.js';
@@ -11,6 +12,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Modal from 'react-bootstrap/Modal';
 import Popover from 'react-bootstrap/Popover';
 import PopoverContent from 'react-bootstrap/PopoverContent';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -53,8 +55,10 @@ const Profile = (props) => {
     const [day, setDay] = useState(0);
     //sets shelf on dropdown
     const [shelf, setShelf] = useState('All');
-    //state for requests
+    //state for friends
     const [frequests, setFrequests] = useState([]);
+    const [friends, setFriends] = useState([]);
+    const [showFriends, setShowFriends] = useState(false);
     //state for shelves
     const [TBR, setTBR] = useState([]);
     const [CURR, setCURR] = useState([]);
@@ -147,12 +151,35 @@ const Profile = (props) => {
             method: "PUT"
         });
         getRequests();
+        getFriends();
+    }
+
+    //gets a list of completed friend requests
+    const getFriends = async () => {
+        let empty = [];
+        const to = await fetch(`/api/friends/tome/${cookies.auth0}`);
+        const toJson = await to.json();
+        const from = await fetch(`/api/friends/fromme/${cookies.auth0}`);
+        const fromJson = await from.json();
+        empty = empty.concat(toJson).concat(fromJson);
+        for (let i = 0; i < empty.length; i++) {
+            empty[i].username = empty[i].username_a;
+        }
+        await setFriends(empty);
+        console.log(friends);
+    }
+
+    //on hide, this a regeneration of the frinds list is called for
+    const friendsModalHide = () => {
+        setShowFriends(false)
+        getFriends();
     }
 
     useEffect(() => {
         getInfo();
         getLists();
         getRequests();
+        getFriends();
         dayOfYear(new Date());
     }, []);
 
@@ -239,7 +266,27 @@ const Profile = (props) => {
                                     <p className="profile-piece" id="stats"><strong>{parseInt(words).toLocaleString()}</strong> words</p>
                                 </div>
                                 <div className="numsum">
-                                    <p className="under" id="stats">view friends</p>
+                                    <p className="under" id="stats" onClick={() => setShowFriends(true)}>view friends</p>
+                                    <Modal show={showFriends} onHide={() => friendsModalHide()}>
+                                        <Modal.Header closeButton>
+                                        <Modal.Title id="friends-title">your supporting characters</Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body>
+                                        {
+                                            friends.map((user, i) => {
+                                                return (
+                                                    <UserLine key={i} info={user} sty={{ 'font-size': '30px' }} profile={true} accepted={friends} />
+                                            )
+                                            })
+                                        }
+                                        {friends.length === 0 ? <p id="no-friends">you're flying solo. <Link id="no-friends" to="/search">find supporting characters</Link></p> : <span></span>}
+                                        </Modal.Body>
+                                        <Modal.Footer>
+                                        <Button variant="secondary" onClick={() => friendsModalHide()}>
+                                            Close
+                                        </Button>
+                                        </Modal.Footer>
+                                    </Modal>
                                     <p className="under" id="stats">view clubs</p>
                                 </div>
 
@@ -279,8 +326,8 @@ const Profile = (props) => {
                                     <p className="profile-piece" id="stats"><strong>{parseInt(words).toLocaleString()}</strong> words</p>
                                 </div>
                                 <div className="numsum">
-                                    <p className="under" id="stats">view friends</p>
-                                    <p className="under" id="stats">view clubs</p>
+                                    <p className="under">view friends</p>
+                                    <p className="under">view clubs</p>
                                 </div>
 
                             </div>
