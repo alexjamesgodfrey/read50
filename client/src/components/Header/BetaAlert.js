@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useCookies  } from 'react-cookie';
 import Alert from 'react-bootstrap/Alert';
 import './BetaAlert.scss';
 
 const BetaAlert = () => {
+    //state for showing alert
     const [show, setShow] = useState(true);
+    //cookies for showing modal
     const [cookies, setCookie] = useCookies(['beta']);
 
+    //if local show is true and there is no values for cookies.beta, show alert
     if (show===true && !(cookies.beta)) {
         return (
             <Alert id="betaalert" variant="danger" dismissible onClose={() => {
