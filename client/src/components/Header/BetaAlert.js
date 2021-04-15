@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useCookies  } from 'react-cookie';
 import Alert from 'react-bootstrap/Alert';
-import './BetaAlert.scss';
+import './Header.scss';
 
 const BetaAlert = () => {
     //state for showing alert
