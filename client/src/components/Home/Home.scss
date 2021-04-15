@@ -1,39 +1,28 @@
 @import "../../_variables.scss";
-
 $barrier: 800px;
 
+//total div. stretches from top to bottom with special radial background color
 .sample-total {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  width: 100%;
   background: radial-gradient($primary-color 15%, #e5f7e4);
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  .counts {
-    margin: auto 0px;
-    height: 70%;
-    width: 90%;
-    max-width: 800px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    p {
-      text-align: center;
-    }
-  }
-
   p {
+    text-align: center;
     color: white !important;
   }
 
   @media screen and (max-width: $barrier) {
-    background: radial-gradient($primary-color 15%, #e5f7e4);
     p {
-      font-size: 45px;
+      font-size: 40px;
     }
     .smaller {
-      font-size: 35px;
+      font-size: 30px;
     }
   }
 
@@ -45,4 +34,14 @@ $barrier: 800px;
       font-size: 45px;
     }
   }
+}
+
+//centers counts and button,
+.counts {
+  margin: auto 0px;
+  width: 90%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
