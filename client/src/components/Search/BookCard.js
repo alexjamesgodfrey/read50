@@ -4,9 +4,9 @@ import Spinner from 'react-bootstrap/Spinner';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import amazon from '../../images/amazon_logo.png';
+import amazon from '../../images/amazon.svg';
 import bookshop from '../../images/bookshop_logo.png';
-import wikipedia from '../../images/wikipedia.png';
+import wikipedia from '../../images/wikipedia.svg';
 import './BookCard.scss';
 
 const BookCard = (props) => {

@@ -19,64 +19,22 @@ body {
   padding: 0;
 }
 
-h1 {
-  color: $font-color;
-}
-
-h5 {
-  color: $font-color;
-}
-
+//set font color for common values
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 p {
-  color: $font-color !important;
+  color: $font-color;
 }
 
+//white color for login button font
 #loginbutton {
   color: #f2eded;
 }
 
 #loginbutton:hover {
   color: #f2eded;
-}
-
-.booklist {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.pagination-box {
-  display: flex;
-  width: 100%;
-  margin: 40px 0px 100px 0px;
-  justify-content: center;
-}
-
-.pagination {
-  display: flex;
-  border-radius: 2%;
-}
-
-.hashrouter-link {
-  color: $primary-color;
-}
-
-.hashrouter-link:hover {
-  color: $primary-color;
-  text-decoration: none;
-}
-
-h4 {
-  color: $primary-color;
-}
-
-.navigation {
-  display: flex;
-  width: 80%;
-  margin: 0 auto;
-  justify-content: center;
-
-  h3 {
-  }
 }
