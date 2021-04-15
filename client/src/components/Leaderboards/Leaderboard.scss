@@ -1,5 +1,11 @@
 @import "../../_variables.scss";
 
+.spinner-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .leaderboard-page {
   margin-top: 30px;
   display: flex;
@@ -31,7 +37,7 @@
   font-weight: bold;
   border: 2px solid black;
   border-right: 1px solid black;
-  border-color: $primary-color;
+  border-color: $font-color;
 }
 
 .entry-name {
@@ -41,7 +47,7 @@
   font-weight: bold;
   border: 2px solid black;
   border-right: 1px solid black;
-  border-color: $primary-color;
+  border-color: $font-color;
 }
 
 .entry-part {
@@ -51,7 +57,7 @@
   font-weight: bold;
   border: 2px solid black;
   border-right: 1px solid black;
-  border-color: $primary-color;
+  border-color: $font-color;
 }
 
 .entry-meat {
@@ -60,7 +66,7 @@
   text-align: center;
   font-weight: bold;
   border: 2px solid black;
-  border-color: $primary-color;
+  border-color: $font-color;
 }
 
 .real-entry-rank {
@@ -70,7 +76,7 @@
   border: 2px solid black;
   border-right: 1px solid black;
   border-top: none;
-  border-color: $leaderboard-entry-color;
+  border-color: $font-color;
 }
 
 .real-entry-name {
@@ -80,7 +86,7 @@
   border: 2px solid black;
   border-right: 1px solid black;
   border-top: none;
-  border-color: $leaderboard-entry-color;
+  border-color: $font-color;
 }
 
 .real-entry-part {
@@ -90,7 +96,7 @@
   border: 2px solid black;
   border-right: 1px solid black;
   border-top: none;
-  border-color: $leaderboard-entry-color;
+  border-color: $font-color;
 }
 
 .real-entry-meat {
@@ -99,5 +105,31 @@
   text-align: center;
   border: 2px solid black;
   border-top: none;
-  border-color: $leaderboard-entry-color;
+  border-color: $font-color;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h3 {
+    margin-top: 20px;
+    margin-bottom: 0px;
+    color: $font-color;
+  }
+  h6 {
+    margin-bottom: 15px;
+    color: $font-color;
+    font-weight: 600;
+  }
+}
+
+#leaderboard-link {
+  color: $primary-color;
+  font-weight: 800;
+}
+
+.leaderboard {
+  min-height: 400px;
 }

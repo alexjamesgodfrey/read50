@@ -10,7 +10,7 @@ const LeaderboardEntry = (props) => {
     return (
         <div className="leaderboard-entry">
             <div className="real-entry-rank">#{props.rank}</div>
-            <div className="real-entry-name"><Link to={link}>{props.username}</Link></div>
+            <div className="real-entry-name"><Link id="leaderboard-link" to={link}>{props.username}</Link></div>
             <div className="real-entry-meat">{props.threeNumSum}</div>
         </div>
     )

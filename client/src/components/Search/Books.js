@@ -4,6 +4,7 @@ import { FormControl, Button } from 'react-bootstrap';
 import BookList from './BookList.js';
 import request from 'superagent';
 import { Spinner } from 'react-bootstrap';
+import { withRouter } from "react-router";
 import './Search.scss';
 
 class Books extends Component {
@@ -13,6 +14,7 @@ class Books extends Component {
     this.state = {
       previousBooks: JSON.parse(sessionStorage.getItem('books')) || [],
       books: [],
+      urlSearch: this.props.match.params.urlSearch,
       searchField: sessionStorage.getItem('searchField') || '',
       searchCount: 0,
       searched: false,
@@ -53,10 +55,24 @@ class Books extends Component {
     this.setState({ users: value });
   }
 
-
+  perfomurlSearch = async () => {
+    this.setState({ loading: true });
+    this.setState({ searchField: this.state.urlSearch });
+    await request
+      .get("https://www.googleapis.com/books/v1/volumes")
+      .query({ q: this.state.urlSearch, maxResults: 40})
+      .then((data) => {
+        sessionStorage.setItem('books', JSON.stringify(data.body.items));
+        this.setState({ books: [...data.body.items] })
+        this.setState({searched: true})
+      })
+    this.setState({ loading: false });
+  }
 
   componentDidMount() {
-    console.log('main users ' + this.state.users);
+    if (this.state.urlSearch && this.state.searched === false) {
+      this.perfomurlSearch();
+    }
   }
 
   render() {
@@ -93,4 +109,4 @@ class Books extends Component {
   }
 }
 
-export default Books;
+export default withRouter(Books);

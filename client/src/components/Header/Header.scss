@@ -23,3 +23,13 @@ header {
 #dropdown-link:active {
   background-color: #fff;
 }
+
+.selected-nav {
+  text-decoration: underline;
+  text-decoration-color: white;
+}
+
+.nav-link {
+  color: white !important;
+  padding-bottom: 7px;
+}

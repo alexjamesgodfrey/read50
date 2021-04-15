@@ -19,7 +19,7 @@ class App extends Component {
       <HashRouter>
         <Switch>
           <Route exact path="/" component={Home} exact />
-          <Route path="/search" component={(props) => <SearchPage {...props} sleep={this.sleep} />} />
+          <Route path="/search/:urlSearch?" component={(props) => <SearchPage {...props} sleep={this.sleep} />} />
           <Route path="/profile" component={(props) => <Profile {...props} state={this.state} sleep={this.sleep} />} />
           <Route path="/user/:username" component={(props) => <User {...props} state={this.state} sleep={this.sleep} />} />
           <Route path="/clubs" component={(props) => <Clubs {...props} sleep={this.sleep} />} />

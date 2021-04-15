@@ -235,6 +235,7 @@ h3 {
 
 .goal {
   margin-left: 10px;
+  color: $font-color !important;
 }
 
 .shelf-dropdown {
@@ -293,6 +294,10 @@ h2 {
 #notification-bell:hover {
   transform: rotate(-20deg);
   cursor: pointer;
+}
+
+#user {
+  color: $primary-color;
 }
 
 .user-notif {

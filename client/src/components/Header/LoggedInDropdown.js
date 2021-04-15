@@ -56,7 +56,7 @@ const LoggedInDropdown = () => {
     return (
         <NavDropdown className="mr-auto" id="myread50" title={<span id="nav-link">myread50</span>}>
             <NavDropdown.Item id="dropdown-link" href="#profile">profile</NavDropdown.Item>
-            <NavDropdown.Item id="dropdown-link" href="#action/3.3">friends</NavDropdown.Item>
+            {/* <NavDropdown.Item id="dropdown-link" href="#action/3.3">friends</NavDropdown.Item> */}
             {/* <NavDropdown.Item id="dropdown-link" href="#action/3.3">clubs</NavDropdown.Item> */}
             <NavDropdown.Divider />
             <NavDropdown.Item id="dropdown-link" onClick={() => logout()}>sign out</NavDropdown.Item>

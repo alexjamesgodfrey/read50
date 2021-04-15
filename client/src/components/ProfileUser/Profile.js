@@ -21,7 +21,6 @@ import Notification from '../../images/notification.svg';
 import Reddot from '../../images/reddot.svg';
 import './Profile.scss';
 import './ShelfEntry.scss';
-import { get } from 'superagent';
 
 const Profile = (props) => {
     
@@ -240,7 +239,7 @@ const Profile = (props) => {
                                     </div>
                                 </OverlayTrigger>
                             </div>
-                            <p className="profile-piece"><span className="name">{user['https://www.read50.com/username']}</span></p>
+                            <p className="profile-piece"><span className="name" id="user">{user['https://www.read50.com/username']}</span></p>
                             {/* <p className="profile-piece" id="stats"><strong>{books}</strong> books</p>
                             <p className="profile-piece" id="stats"><strong>{pages}</strong> pages</p>
                             <p className="profile-piece" id="stats"><strong>{words}</strong> words</p>
@@ -251,7 +250,7 @@ const Profile = (props) => {
                         <div className="profile-rest">
                             <ProgressBar id="goal-progress" variant="danger" now={Math.max((readYear / goal * 100), 7)} label={(readYear / goal * 100).toFixed(2) + '%'} />
                             <div className="progress-box">
-                                <h4>Yearly Goal: </h4>
+                                <h4 className="goal">Yearly Goal: </h4>
                                 {(edit === 'Edit') ? <h4 className="goal">{goal} books</h4> : <Form.Group>
                                     <Form.Control onChange={handleChange} placeholder={goal} id="goal-enter" />
                                                                                             </Form.Group> 

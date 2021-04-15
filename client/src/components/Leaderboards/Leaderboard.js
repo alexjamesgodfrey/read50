@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import Header from '../Header/Header.js';
 import LeaderboardList from './LeaderboardList.js';
-import Loading from '../Loading.js';
 import './Leaderboard.scss';
 
 const Leaderboard = () => {
@@ -24,24 +23,31 @@ const Leaderboard = () => {
         getLeaderboards();
     }, [])
 
-    if (loading) {
-        return <Loading title={'loading the leaderboards'} desc={'this can take a few seconds; it\'ll be worth the wait'}/>
-    }
     return (
-        <div className="">
+        <div>
             <Header />
+            <div>
+                <div className="heading">
+                    <h3>top 100 read50 users</h3>
+                    <h6>ordered by words read</h6>
+                </div>
                 <div>
-                <h3 className="head">Read50 Leaderboard</h3>
-                <div>
-                <div className="leaderboard-entry">
-                <div className="entry-rank">Rank</div>
-                <div className="entry-name">Username</div>
-                <div className="entry-meat">Books/Pages/Words</div>
+                    {loading ?
+                        <div className="spinner-container">
+                        <Spinner animation="border" variant="danger" size="xl" />
+                        </div>
+                    :
+                        <div>
+                            <div className="leaderboard-entry">
+                                <div className="entry-rank">rank</div>
+                                <div className="entry-name">username</div>
+                                <div className="entry-meat">books/pages/words</div>
+                            </div>
+                            <LeaderboardList users={users} getLeaderboards={getLeaderboards} />
+                        </div>
+                    }
                 </div>
-                <LeaderboardList users={users} getLeaderboards={getLeaderboards} />
                 </div>
-                </div>
-            }
         </div>  
     )
 }
