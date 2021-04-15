@@ -42,23 +42,26 @@ const CustomNav = () => {
           <Redirect push to={`/search/${field}`} />
           :
         
-          <Navbar bg="danger" variant="dark">
+          <Navbar bg="danger" variant="dark" expand="md">
             <NavLink to="/"><Navbar.Brand>read50.com</Navbar.Brand></NavLink>
-            <Nav className="mr-auto">
-              <NavLink activeClassName="selected-nav" className="nav-link" to="/search">search</NavLink>
-              <NavLink activeClassName="selected-nav" className="nav-link" to="/clubs">clubs</NavLink>
-              <NavLink activeClassName="selected-nav" className="nav-link" to="/leaderboard">leaderboards</NavLink>
-              <NavLink activeClassName="selected-nav" className="nav-link" to="/about">about</NavLink>
-              {(isAuthenticated ? <LoggedInDropdown /> : <NotLoggedInDropdown />)}
-            </Nav>
-            {here === '/search' ?
-              <span></span>
-              :
-              <Form inline>
-                <FormControl type="text" placeholder='search' value={field} className="mr-sm-2" onChange={(e) => handleChange(e)} />
-                <Button type="submit" variant="outline-light" onClick={() => setRedirect(true)}>search</Button>
-              </Form>
-            }
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav>
+                <NavLink activeClassName="selected-nav" className="nav-link" to="/search">search</NavLink>
+                <NavLink activeClassName="selected-nav" className="nav-link" to="/leaderboard">leaderboards</NavLink>
+                <NavLink activeClassName="selected-nav" className="nav-link" to="/about">about</NavLink>
+                {(isAuthenticated ? <LoggedInDropdown /> : <NotLoggedInDropdown />)}
+                  {here === '/search' ?
+                <span></span>
+                :
+                <Form flex>
+                  <FormControl type="text" placeholder='search' value={field} className="mr-sm-2" onChange={(e) => handleChange(e)} />
+                  <Button type="submit" variant="outline-light" onClick={() => setRedirect(true)}>search</Button>
+                </Form>
+              }
+              </Nav>
+            </Navbar.Collapse>
+            
           </Navbar>
         }
         </div>
