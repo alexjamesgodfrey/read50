@@ -39,7 +39,7 @@ const CustomNav = () => {
                   <span></span>
                 :
                   <Form flex>
-                    <FormControl className="header-search-box" type="text" placeholder='search' value={field} onChange={(e) => setField(e.target.value)} />
+                    <FormControl className="header-search-box" type="text" placeholder='quick search' value={field} onChange={(e) => setField(e.target.value)} />
                     <Button type="submit" variant="outline-light" onClick={() => setRedirect(true)}>search</Button>
                   </Form>
               }
