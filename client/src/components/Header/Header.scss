@@ -1,41 +1,23 @@
-@import "~bootstrap/scss/bootstrap";
-@import "../../_variables.scss";
-
-header {
-  padding: 0;
-  border: 0;
-  margin: 0;
-  margin-top: 0px;
-  background-color: $primary-color;
+//sets color as white for header links
+.nav-link {
+  color: white !important;
 }
 
-#nav-link {
-  color: $secondary-color;
-  padding-bottom: 7px;
-  margin-right: 8px;
-  margin-left: 8px;
-}
-
-#dropdown-link {
-  color: $primary-color;
-}
-
-#dropdown-link:active {
-  background-color: #fff;
-}
-
+//activeClassName, selected link is underlined
 .selected-nav {
   text-decoration: underline;
   text-decoration-color: white;
 }
 
-.nav-link {
-  color: white !important;
-  padding-bottom: 7px;
-}
-
+//allows search box to be positioned to the right
 #custom-nav {
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+//max width and spacing for search box
+.header-search-box {
+  max-width: 200px;
+  margin-right: 8px;
 }

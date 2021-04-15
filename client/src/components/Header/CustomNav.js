@@ -24,24 +24,10 @@ const CustomNav = () => {
   }
 
     return (
-      // <Navbar variant="dark" expand="sm">
-      // <Navbar.Brand id="nav-link" href="./">read50.com</Navbar.Brand>
-      // <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      // <Navbar.Collapse id="basic-navbar-nav">
-      //   <Nav bg="danger">
-      //     <NavLink activeStyle={{color: "800"}} to="/search"><Navbar.Text id="nav-link">search</Navbar.Text></NavLink>
-      //     <NavLink to="/clubs"><Navbar.Text id="nav-link">clubs</Navbar.Text></NavLink>
-      //     <NavLink to="/leaderboard"><Navbar.Text id="nav-link">leaderboard</Navbar.Text></NavLink>
-      //     <NavLink to="/search"><Navbar.Text id="nav-link">about</Navbar.Text></NavLink>
-      //     {(isAuthenticated ? <LoggedInDropdown /> : <NotLoggedInDropdown />)}
-      //   </Nav>
-      // </Navbar.Collapse>
-      // </Navbar>
       <div>
         {redirect ?
           <Redirect push to={`/search/${field}`} />
           :
-        
           <Navbar bg="danger" variant="dark" expand="md">
             <NavLink to="/"><Navbar.Brand>read50.com</Navbar.Brand></NavLink>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -56,7 +42,7 @@ const CustomNav = () => {
                     <span></span>
                   :
                     <Form flex>
-                      <FormControl type="text" placeholder='search' value={field} className="mr-sm-2" onChange={(e) => handleChange(e)} />
+                      <FormControl className="header-search-box" type="text" placeholder='search' value={field} onChange={(e) => handleChange(e)} />
                       <Button type="submit" variant="outline-light" onClick={() => setRedirect(true)}>search</Button>
                     </Form>
                     }
@@ -66,7 +52,7 @@ const CustomNav = () => {
             
           </Navbar>
         }
-        </div>
+      </div>
     )   
     
 }
