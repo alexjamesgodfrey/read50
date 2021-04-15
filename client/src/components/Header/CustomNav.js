@@ -46,19 +46,21 @@ const CustomNav = () => {
             <NavLink to="/"><Navbar.Brand>read50.com</Navbar.Brand></NavLink>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-              <Nav>
+              <Nav id="custom-nav">
                 <NavLink activeClassName="selected-nav" className="nav-link" to="/search">search</NavLink>
                 <NavLink activeClassName="selected-nav" className="nav-link" to="/leaderboard">leaderboards</NavLink>
                 <NavLink activeClassName="selected-nav" className="nav-link" to="/about">about</NavLink>
                 {(isAuthenticated ? <LoggedInDropdown /> : <NotLoggedInDropdown />)}
+                <div id="custom-nav-right">
                   {here === '/search' ?
-                <span></span>
-                :
-                <Form flex>
-                  <FormControl type="text" placeholder='search' value={field} className="mr-sm-2" onChange={(e) => handleChange(e)} />
-                  <Button type="submit" variant="outline-light" onClick={() => setRedirect(true)}>search</Button>
-                </Form>
-              }
+                    <span></span>
+                  :
+                    <Form flex>
+                      <FormControl type="text" placeholder='search' value={field} className="mr-sm-2" onChange={(e) => handleChange(e)} />
+                      <Button type="submit" variant="outline-light" onClick={() => setRedirect(true)}>search</Button>
+                    </Form>
+                    }
+                </div>
               </Nav>
             </Navbar.Collapse>
             

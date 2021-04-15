@@ -33,3 +33,9 @@ header {
   color: white !important;
   padding-bottom: 7px;
 }
+
+#custom-nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
