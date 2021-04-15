@@ -15,7 +15,6 @@ const BetaAlert = () => {
             <Alert id="betaalert" variant="danger" dismissible onClose={() => {
                 setShow(false);
                 setCookie('beta', true, { path: '/', maxAge: 1000000 });
-                console.log(cookies.beta);
             }}>
                 welcome to the read50.com beta! view the <Alert.Link href="#">tutorial</Alert.Link> if you are starting out. please report bugs and suggest changes <Alert.Link>here</Alert.Link>.
             </Alert>
