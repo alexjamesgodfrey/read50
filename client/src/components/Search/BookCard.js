@@ -444,7 +444,7 @@ const BookCard = (props) => {
                   <p className="DNF-count">( )</p>
                 </div>
                 <div className="checklist-container">
-                  <div onClick={TBRonCheck}><input type="checkbox" className="TBR"></input></div>
+                  <div onClick={TBRonCheck}><input type="checkbox" className="TBR"></input><span></span></div>
                 </div>
                 <div className="checklist-container">
                   <div onClick={CURRonCheck}><input type="checkbox" className="CURR"></input></div>

@@ -101,6 +101,7 @@ $barrier: 800px;
 }
 
 .checklist-container {
+  position: relative;
   height: 40px;
   width: 25%;
 }
@@ -108,33 +109,77 @@ $barrier: 800px;
 .TBR {
   width: 35px;
   height: 35px;
-  border: 2px solid black;
-  border-radius: 5%;
+  border-radius: 3px;
   cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border: 1px solid $font-color;
+  outline: none;
+  transition-duration: 0.3s;
+  cursor: pointer;
+}
+
+.TBR:checked {
+  background-color: $primary-color;
 }
 
 .CURR {
   width: 35px;
   height: 35px;
-  border: 2px solid black;
-  border-radius: 5%;
+  border-radius: 3px;
   cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border: 1px solid $font-color;
+  outline: none;
+  transition-duration: 0.3s;
+  cursor: pointer;
+}
+
+.CURR:checked {
+  background-color: $primary-color;
 }
 
 .ARL {
   width: 35px;
   height: 35px;
-  border: 2px solid black;
-  border-radius: 5%;
+  border-radius: 3px;
   cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border: 1px solid $font-color;
+  outline: none;
+  transition-duration: 0.3s;
+  cursor: pointer;
+}
+
+.ARL:checked {
+  background-color: $primary-color;
 }
 
 .DNF {
   width: 35px;
   height: 35px;
-  border: 2px solid black;
-  border-radius: 5%;
+  border-radius: 3px;
   cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border: 1px solid $font-color;
+  outline: none;
+  transition-duration: 0.3s;
+  cursor: pointer;
+}
+
+.DNF:checked {
+  background-color: $primary-color;
 }
 
 .description-container {
