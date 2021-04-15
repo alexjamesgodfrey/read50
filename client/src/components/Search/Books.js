@@ -26,7 +26,8 @@ class Books extends Component {
 
   delay = ms => new Promise(res => setTimeout(res, ms));
 
-  searchBook = async () => {
+  searchBook = async (e) => {
+    e.preventDefault();
     this.setState({ loading: true });
     if (this.state.searchField === "") {
       await this.setState({ searchField: 'brandon sanderson' });
@@ -36,10 +37,11 @@ class Books extends Component {
       .query({ q: this.state.searchField, maxResults: 40})
       .then((data) => {
         sessionStorage.setItem('books', JSON.stringify(data.body.items));
-        this.setState({ books: [...data.body.items] })
-        this.setState({searched: true})
+        this.setState({ books: [...data.body.items] });
+        this.setState({ searched: true });
       })
     this.setState({ loading: false });
+    console.log(this.state.books);
   }
 
   handleSearch = (e) => {
@@ -71,6 +73,7 @@ class Books extends Component {
 
   componentDidMount() {
     if (this.state.urlSearch && this.state.searched === false) {
+      console.log('url search');
       this.perfomurlSearch();
     }
   }
@@ -82,7 +85,7 @@ class Books extends Component {
       <div id="aggregation">
         <div className="search-total">
           <div className="search">
-            <form actions="">
+            <form>
               <FormControl id="input" type="text" placeholder="enter title, author, or username" onChange={this.handleSearch} value={this.state.searchField} />
               <Button id="button" variant="danger" type="submit" onClick={this.searchBook}>go</Button>
             </form>
