@@ -32,7 +32,8 @@ const CustomNav = () => {
               <NavLink activeClassName="selected-nav" className="nav-link" to="/leaderboard">leaderboards</NavLink>
               <NavLink activeClassName="selected-nav" className="nav-link" to="/about">about</NavLink>
               {(isAuthenticated ? <LoggedInDropdown /> : <NotLoggedInDropdown />)}
-              <div id="custom-nav-right">
+            </Nav>
+            <Nav fixed="right">
                 {/*if the url is /search, do not render the search field*/}
                 {here === '/search' ?
                   <span></span>
@@ -41,9 +42,9 @@ const CustomNav = () => {
                     <FormControl className="header-search-box" type="text" placeholder='search' value={field} onChange={(e) => setField(e.target.value)} />
                     <Button type="submit" variant="outline-light" onClick={() => setRedirect(true)}>search</Button>
                   </Form>
-                  }
-              </div>
+              }
             </Nav>
+            
           </Navbar.Collapse>
         </Navbar>
       }
