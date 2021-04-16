@@ -15,13 +15,13 @@ const BookCard = (props) => {
   const [cookies, setCookie] = useCookies(['auth0']);
 
   //state for checks
+  const [loadingChecks, setLoadingChecks] = useState(true);
   const [wantCheck, setWantCheck] = useState(false);
   const [readingCheck, setReadingCheck] = useState(false);
   const [readCheck, setReadCheck] = useState(false);
   const [DNFCheck, setDNFCheck] = useState(false);
 
   //state for counts
-  const [loadingCounts, setLoadingCounts] = useState(true);
   const [wantCount, setWantCount] = useState(0);
   const [readingCount, setReadingCount] = useState(0);
   const [readCount, setReadCount] = useState(0);
@@ -57,6 +57,7 @@ const BookCard = (props) => {
         }
       }
     }
+    setLoadingChecks(false)
   };
 
   const renderCounts = async () => {
@@ -76,7 +77,6 @@ const BookCard = (props) => {
         }
       }
     }
-    setLoadingCounts(false);
   }
 
   const addEntry = async (sub, listType) => {
@@ -287,9 +287,9 @@ const BookCard = (props) => {
             <h1 id="date">{props.published}</h1>
           </div>
         <div className="action-buttons">
-          {loadingCounts ?
+          {loadingChecks ?
             <div className="loading-spinner-container">
-              <Spinner id="loading-spinner" animation="border" variant="danger" />
+              <Spinner id="loading-spinner" animation="border" variant="warning" />
             </div>
           :
             <div className="counts-and-checks">

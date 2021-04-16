@@ -6,7 +6,7 @@ $leaderboard-entry-color: #6bcf9f;
 
 $theme-colors: (
   "danger": $primary-color,
-  "warning": #1769a4,
+  "warning": $font-color,
 );
 
 @import "~bootstrap/scss/bootstrap";

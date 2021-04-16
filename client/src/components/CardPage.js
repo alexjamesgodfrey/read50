@@ -58,13 +58,20 @@ const CardPage = (props) => {
       <div className="booklist">
       {
           props.books.map((book, i) => {
-          //error handling for an undefined image
+          //error handling for an undefined image / link
           let image;
+          let bookshop;
+          let wiki;
           try {
-              image = book.volumeInfo.imageLinks.thumbnail;
+            image = book.volumeInfo.imageLinks.thumbnail;
+            bookshop = "https://bookshop.org/books?keywords=" + book.volumeInfo.title.replace(" ", "+");
+            wiki = "https://en.wikipedia.org/wiki/" + book.volumeInfo.title.replace(" ", "_");
           } catch (err) {
-              image = NoImage;
+            image = NoImage;
+            bookshop = "https://bookshop.org/";
+            wiki = "https://en.wikipedia.org";
           }
+          
             return <BookCard
                       months={months}
                       alert={props.state.alert}
@@ -75,8 +82,8 @@ const CardPage = (props) => {
                       google_id={book.id}
                       google_link={book.volumeInfo.canonicalVolumeLink}
                       amazon_link={"https://www.amazon.com/s?k=" + book.volumeInfo.title + "&ref=nb_sb_noss_2"}
-                      bookshop_link={"https://bookshop.org/books?keywords=" + book.volumeInfo.title.replace(" ", "+")}
-                      wikipedia_link={"https://en.wikipedia.org/wiki/" + book.volumeInfo.title.replace(" ", "_")}
+                      bookshop_link={bookshop}
+                      wikipedia_link={wiki}
                       image={image}
                       title={stringTrimmer(book.volumeInfo.title)}
                       author={arrayTrimmer(book.volumeInfo.authors)}

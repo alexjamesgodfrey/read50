@@ -32,6 +32,7 @@ class Books extends Component {
     if (this.state.searchField === "") {
       await this.setState({ searchField: 'brandon sanderson' });
     }
+    console.log(this.state.searchField)
     await request
       .get("https://www.googleapis.com/books/v1/volumes")
       .query({ q: this.state.searchField, maxResults: 40})
@@ -58,11 +59,12 @@ class Books extends Component {
   }
 
   perfomurlSearch = async () => {
+    const trimmed = this.state.urlSearch.replace('%', ' ');
     this.setState({ loading: true });
-    this.setState({ searchField: this.state.urlSearch });
+    this.setState({ searchField: trimmed });
     await request
       .get("https://www.googleapis.com/books/v1/volumes")
-      .query({ q: this.state.urlSearch, maxResults: 40})
+      .query({ q: trimmed, maxResults: 40})
       .then((data) => {
         sessionStorage.setItem('books', JSON.stringify(data.body.items));
         this.setState({ books: [...data.body.items] })
