@@ -82,6 +82,18 @@ module.exports = function (app) {
         }
     })
 
+    //efficient checks query
+    app.get("/api/getchecks/:auth0_id/:google_id", async (req, res) => {
+        try {
+            const { auth0_id, google_id } = req.params;
+            const checks = await pool.query("SELECT listtype, COUNT(*) FROM booklists WHERE (auth0_id = $1) AND (google_id = $2) GROUP BY listtype;", [auth0_id, google_id]);
+            res.send(checks.rows);
+        } catch (err) {
+            res.send('not in list');
+            console.error(err.message);
+        }
+    })
+
     //get a count of how many of each book are in each list
    app.get("/api/count/:listtype/:google_id", async (req, res) => {
         try {
@@ -94,6 +106,18 @@ module.exports = function (app) {
             console.error(err.message);
         }
    })
+    
+   //efficient count query
+    app.get("/api/totalcount/:google_id", async (req, res) => {
+        try {
+            const { google_id } = req.params;
+            const count = await pool.query("SELECT listtype, COUNT(*) FROM booklists WHERE (google_id = $1) GROUP BY listtype;", [google_id]);
+            res.send(count.rows);
+        } catch (err) {
+            res.send('not in list');
+            console.error(err.message);
+        }
+    })
     
     //create three number summary by (1) counting ARL entries; (2) summating pages read; (3) summating words read
     //get books read (user)

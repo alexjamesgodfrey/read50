@@ -187,12 +187,14 @@ $barrier: 800px;
 }
 
 .loading-spinner-container {
+  display: flex;
   width: 100%;
   height: 82px;
 }
 
 #loading-spinner {
   margin-top: 25px;
+  margin: 25px auto;
 }
 
 .add-description {
