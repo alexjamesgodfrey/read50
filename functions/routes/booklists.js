@@ -21,7 +21,7 @@ module.exports = function (app) {
     app.get("/api/booklists/:listtype/:auth0_id", async (req, res) => {
         try {
             const { listtype, auth0_id } = req.params;
-            const allBookLists = await pool.query("SELECT * FROM booklists WHERE (listtype = $1) AND (auth0_id = $2)", [listtype, auth0_id]);
+            const allBookLists = await pool.query("SELECT * FROM booklists WHERE (listtype = $1) AND (auth0_id = $2) ORDER BY year_read DESC", [listtype, auth0_id]);
             res.json(allBookLists.rows);
         } catch (err) {
             console.error(err.message);

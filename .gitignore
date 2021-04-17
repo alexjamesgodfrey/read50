@@ -6,6 +6,7 @@
 
 #environment variables
 /functions/.env
+/client/.env
 
 #firebase
 /.firebase

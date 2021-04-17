@@ -15,6 +15,7 @@ require('./routes/shelves.js')(app);
 require('./routes/leaderboards.js')(app);
 require('./routes/friends.js')(app);
 require('./routes/deletions.js')(app);
+require('./routes/contact.js')(app);
 require('./routes/searches.js')(app);
 
 app.get("/", async (req, res) => {
