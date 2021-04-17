@@ -11,6 +11,7 @@ import wikipedia from '../../images/wikipedia.svg';
 import './BookCard.scss';
 
 const BookCard = (props) => {
+  //cookies & auth0
   const { user, isAuthenticated, isLoading } = useAuth0();
   const [cookies, setCookie] = useCookies(['auth0']);
 
@@ -39,27 +40,10 @@ const BookCard = (props) => {
   const [format, setFormat] = useState('paper');
   const [review, setReview] = useState('');
 
+  //delay function used in arl submission
   const delay = ms => new Promise(res => setTimeout(res, ms));
 
-  const renderChecks = async (sub, listType, id) => {
-    const checks = await fetch(`/api/getchecks/${sub}/${id}`);
-    const checksJSON = await checks.json();
-    for (let i = 0; i < checksJSON.length; i++) {
-      if (checksJSON[i]) {
-        if (checksJSON[i].listtype === 'TBR') {
-          setWantCheck(true);
-        } else if (checksJSON[i].listtype === 'CURR') {
-          setReadingCheck(true);
-        } else if (checksJSON[i].listtype === 'ARL') {
-          setReadCheck(true);
-        } else {
-          setDNFCheck(true);
-        }
-      }
-    }
-    setLoadingChecks(false)
-  };
-
+  //renders counts through fetch and count state
   const renderCounts = async () => {
     const totalCount = await fetch(`api/totalcount/${props.google_id}`);
     const totalCountJSON = await totalCount.json();
@@ -79,12 +63,33 @@ const BookCard = (props) => {
     }
   }
 
-  const addEntry = async (sub, listType) => {
+  //renders checks via fetch and check state
+  const renderChecks = async () => {
+    const checks = await fetch(`/api/getchecks/${cookies.auth0}/${props.google_id}`);
+    const checksJSON = await checks.json();
+    for (let i = 0; i < checksJSON.length; i++) {
+      if (checksJSON[i]) {
+        if (checksJSON[i].listtype === 'TBR') {
+          setWantCheck(true);
+        } else if (checksJSON[i].listtype === 'CURR') {
+          setReadingCheck(true);
+        } else if (checksJSON[i].listtype === 'ARL') {
+          setReadCheck(true);
+        } else {
+          setDNFCheck(true);
+        }
+      }
+    }
+    setLoadingChecks(false)
+  };
+
+  //generic function to add entry to shelf
+  const addEntry = async (listType) => {
     const date_added = Date();
     const seconds_added = Date.now();
     //create json
     const json = `{
-      "auth0_id": "${sub}",
+      "auth0_id": "${cookies.auth0}",
       "google_id": "${props.google_id}",
       "listtype": "${listType}",
       "title": "${props.title}",
@@ -104,52 +109,57 @@ const BookCard = (props) => {
     });
   }
 
-  const removeEntry = async (sub, listType) => {
-    const response = fetch(`/api/booklists/${sub}/${listType}/${props.google_id}`, {
+  //generic function to remove an entry
+  const removeEntry = async (listType) => {
+    const response = fetch(`/api/booklists/${cookies.auth0}/${listType}/${props.google_id}`, {
       method: "DELETE"
     });
   }
 
+  //onclick function for want box
   const addRemoveWant = async (sub) => {
     if (wantCheck === false) {
       setWantCheck(true);
       setWantCount(wantCount + 1);
-      addEntry(sub, 'TBR');
+      addEntry('TBR');
     } else {
       setWantCheck(false);
       setWantCount(wantCount - 1);
-      removeEntry(sub, 'TBR');
+      removeEntry('TBR');
     }
   }
 
-  const addRemoveReading = async (sub) => {
+  //onclick function for reading box
+  const addRemoveReading = async () => {
     if (readingCheck === false) {
       setReadingCheck(true);
       setReadingCount(readingCount + 1);
-      addEntry(sub, 'CURR');
+      addEntry('CURR');
     } else {
       setReadingCheck(false);
       setReadingCount(readingCount - 1);
-      removeEntry(sub, 'CURR');
+      removeEntry('CURR');
     }
   }
 
-  const addRemoveRead = async (sub) => {
+  //onclick function for read
+  const addRemoveRead = async () => {
     if (readCheck === false) {
       setThoughts(true);
     } else {
       setReadCheck(false);
       setReadCount(readCount - 1);
-      removeEntry(sub, 'ARL')
+      removeEntry('ARL');
     }
   }
 
-  const submitRead = async (sub) => {
+  //special read submission box
+  const submitRead = async () => {
     setSubmitting(true);
     const date_added = Date();
     const seconds_added = Date.now();
     const json = `{
-      "auth0_id": "${user.sub}",
+      "auth0_id": "${cookies.auth0}",
       "google_id": "${props.google_id}",
       "listtype": "ARL",
       "title": "${props.title}",
@@ -181,28 +191,23 @@ const BookCard = (props) => {
     setThoughts(false);
   }
 
-  const addRemoveDNF = async (sub) => {
+  const addRemoveDNF = async () => {
     if (DNFCheck === false) {
       setDNFCheck(true);
       setDNFCount(DNFCount + 1);
-      addEntry(sub, 'DNF');
+      addEntry('DNF');
     } else {
       setDNFCheck(false);
       setDNFCount(DNFCount - 1);
-      removeEntry(sub, 'DNF');
+      removeEntry('DNF');
     }
   }
 
   //useEffect ensures that render checks and color enforcement are only run once
   useEffect(() => {
     renderCounts();
-    if (isAuthenticated && !isLoading) {
-      renderChecks(user.sub, 'TBR', props.google_id);
-      renderChecks(user.sub, 'CURR', props.google_id);
-      renderChecks(user.sub, 'ARL', props.google_id);
-      renderChecks(user.sub, 'DNF', props.google_id);
-  };
-  }, [props.page])
+    renderChecks();
+  }, []);
 
   return (
     <div className="bookcard">
@@ -271,8 +276,8 @@ const BookCard = (props) => {
             }
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={() => setThoughts(false)}>Cancel</Button>
-            <Button variant="danger" onClick={() => submitRead(user.sub)}>Add</Button>
+            <Button variant="warning" onClick={() => setThoughts(false)}>Cancel</Button>
+            <Button variant="danger" onClick={() => submitRead()}>Add</Button>
           </Modal.Footer>
         </Modal>
       :
