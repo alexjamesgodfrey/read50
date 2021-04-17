@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useCookies  } from 'react-cookie';
+import { useCookies } from 'react-cookie';
+import { Link } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
 import './Header.scss';
 
@@ -16,7 +17,7 @@ const BetaAlert = () => {
                 setShow(false);
                 setCookie('beta', true, { path: '/', maxAge: 1000000 });
             }}>
-                welcome to the read50.com beta! view the <Alert.Link href="#">tutorial</Alert.Link> if you are starting out. please report bugs and suggest changes <Alert.Link>here</Alert.Link>.
+                welcome to the read50.com beta! view the <Link id="alert-link" to="/tutorial">tutorial</Link> if you are starting out. please report bugs and suggest changes <Link id="alert-link" to="/bugs">here</Link>.
             </Alert>
         )   
     } else {

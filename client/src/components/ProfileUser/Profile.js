@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useCookies } from 'react-cookie';
 import { Spinner, ProgressBar, Button, Form, OverlayTrigger, Modal, Popover, PopoverContent, Nav } from 'react-bootstrap';
@@ -97,23 +97,19 @@ const Profile = (props) => {
     }
 
     const getLists = async () => {
-        try {
-            const TBRResponse = await fetch(`/api/booklists/TBR/${cookies.auth0}`)
-            const TBRjson = await TBRResponse.json();
-            const CURRResponse = await fetch(`/api/booklists/CURR/${cookies.auth0}`)
-            const CURRjson = await CURRResponse.json();
-            const ARLResponse = await fetch(`/api/booklists/ARL/${cookies.auth0}`)
-            const ARLjson = await ARLResponse.json();
-            const DNFResponse = await fetch(`/api/booklists/DNF/${cookies.auth0}`)
-            const DNFjson = await DNFResponse.json();
-            setTBR(TBRjson);
-            setCURR(CURRjson);
-            setARL(ARLjson);
-            setDNF(DNFjson);
-            setLoad(false);
-        } catch (err) {
-            console.error(err.message);
-        }
+        const TBRResponse = await fetch(`/api/booklists/TBR/${cookies.auth0}`)
+        const TBRjson = await TBRResponse.json();
+        const CURRResponse = await fetch(`/api/booklists/CURR/${cookies.auth0}`)
+        const CURRjson = await CURRResponse.json();
+        const ARLResponse = await fetch(`/api/booklists/ARL/${cookies.auth0}`)
+        const ARLjson = await ARLResponse.json();
+        const DNFResponse = await fetch(`/api/booklists/DNF/${cookies.auth0}`)
+        const DNFjson = await DNFResponse.json();
+        setTBR(TBRjson);
+        setCURR(CURRjson);
+        setARL(ARLjson);
+        setDNF(DNFjson);
+        setLoad(false);
     }
 
     //function to be run upon each click of the shelves div - it will update timeline and progress bar if an entry is to be removed
@@ -228,9 +224,7 @@ const Profile = (props) => {
                             </div>
                             
                             <div className="stats">
-                                <div>
-                                    <p className="profile-piece">{((goal-readYear)/((365-day) / 7)).toFixed(2)} books per week to meet goal</p>
-                                </div>
+                                <p className="profile-piece">{((goal-readYear)/((365-day) / 7)).toFixed(2)} books per week to meet goal</p>
                                 <div className="numsum">
                                     <p className="profile-piece" id="stats"><strong>{parseInt(books).toLocaleString()}</strong> books</p>
                                     <p className="profile-piece" id="stats"><strong>{parseInt(pages).toLocaleString()}</strong> pages</p>
@@ -287,6 +281,7 @@ const Profile = (props) => {
                             </div>
                                 
                             <div className="stats">
+                                <p className="profile-piece">{((goal-readYear)/((365-day) / 7)).toFixed(2)} books per week to meet goal</p>
                                 <div className="numsum">
                                     <p className="profile-piece" id="stats"><strong>{parseInt(books).toLocaleString()}</strong> books</p>
                                     <p className="profile-piece" id="stats"><strong>{parseInt(pages).toLocaleString()}</strong> pages</p>
@@ -305,15 +300,15 @@ const Profile = (props) => {
                     {shelf === 'All' ? 
                         <div onClick={onShelfClick} className="profile-main">
                             <div className="shelves-container">
-                                <Shelf sample={true} profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Read Shelf'} />
-                                <Shelf sample={true} profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Currently Reading Shelf'} />
-                                <Shelf sample={true} profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Want Shelf'} />
-                                <Shelf sample={true} profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Did Not Finish Shelf'} />
+                                <Shelf sample={true} profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Read Shelf'} username={cookies.username} />
+                                <Shelf sample={true} profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Currently Reading Shelf'} username={cookies.username}/>
+                                <Shelf sample={true} profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Want Shelf'} username={cookies.username}/>
+                                <Shelf sample={true} profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Did Not Finish Shelf'} username={cookies.username}/>
                             </div>
                         </div>
                         :
                         <div onClick={onShelfClick} className="profile-main">
-                            <Shelf profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={shelf} />
+                            <Shelf profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={shelf} username={cookies.username}/>
                         </div>
                     }
                 </div>

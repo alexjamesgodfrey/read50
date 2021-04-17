@@ -1,0 +1,51 @@
+@import "../../_variables.scss";
+$barrier: 800px;
+
+.about {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+}
+
+.about-meat {
+  margin: 0px auto;
+  width: 80%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  @media screen and (max-width: $barrier) {
+    width: 95%;
+  }
+}
+
+.push-left {
+  text-align: left;
+}
+
+.special {
+  font-weight: 800;
+  font-size: 17px;
+}
+
+.picture-container {
+  display: flex;
+  align-items: center;
+}
+
+.me {
+  border-radius: 50%;
+  width: 125px;
+  height: 125px;
+}
+
+#about-link {
+  color: $primary-color !important;
+}
+
+.privacy {
+  width: 350px;
+  margin: 0px auto;
+}

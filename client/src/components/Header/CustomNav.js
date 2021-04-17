@@ -25,13 +25,15 @@ const CustomNav = () => {
       {redirect ?
         <Redirect push to={`/search/${field}`} />
         :
-        <Navbar bg="danger" variant="dark" expand="md">
+        <Navbar bg="danger" variant="dark" expand="lg">
           <NavLink to="/"><Navbar.Brand>read50.com</Navbar.Brand></NavLink>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav id="custom-nav">
               {append ? <NavLink activeClassName="selected-nav" className="nav-link" to={`/search/${sessionStorage.getItem('searchField')}`}>search</NavLink> : <NavLink activeClassName="selected-nav" className="nav-link" to="/search">search</NavLink>}
               <NavLink activeClassName="selected-nav" className="nav-link" to="/leaderboard">leaderboards</NavLink>
+              <NavLink activeClassName="selected-nav" className="nav-link" to="/tutorial">tutorial</NavLink>
+              <NavLink activeClassName="selected-nav" className="nav-link" to="/bugs">bugs</NavLink>
               <NavLink activeClassName="selected-nav" className="nav-link" to="/about">about</NavLink>
               {(isAuthenticated ? <LoggedInDropdown /> : <NotLoggedInDropdown />)}
             </Nav>

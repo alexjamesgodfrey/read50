@@ -6,6 +6,9 @@ import Profile from './components/ProfileUser/Profile.js';
 import User from './components/ProfileUser/User.js';
 import Clubs from './components/Clubs/Clubs.js';
 import Leaderboard from './components/Leaderboards/Leaderboard.js';
+import About from './components/About/About.js';
+import Bugs from './components/Bugs/Bugs.js';
+import Tutorial from './components/Tutorial/Tutorial.js';
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -20,6 +23,9 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} exact />
           <Route path="/search/:urlSearch?" component={(props) => <SearchPage {...props} sleep={this.sleep} />} />
+          <Route path="/about" component={About} />
+          <Route path="/bugs" component={Bugs} />
+          <Route path="/tutorial" component={Tutorial} />
           <Route path="/profile" component={(props) => <Profile {...props} state={this.state} sleep={this.sleep} />} />
           <Route path="/user/:username" component={(props) => <User {...props} state={this.state} sleep={this.sleep} />} />
           <Route path="/clubs" component={(props) => <Clubs {...props} sleep={this.sleep} />} />

@@ -1,0 +1,16 @@
+@import "../../_variables.scss";
+
+.bugs-form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 10px auto;
+}
+
+#bugs-color {
+  color: $font-color;
+}
+
+h3 {
+  margin-top: 20px !important;
+}

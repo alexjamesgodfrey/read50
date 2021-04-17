@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useCookies  } from 'react-cookie';
 import Header from '../Header/Header.js';
 import Shelf from './Shelf.js';
 import Timeline from './Timeline.js';
 import Loading from '../Loading.js';
-import ProgressBar from 'react-bootstrap/ProgressBar';
+import { Spinner, ProgressBar, Nav } from 'react-bootstrap';
 import './Profile.scss';
-import { useParams } from 'react-router';
+
 
 const User = (props) => {
     //fetches auth0 user information
     const { user, isAuthenticated } = useAuth0();
     let { username } = useParams();
     const [sub, setSub] = useState("");
+    const [picture, setPicture] = useState("");
 
     const fetchCreds = async () => {
         console.log('fetch creds');
@@ -91,6 +93,7 @@ const User = (props) => {
         setWords(person.words);
         setTotal(person.total);
         setGoal(person.goal);
+        setPicture(person.picture_link);
         setReadYear(person.read_year);
     }
 
@@ -101,100 +104,100 @@ const User = (props) => {
         getLists();
         dayOfYear(new Date());
     }, [sub])
-    
-
-    //controls primary loading state
-    if (load) {
-        return (
-            <Loading title={`loading ${username}'s read50`} />
-        )
-    }
 
     return (
         isAuthenticated && (
             <div className="profile-all">
                 <Header />
-                <div className="profile">
-                    <div className="profile-top">
-                        <div className="picture-section">
-                            <img className="profile-pic" src={user.picture}></img>
+                {load ?
+                    <div className="total">
+                        <div className="spinner-container">
+                            <Spinner animation="border" variant="danger" size="xl" />
                         </div>
+                    </div>
+                    :
+                    <div className="profile">
+                        <div className="profile-top">
+                            <div className="picture-section">
+                                <img className="profile-pic" src={picture}></img>
+                            </div>
                         
-                        <div className="profile-info">
-                            <p className="user-desc"><span id="user">USER</span></p>
-                            <p className="profile-piece"><span className="name">{username}</span></p>
-                        </div>
-
-                        <div className="profile-rest">
-                            <ProgressBar id="goal-progress" variant="danger" now={Math.max((readYear / goal * 100), 7)} label={(readYear / goal * 100).toFixed(2) + '%'} />
-                            <div className="progress-box">
-                                <h4>Yearly Goal: </h4>
-                                <h4 className="goal">{goal} books</h4>
+                            <div className="profile-info">
+                                <p className="user-desc"><span id="user">USER</span></p>
+                                <p className="profile-piece"><span className="name">{username}</span></p>
                             </div>
+
+                            <div className="profile-rest">
+                                <ProgressBar id="goal-progress" variant="danger" now={Math.max((readYear / goal * 100), 7)} label={(readYear / goal * 100).toFixed(2) + '%'} />
+                                <div className="progress-box">
+                                    <h4>Yearly Goal: </h4>
+                                    <h4 className="goal">{goal} books</h4>
+                                </div>
                             
-                            <div className="stats">
-                                <div className="numsum">
-                                    <p className="profile-piece" id="stats"><strong>{parseInt(books).toLocaleString()}</strong> books</p>
-                                    <p className="profile-piece" id="stats"><strong>{parseInt(pages).toLocaleString()}</strong> pages</p>
-                                    <p className="profile-piece" id="stats"><strong>{parseInt(words).toLocaleString()}</strong> words</p>
-                                </div>
-                                <div className="numsum">
-                                    <p className="under" id="stats">view friends</p>
-                                    <p className="under" id="stats">view clubs</p>
-                                </div>
+                                <div className="stats">
+                                    <p className="profile-piece">{((goal - readYear) / ((365 - day) / 7)).toFixed(2)} books per week to meet goal</p>
+                                    <div className="numsum">
+                                        <p className="profile-piece" id="stats"><strong>{parseInt(books).toLocaleString()}</strong> books</p>
+                                        <p className="profile-piece" id="stats"><strong>{parseInt(pages).toLocaleString()}</strong> pages</p>
+                                        <p className="profile-piece" id="stats"><strong>{parseInt(words).toLocaleString()}</strong> words</p>
+                                    </div>
+                                    <div className="numsum">
+                                        <p className="under" id="stats">view friends</p>
+                                        <p className="under" id="stats">view clubs</p>
+                                    </div>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="navigation">
-                            <ul className="nav-list">
-                            <li className="nav-item" onClick={() => setShelf('All')}>OVERVIEW</li>
-                                <li className="nav-item" onClick={() => setShelf('Want Shelf')}>WANT</li>
-                                <li className="nav-item" onClick={() => setShelf('Currently Reading Shelf')}>CURRENT</li>
-                                <li className="nav-item" onClick={() => setShelf('Read Shelf')}>READ</li>
-                                <li className="nav-item" onClick={() => setShelf('Did Not Finish Shelf')}>DIDN'T FINISH</li>
-                            </ul>
-                    </div>
-                    {shelf === 'All' ?
-                        <div className="profile-rest-small">
-                            <div className="profile-header">
-                                <p>About</p>
-                            </div>
-                            <ProgressBar id="goal-progress-small" variant="danger" now={Math.max((readYear / goal * 100), 10)} label={(readYear / goal * 100).toFixed(2) + '%'} />
-                            <div className="progress-box">
-                                <h4>Yearly Goal: </h4>
-                                <h4 className="goal">{goal} books</h4>
-                            </div>
+                        <Nav className="profile-nav">
+                            <Nav.Item activeClassName="profile-nav-selected" className="profile-nav-item" onClick={() => setShelf('All')}>OVERVIEW</Nav.Item>
+                            <Nav.Item activeClassName="profile-nav-selected" className="profile-nav-item" onClick={() => setShelf('Want Shelf')}>WANT</Nav.Item>
+                            <Nav.Item activeClassName="profile-nav-selected" className="profile-nav-item" onClick={() => setShelf('Currently Reading Shelf')}>CURRENT</Nav.Item>
+                            <Nav.Item activeClassName="profile-nav-selected" className="profile-nav-item" onClick={() => setShelf('Read Shelf')}>READ</Nav.Item>
+                            <Nav.Item activeClassName="profile-nav-selected" className="profile-nav-item" onClick={() => setShelf('Did Not Finish Shelf')}>DNF</Nav.Item>
+                        </Nav>
+                        {shelf === 'All' ?
+                            <div className="profile-rest-small">
+                                <div className="profile-header">
+                                    <p>About</p>
+                                </div>
+                                <ProgressBar id="goal-progress-small" variant="danger" now={Math.max((readYear / goal * 100), 10)} label={(readYear / goal * 100).toFixed(2) + '%'} />
+                                <div className="progress-box">
+                                    <h4>Yearly Goal: </h4>
+                                    <h4 className="goal">{goal} books</h4>
+                                </div>
                                 
-                            <div className="stats">
-                                <div className="numsum">
-                                    <p className="profile-piece" id="stats"><strong>{parseInt(books).toLocaleString()}</strong> books</p>
-                                    <p className="profile-piece" id="stats"><strong>{parseInt(pages).toLocaleString()}</strong> pages</p>
-                                    <p className="profile-piece" id="stats"><strong>{parseInt(words).toLocaleString()}</strong> words</p>
-                                </div>
-                                <div className="numsum">
-                                    <p className="under" id="stats">view friends</p>
-                                    <p className="under" id="stats">view clubs</p>
-                                </div>
+                                <div className="stats">
+                                    <p className="profile-piece">{((goal - readYear) / ((365 - day) / 7)).toFixed(2)} books per week to meet goal</p>
+                                    <div className="numsum">
+                                        <p className="profile-piece" id="stats"><strong>{parseInt(books).toLocaleString()}</strong> books</p>
+                                        <p className="profile-piece" id="stats"><strong>{parseInt(pages).toLocaleString()}</strong> pages</p>
+                                        <p className="profile-piece" id="stats"><strong>{parseInt(words).toLocaleString()}</strong> words</p>
+                                    </div>
+                                    <div className="numsum">
+                                        <p className="under" id="stats">view friends</p>
+                                        <p className="under" id="stats">view clubs</p>
+                                    </div>
 
+                                </div>
                             </div>
-                        </div>
-                        :
-                        <span></span>
-                    }
-                    {shelf === 'All' ? 
-                        <div className="profile-main">
-                            <Shelf sample={true} profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Want Shelf'} />
-                            <Shelf sample={true} profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Currently Reading Shelf'} />
-                            <Shelf sample={true} profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Read Shelf'} />
-                            <Shelf sample={true} profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Did Not Finish Shelf'} />
-                        </div>
-                        :
-                        <div className="profile-main">
-                            <Shelf profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={shelf} />
-                        </div>
-                    }
-                </div>
+                            :
+                            <span></span>
+                        }
+                        {shelf === 'All' ?
+                            <div className="profile-main">
+                                <Shelf sample={true} profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Want Shelf'} username={username} />
+                                <Shelf sample={true} profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Currently Reading Shelf'} username={username} />
+                                <Shelf sample={true} profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Read Shelf'} username={username} />
+                                <Shelf sample={true} profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Did Not Finish Shelf'} username={username} />
+                            </div>
+                            :
+                            <div className="profile-main">
+                                <Shelf profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={shelf} username={username} />
+                            </div>
+                        }
+                    </div>
+                }
             </div>
         )
     );

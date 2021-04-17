@@ -11,7 +11,7 @@ const Shelf = (props) => {
                 <div className="sample-empty">
                     <div className="sample-header">
                             <p>Want Shelf</p>
-                            <p className="see">SEE ALL</p>
+                            {/* <p className="see">SEE ALL</p> */}
                     </div>
                     {props.profile ? <p>Empty! <Link id="add-link" to="/search">Add books</Link></p> : <p>Empty :(</p>}
                 </div>
@@ -22,14 +22,15 @@ const Shelf = (props) => {
                 <div className="sample">
                     <div className="sample-header">
                         <p>Want Shelf ({props.TBR.length})</p>
-                        <p className="see">SEE ALL</p>
+                        {/* <p className="see">SEE ALL</p> */}
                     </div>
                     <div className="sample-items">
                     {
-                        props.TBR.slice(0, 4).map((book, i) => {
+                        props.TBR.slice(0, 3).map((book, i) => {
                             numbers++;
                             return <ShelfEntry
                                         readOnly={!props.profile}
+                                        username={props.username}
                                         key={i}
                                         entryNumber={numbers}
                                         google_id={book.google_id}
@@ -41,6 +42,7 @@ const Shelf = (props) => {
                                         image={book.image}
                                         pages={props.pages}
                                         words={props.pages * 300}
+                                        id={book.id}
                                     />
                         })}
                                 </div>
@@ -59,6 +61,7 @@ const Shelf = (props) => {
                 numbers++;
                 return <ShelfEntry
                             readOnly={!props.profile}
+                            username={props.username}
                             key={i}
                             entryNumber={numbers}
                             google_id={book.google_id}
@@ -70,6 +73,7 @@ const Shelf = (props) => {
                             image={book.image}
                             pages={props.pages}
                             words={props.pages * 300}
+                            id={book.id}
                         />
             })
                     }
@@ -83,7 +87,7 @@ const Shelf = (props) => {
                 <div className="sample-empty">
                     <div className="sample-header">
                             <p>Currently Reading Shelf ({props.CURR.length})</p>
-                            <p className="see">SEE ALL</p>
+                            {/* <p className="see">SEE ALL</p> */}
                     </div>
                     {props.profile ? <p>Empty! <Link id="add-link" to="/search">Add books</Link></p> : <p>Empty :(</p>}
                 </div>
@@ -94,14 +98,15 @@ const Shelf = (props) => {
                 <div className="sample">
                     <div className="sample-header">
                         <p>Currently Reading Shelf</p>
-                        <p className="see">SEE ALL</p>
+                        {/* <p className="see">SEE ALL</p> */}
                     </div>
                     <div className="sample-items">
                     {
-                        props.CURR.slice(0, 4).map((book, i) => {
+                        props.CURR.slice(0, 3).map((book, i) => {
                             numbers++;
                             return <ShelfEntry
                                         readOnly={!props.profile}
+                                        username={props.username}
                                         key={i}
                                         entryNumber={numbers}
                                         google_id={book.google_id}
@@ -113,6 +118,7 @@ const Shelf = (props) => {
                                         image={book.image}
                                         pages={props.pages}
                                         words={props.pages * 300}
+                                        id={book.id}
                                     />
                         })
                                 }
@@ -132,6 +138,7 @@ const Shelf = (props) => {
                 numbers++;
                 return <ShelfEntry
                             readOnly={!props.profile}
+                            username={props.username}
                             key={i}
                             entryNumber={numbers}
                             google_id={book.google_id}
@@ -143,6 +150,7 @@ const Shelf = (props) => {
                             image={book.image}
                             pages={props.pages}
                             words={props.pages * 300}
+                            id={book.id}
                         />
             })
                     }
@@ -156,7 +164,7 @@ const Shelf = (props) => {
                 <div className="sample-empty">
                     <div className="sample-header">
                             <p>Read Shelf ({props.ARL.length})</p>
-                            <p className="see">SEE ALL</p>
+                            {/* <p className="see">SEE ALL</p> */}
                     </div>
                     {props.profile ? <p>Empty! <Link id="add-link" to="/search">Add books</Link></p> : <p>Empty :(</p>}
                 </div>
@@ -167,14 +175,15 @@ const Shelf = (props) => {
                 <div className="sample">
                     <div className="sample-header">
                         <p>Read Shelf ({props.ARL.length})</p>
-                        <p className="see">SEE ALL</p>
+                        {/* <p className="see">SEE ALL</p> */}
                     </div>
                     <div className="sample-items">
                     {
-                        props.ARL.slice(0, 4).map((book, i) => {
+                        props.ARL.slice(0, 3).map((book, i) => {
                             numbers++;
                             return <ShelfEntry
                                         readOnly={!props.profile}
+                                        username={props.username}
                                         key={i}
                                         entryNumber={numbers}
                                         google_id={book.google_id}
@@ -212,6 +221,7 @@ const Shelf = (props) => {
                 numbers++;
                 return <ShelfEntry
                             readOnly={!props.profile}
+                            username={props.username}
                             key={i}
                             entryNumber={numbers}
                             google_id={book.google_id}
@@ -243,7 +253,7 @@ const Shelf = (props) => {
                 <div className="sample-empty">
                     <div className="sample-header">
                         <p id="shelf-header">Did Not Finish Shelf ({props.DNF.length})</p>
-                        <p className="see">SEE ALL</p>
+                        {/* <p className="see">SEE ALL</p> */}
                     </div>
                     {props.profile ? <p>Empty! <Link id="add-link" to="/search">Add books</Link></p> : <p>Empty :(</p>}
                 </div>
@@ -254,14 +264,15 @@ const Shelf = (props) => {
                 <div className="sample">
                     <div className="sample-header">
                         <p id="shelf-header">Did Not Finish Shelf ({props.DNF.length})</p>
-                        <p className="see">SEE ALL</p>
+                        {/* <p className="see">SEE ALL</p> */}
                     </div>
                     <div className="sample-items">
                     {
-                        props.DNF.slice(0, 4).map((book, i) => {
+                        props.DNF.slice(0, 3).map((book, i) => {
                             numbers++;
                             return <ShelfEntry
                                         readOnly={!props.profile}
+                                        username={props.username}
                                         key={i}
                                         entryNumber={numbers}
                                         google_id={book.google_id}
@@ -273,6 +284,7 @@ const Shelf = (props) => {
                                         image={book.image}
                                         pages={props.pages}
                                         words={props.pages * 300}
+                                        id={book.id}
                                     />
                         })
                                 }
@@ -292,6 +304,7 @@ const Shelf = (props) => {
                 numbers++;
                 return <ShelfEntry
                             readOnly={!props.profile}
+                            username={props.username}
                             key={i}
                             entryNumber={numbers}
                             google_id={book.google_id}
@@ -303,6 +316,7 @@ const Shelf = (props) => {
                             image={book.image}
                             pages={props.pages}
                             words={props.pages * 300}
+                            id={book.id}
                         />
             })
                     }

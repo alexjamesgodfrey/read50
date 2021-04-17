@@ -58,6 +58,7 @@ $barrier: 800px;
 
 .name {
   font-size: 60px;
+  color: $primary-color;
 }
 
 .book {
@@ -337,6 +338,9 @@ h2 {
 .profile-nav-item {
   font-size: 25px;
   color: $font-color;
+  @media screen and (max-width: $barrier) {
+    font-size: 20px;
+  }
 }
 
 .profile-nav-item:hover {

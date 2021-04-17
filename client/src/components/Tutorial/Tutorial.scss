@@ -1,0 +1,29 @@
+.sample-bookcard-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.bookcard-sample {
+  width: 300px;
+}
+
+.read-box {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.read-sample {
+  width: 400px;
+}
+
+.read-captions {
+  max-width: 500px;
+}
+
+#notis {
+  margin: 0px auto;
+}
