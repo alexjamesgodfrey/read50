@@ -45,6 +45,11 @@ const BookCard = (props) => {
 
   //renders counts through fetch and count state
   const renderCounts = async () => {
+    //set all to false for proper page changing
+    setWantCount(0);
+    setReadingCount(0);
+    setReadCount(0);
+    setDNFCount(0);
     const totalCount = await fetch(`api/totalcount/${props.google_id}`);
     const totalCountJSON = await totalCount.json();
     for (let i = 0; i < totalCountJSON.length; i++) {
@@ -65,6 +70,11 @@ const BookCard = (props) => {
 
   //renders checks via fetch and check state
   const renderChecks = async () => {
+    setLoadingChecks(true);
+    setWantCheck(false);
+    setReadingCheck(false);
+    setReadCheck(false);
+    setDNFCheck(false);
     const checks = await fetch(`/api/getchecks/${cookies.auth0}/${props.google_id}`);
     const checksJSON = await checks.json();
     for (let i = 0; i < checksJSON.length; i++) {
@@ -208,7 +218,7 @@ const BookCard = (props) => {
   useEffect(() => {
     renderCounts();
     renderChecks();
-  }, []);
+  }, [props.page]);
 
   return (
     <div className="bookcard">
