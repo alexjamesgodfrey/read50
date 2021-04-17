@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import Search from './Search.js';
+import { Component } from 'react';
 import { FormControl, Button } from 'react-bootstrap';
 import BookList from './BookList.js';
 import request from 'superagent';
@@ -12,13 +11,11 @@ class Books extends Component {
     super(props);
 
     this.state = {
-      previousBooks: JSON.parse(sessionStorage.getItem('books')) || [],
       books: [],
       urlSearch: this.props.match.params.urlSearch,
       searchField: sessionStorage.getItem('searchField') || '',
       searchCount: 0,
       searched: false,
-      page: sessionStorage.getItem('page') || 1,
       users: false,
       loading: false
     }
@@ -31,18 +28,17 @@ class Books extends Component {
     this.setState({ loading: true });
     if (this.state.searchField === "") {
       await this.setState({ searchField: 'brandon sanderson' });
+      window.history.replaceState(null, null, `/#/search/${sessionStorage.getItem('searchField')}`);
     }
-    console.log(this.state.searchField)
+    window.history.replaceState(null, null, `/#/search/${sessionStorage.getItem('searchField')}`);
     await request
       .get("https://www.googleapis.com/books/v1/volumes")
       .query({ q: this.state.searchField, maxResults: 40})
       .then((data) => {
-        sessionStorage.setItem('books', JSON.stringify(data.body.items));
         this.setState({ books: [...data.body.items] });
         this.setState({ searched: true });
       })
     this.setState({ loading: false });
-    console.log(this.state.books);
   }
 
   handleSearch = (e) => {
@@ -62,11 +58,11 @@ class Books extends Component {
     const trimmed = this.state.urlSearch.replace('%', ' ');
     this.setState({ loading: true });
     this.setState({ searchField: trimmed });
+    window.history.replaceState(null, null, `/#/search/${trimmed}`);
     await request
       .get("https://www.googleapis.com/books/v1/volumes")
       .query({ q: trimmed, maxResults: 40})
       .then((data) => {
-        sessionStorage.setItem('books', JSON.stringify(data.body.items));
         this.setState({ books: [...data.body.items] })
         this.setState({searched: true})
       })
@@ -74,8 +70,8 @@ class Books extends Component {
   }
 
   componentDidMount() {
+    window.history.replaceState(null, null, `/#/search/${sessionStorage.getItem('searchField')}`);
     if (this.state.urlSearch && this.state.searched === false) {
-      console.log('url search');
       this.perfomurlSearch();
     }
   }
@@ -106,7 +102,7 @@ class Books extends Component {
               <Spinner className="spinner" animation="border" variant="danger" size="lg" />
             </div>
             :
-            <BookList page={this.state.page} users={this.state.users} changeLoad={this.changeLoad} state={this.state} books={this.state.books} />
+            <BookList users={this.state.users} changeLoad={this.changeLoad} state={this.state} books={this.state.books} />
           }
         </div>
       </div>

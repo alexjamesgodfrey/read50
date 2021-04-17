@@ -8,12 +8,13 @@ const LoggedInDropdown = () => {
   //auth0 user and logout
   const { user, logout } = useAuth0();
   //auth0 sub cookie and username cookie
-  const [cookies, setCookie] = useCookies(['auth0', 'username']);
+  const [cookies, setCookie] = useCookies(['auth0', 'username', 'picture']);
 
   //sets auth0 and username cookie (age three hours)
   const setAuth = async () => {
     setCookie('auth0', user.sub, { path: '/', maxAge: 10800 });
     setCookie('username', user['https://www.read50.com/username'], { path: '/', maxAge: 10800 });
+    setCookie('picture', user.picture, { path: '/', maxAge: 10800 });
   }
 
   //creates user JSON and adds to database

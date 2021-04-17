@@ -146,25 +146,6 @@ $barrier: 800px;
   margin-left: 5px !important;
 }
 
-.nav-list {
-  width: 90%;
-  margin: 20px auto;
-  color: $primary-color;
-  font-size: 25px;
-  display: flex;
-  justify-content: space-around;
-  list-style-type: none;
-
-  @media screen and (max-width: $barrier) {
-    width: 100%;
-    font-size: 20px;
-  }
-}
-
-.nav-item {
-  cursor: pointer;
-}
-
 .profile-piece {
   line-height: 0.8;
 }
@@ -276,7 +257,7 @@ h2 {
 .numsum {
   display: flex;
   justify-content: space-around;
-  width: 300px;
+  width: 350px;
 }
 
 .under {
@@ -343,4 +324,26 @@ h2 {
 #no-friends {
   text-align: center;
   color: $tertiary-color !important;
+}
+
+.profile-nav {
+  display: flex;
+  margin: 30px 0px;
+  margin-bottom: 20px !important;
+  justify-content: space-around;
+}
+
+.profile-nav-item {
+  font-size: 25px;
+  color: $font-color;
+}
+
+.profile-nav-item:hover {
+  color: $font-color;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.profile-nav-item:global(.active) {
+  color: red;
 }

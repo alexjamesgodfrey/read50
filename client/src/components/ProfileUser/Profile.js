@@ -1,41 +1,29 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react'
+import { Link, NavLink } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useCookies  } from 'react-cookie';
+import { useCookies } from 'react-cookie';
+import { Spinner, ProgressBar, Button, Form, OverlayTrigger, Modal, Popover, PopoverContent, Nav } from 'react-bootstrap';
 import Header from '../Header/Header.js';
 import Shelf from './Shelf.js';
 import UserLine from './UserLine.js';
-import FriendRequest from './FriendRequest.js';
-import Timeline from './Timeline.js';
-import Loading from '../Loading.js';
-import ProgressBar from 'react-bootstrap/ProgressBar';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Modal from 'react-bootstrap/Modal';
-import Popover from 'react-bootstrap/Popover';
-import PopoverContent from 'react-bootstrap/PopoverContent';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import Notification from '../../images/notification.svg';
 import Reddot from '../../images/reddot.svg';
 import './Profile.scss';
 import './ShelfEntry.scss';
 
 const Profile = (props) => {
-    
     //fetches auth0 user information
-    const { user, isAuthenticated } = useAuth0();
+    const { user } = useAuth0();
 
     //allows use of the auth0 cookie
-    const [cookies, setCookie] = useCookies(['auth0']);
+    const [cookies, setCookie] = useCookies(['auth0', 'username', 'picture']);
 
     //function to get day of year 
     const dayOfYear = date => {
         setDay(Math.floor((date - new Date(date.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24)));
     }
 
-    //main loading state -- set to false after 1250ms
+    //main loading state -- set to false after info is loaded
     const [load, setLoad] = useState(true);
     //user stat state
     const [books, setBooks] = useState('books');
@@ -182,31 +170,20 @@ const Profile = (props) => {
         dayOfYear(new Date());
     }, []);
 
-    //controls primary loading state
-    if (load) {
-        return (
-            <Loading title={'loading your profile'} />
-        )
-    }
-
     return (
-        isAuthenticated && (
-            <div className="profile-all">
-                <Header />
-                <div className="profile">
-                    {/* <div className="progress-box">
-                        <h3>Yearly Goal: </h3>
-                        {(edit === 'Edit') ? <h3 className="goal">{goal} books</h3> : <Form.Group>
-                            <Form.Control onChange={handleChange} placeholder={goal} id="goal-enter" />
-                                                                                    </Form.Group> 
-                        }
-                        <Button id="edit-button" variant="light" onClick={onEdit}>{edit}</Button>
+        <div className="profile-all">
+            <Header />
+            {load ? 
+                <div className="total">
+                    <div className="spinner-container">
+                        <Spinner animation="border" variant="danger" size="xl" />
                     </div>
-                    <h6>({((goal - readYear) / ((365-day) / 7)).toFixed(3)} books per week needed to meet goal)</h6>
-                    <ProgressBar id="goal-progress" variant="danger" now={Math.max((readYear / goal * 100), 10)} label={(readYear / goal * 100).toFixed(2) + '%'} /> */}
+                </div> 
+            :
+                <div className="profile">
                     <div className="profile-top">
                         <div className="picture-section">
-                            <img className="profile-pic" src={user.picture}></img>
+                            <img className="profile-pic" src={cookies.picture}></img>
                             <Button variant="light" size="sm">upload</Button>
                         </div>
                         
@@ -239,12 +216,7 @@ const Profile = (props) => {
                                     </div>
                                 </OverlayTrigger>
                             </div>
-                            <p className="profile-piece"><span className="name" id="user">{user['https://www.read50.com/username']}</span></p>
-                            {/* <p className="profile-piece" id="stats"><strong>{books}</strong> books</p>
-                            <p className="profile-piece" id="stats"><strong>{pages}</strong> pages</p>
-                            <p className="profile-piece" id="stats"><strong>{words}</strong> words</p>
-                            <p className="profile-piece" id="stats"><span id="underlined">view friends</span></p>
-                            <p className="profile-piece" id="stats"><span id="underlined">view clubs</span></p> */}
+                            <p className="profile-piece"><span className="name" id="user">{cookies.username}</span></p>
                         </div>
 
                         <div className="profile-rest">
@@ -292,17 +264,13 @@ const Profile = (props) => {
                             </div>
                         </div>
                     </div>
-
-
-                    <div className="navigation">
-                            <ul className="nav-list">
-                            <li className="nav-item" onClick={() => setShelf('All')}>OVERVIEW</li>
-                                <li className="nav-item" onClick={() => setShelf('Want Shelf')}>WANT</li>
-                                <li className="nav-item" onClick={() => setShelf('Currently Reading Shelf')}>CURRENT</li>
-                                <li className="nav-item" onClick={() => setShelf('Read Shelf')}>READ</li>
-                                <li className="nav-item" onClick={() => setShelf('Did Not Finish Shelf')}>DIDN'T FINISH</li>
-                            </ul>
-                    </div>
+                    <Nav className="profile-nav">
+                        <Nav.Item activeClassName="profile-nav-selected" className="profile-nav-item" onClick={() => setShelf('All')}>OVERVIEW</Nav.Item>
+                        <Nav.Item activeClassName="profile-nav-selected" className="profile-nav-item" onClick={() => setShelf('Want Shelf')}>WANT</Nav.Item>
+                        <Nav.Item activeClassName="profile-nav-selected" className="profile-nav-item" onClick={() => setShelf('Currently Reading Shelf')}>CURRENT</Nav.Item>
+                        <Nav.Item activeClassName="profile-nav-selected" className="profile-nav-item" onClick={() => setShelf('Read Shelf')}>READ</Nav.Item>
+                        <Nav.Item activeClassName="profile-nav-selected" className="profile-nav-item" onClick={() => setShelf('Did Not Finish Shelf')}>DNF</Nav.Item>
+                    </Nav>
                     {shelf === 'All' ?
                         <div className="profile-rest-small">
                             <div className="profile-header">
@@ -342,17 +310,15 @@ const Profile = (props) => {
                                 <Shelf sample={true} profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Want Shelf'} />
                                 <Shelf sample={true} profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Did Not Finish Shelf'} />
                             </div>
-                            {/* <Timeline key={reRender} /> */}
                         </div>
                         :
                         <div onClick={onShelfClick} className="profile-main">
                             <Shelf profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={shelf} />
-                            {/* <Timeline key={reRender} /> */}
                         </div>
                     }
                 </div>
-            </div>
-        )
+            }
+        </div>
     );
 }
 

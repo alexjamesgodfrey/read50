@@ -9,13 +9,15 @@ import './Header.scss';
 const CustomNav = () => {
   const { isAuthenticated } = useAuth0();
   //state for search field
-  const [field, setField] = useState("");
+  const [field, setField] = useState("brandon sanderson");
   //fetches url
   const location = useLocation();
   //gets the first part of url (where /search will potentially be)
   const [here, setHere] = useState(location.pathname.slice(0, 7));
   //set to true if redirect is needed
   const [redirect, setRedirect] = useState(false);
+  //link for book memory
+  const [append, setAppend] = useState(sessionStorage.getItem('searchField'));
 
   return (
     <div>
@@ -28,7 +30,7 @@ const CustomNav = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav id="custom-nav">
-              <NavLink activeClassName="selected-nav" className="nav-link" to="/search">search</NavLink>
+              {append ? <NavLink activeClassName="selected-nav" className="nav-link" to={`/search/${sessionStorage.getItem('searchField')}`}>search</NavLink> : <NavLink activeClassName="selected-nav" className="nav-link" to="/search">search</NavLink>}
               <NavLink activeClassName="selected-nav" className="nav-link" to="/leaderboard">leaderboards</NavLink>
               <NavLink activeClassName="selected-nav" className="nav-link" to="/about">about</NavLink>
               {(isAuthenticated ? <LoggedInDropdown /> : <NotLoggedInDropdown />)}
@@ -39,12 +41,11 @@ const CustomNav = () => {
                   <span></span>
                 :
                   <Form flex>
-                    <FormControl className="header-search-box" type="text" placeholder='quick search' value={field} onChange={(e) => setField(e.target.value)} />
+                    <FormControl className="header-search-box" type="text" placeholder='quick search' onChange={(e) => setField(e.target.value)} />
                     <Button type="submit" variant="outline-light" onClick={() => setRedirect(true)}>search</Button>
                   </Form>
               }
             </Nav>
-            
           </Navbar.Collapse>
         </Navbar>
       }
