@@ -59,7 +59,7 @@ const LoggedInDropdown = () => {
     <NavDropdown className="mr-auto" title='myread50'>
         <NavDropdown.Item id="dropdown-link" href="#profile">profile</NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item id="dropdown-link" onClick={() => logout()}>sign out</NavDropdown.Item>
+        <NavDropdown.Item id="sign-out" onClick={() => logout()}>sign out</NavDropdown.Item>
     </NavDropdown>
   );
 }

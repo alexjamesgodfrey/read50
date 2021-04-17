@@ -44,9 +44,7 @@ const CardPage = (props) => {
     setLoading(true);
     const users = await fetch(`/api/users/levenshtein/${props.state.searchField}`);
     const usersJson = await users.json();
-    console.log(usersJson);
     setUsersArray(usersJson);
-    console.log(usersArray);
     setLoading(false);
   }
 

@@ -12,10 +12,7 @@ import './Profile.scss';
 import './ShelfEntry.scss';
 
 const Profile = (props) => {
-    //fetches auth0 user information
-    const { user } = useAuth0();
-
-    //allows use of the auth0 cookie
+    //allows the use of cookies
     const [cookies, setCookie] = useCookies(['auth0', 'username', 'picture']);
 
     //function to get day of year 
@@ -231,6 +228,9 @@ const Profile = (props) => {
                             </div>
                             
                             <div className="stats">
+                                <div>
+                                    <p className="profile-piece">{((goal-readYear)/((365-day) / 7)).toFixed(2)} books per week to meet goal</p>
+                                </div>
                                 <div className="numsum">
                                     <p className="profile-piece" id="stats"><strong>{parseInt(books).toLocaleString()}</strong> books</p>
                                     <p className="profile-piece" id="stats"><strong>{parseInt(pages).toLocaleString()}</strong> pages</p>
