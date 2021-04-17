@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useCookies  } from 'react-cookie';
 import Spinner from 'react-bootstrap/Spinner';
@@ -188,6 +188,7 @@ const BookCard = (props) => {
     setReadCount(readCount + 1);
     await delay(750);
     setSubmitting(false);
+    setComplete(false);
     setThoughts(false);
   }
 
@@ -224,7 +225,7 @@ const BookCard = (props) => {
                   :
                   <div className="submitting">
                     <h3>Submitting...</h3>
-                    <Spinner animation="border" variant="danger" />
+                    <Spinner animation="border" variant="warning" />
                   </div>
                 }
               </div>
@@ -315,16 +316,16 @@ const BookCard = (props) => {
                 <p className="DNF-count">({DNFCount})</p>
               </div>
               <div className="checklist-container">
-                <div onClick={() => addRemoveWant(cookies.auth0)}><input type="checkbox" className="TBR" checked={wantCheck}></input><span></span></div>
+                <input type="checkbox" className="TBR" checked={wantCheck} onChange={() => addRemoveWant(cookies.auth0)} />
               </div>
               <div className="checklist-container">
-                <div onClick={() => addRemoveReading(cookies.auth0)}><input type="checkbox" className="CURR" checked={readingCheck}></input></div>
+                <input type="checkbox" className="CURR" checked={readingCheck} onChange={() => addRemoveReading(cookies.auth0)} />
               </div>
               <div className="checklist-container">
-                <div onClick={() => addRemoveRead(cookies.auth0)}><input type="checkbox" className="ARL" checked={readCheck}></input></div>
+                <input type="checkbox" className="ARL" checked={readCheck} onChange={() => addRemoveRead(cookies.auth0)} />
               </div>
               <div className="checklist-container">
-                <div onClick={() => addRemoveDNF(cookies.auth0)}><input type="checkbox" className="DNF" checked={DNFCheck}></input></div>
+                <input type="checkbox" className="DNF" checked={DNFCheck} onClick={() => addRemoveDNF(cookies.auth0)} />
               </div>
             </div>
           }
