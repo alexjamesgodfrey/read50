@@ -66,7 +66,7 @@ export default function Signup() {
                             <div className="auth-spinner"><Spinner id="auth-spin" variant="warning" animation="border" /></div>
                             :
                             <div>
-                                    {error && <Alert variant="danger">{error}</Alert>}
+                                {error && <Alert variant="danger">{error}</Alert>}
                                 <div className="auth-buttons">
                                     <GoogleLoginButton onClick={google} className="google-auth-button" variant="primary"><span className="auth-button">sign up with google</span></GoogleLoginButton>
                                     <FacebookLoginButton onClick={facebook} className="auth-button" variant="primary"><span className="auth-button">sign up</span></FacebookLoginButton>
