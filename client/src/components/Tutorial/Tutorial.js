@@ -15,10 +15,10 @@ const Tutorial = () => {
                 <h3 style={{textDecoration: 'underline'}}>tutorial</h3>
                 <h3 className="push-left">searching for books</h3>
                 <p>simply type your query into the top right of this screen or in the top-center of the search page and
-                click search, go, or hit enter. a list of 40 "book cards" will pop up, with 10 per page. below the search box, you
+                click search, go, or hit enter. a list of 40 "bookcards" will pop up, with 10 per page. below the search box, you
                 will also have an option to search users for your search term. from there you can send requests to other users. tell your
                 friends about read50!</p>
-                <h3 className="push-left">book card  anatomy</h3>
+                <h3 className="push-left">bookcard anatomy</h3>
                 <p>a bookcard obviously has a title, author, and date. in the future, when you click on the title
                 or image, a summary and open discussion of the book by read50 users will pop up. but for now, you can
                 add a book to your want list, reading list, read list, or did not finish list. you cannot create more shelves

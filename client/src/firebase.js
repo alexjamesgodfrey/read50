@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/storage';
 
 var google = new firebase.auth.GoogleAuthProvider();
 var github = new firebase.auth.GithubAuthProvider();

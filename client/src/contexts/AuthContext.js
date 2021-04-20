@@ -43,12 +43,20 @@ export default function AuthProvider({ children }) {
         return currentUser.updateEmail(email);
     }
 
-    function updateDisplayName(displayName) {
-        return currentUser.updateDisplayName(displayName);
+    function updateDisplayName(newDisplayName) {
+        return currentUser.updateProfile({
+            displayName: newDisplayName
+        });
     }
 
     function updatePassword(password) {
         return currentUser.updatePassword(password)
+    }
+
+    function updatePhotoURL(url) {
+        return currentUser.updateProfile({
+            photoURL: url
+        });
     }
 
     useEffect(() => {
@@ -71,7 +79,8 @@ export default function AuthProvider({ children }) {
         resetPassword,
         updateEmail,
         updateDisplayName,
-        updatePassword
+        updatePassword,
+        updatePhotoURL
     }
 
     return (

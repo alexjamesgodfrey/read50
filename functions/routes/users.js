@@ -86,21 +86,6 @@ module.exports = function (app) {
             }
         })
     
-    //set user color
-        app.put("/api/users/color/:auth0_id", async (req, res) => {
-        try {
-            const { auth0_id } = req.params;
-            const { color } = req.body;
-            const updateBook = await pool.query(
-                "UPDATE users SET color = $1 WHERE auth0_id = $2",
-                [color, auth0_id]
-            );
-            res.json("user was updated");
-            res.json(updateBook.rows[0]);
-        } catch (err) {
-            console.error(err.message);
-        }
-    })
 
     //check if user is in db
     /**
@@ -150,6 +135,39 @@ module.exports = function (app) {
             const { number, auth0_id } = req.params;
             const goal = await pool.query("UPDATE users SET goal = $1 WHERE auth0_id = $2", [number, auth0_id]);
             res.json(goal.rows[0]);
+        } catch (err) {
+            console.error(err.message);
+        }
+    })
+
+    //set a user's username
+    app.put("/api/setusername/:username/:auth0_id", async (req, res) => {
+        try {
+            const { username, auth0_id } = req.params;
+            const setun = await pool.query("UPDATE users SET username = $1 WHERE auth0_id = $2", [username, auth0_id]);
+            res.json(setun.rows[0]);
+        } catch (err) {
+            console.error(err.message);
+        }
+    })
+
+    //set a user's email
+    app.put("/api/setemail/:email/:auth0_id", async (req, res) => {
+        try {
+            const { email, auth0_id } = req.params;
+            const setun = await pool.query("UPDATE users SET email = $1 WHERE auth0_id = $2", [email, auth0_id]);
+            res.json(setun.rows[0]);
+        } catch (err) {
+            console.error(err.message);
+        }
+    })
+
+    //set a user's photo url
+    app.put("/api/seturl", async (req, res) => {
+        try {
+            const { picture_link, auth0_id } = req.body;
+            const setun = await pool.query("UPDATE users SET picture_link = $1 WHERE auth0_id = $2", [picture_link, auth0_id]);
+            res.json(setun.rows[0]);
         } catch (err) {
             console.error(err.message);
         }

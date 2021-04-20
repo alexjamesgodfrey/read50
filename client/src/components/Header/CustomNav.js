@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { NavLink, Redirect, useLocation } from 'react-router-dom';
+import { NavLink, Redirect, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext.js';
-import { Navbar, Nav, Button, Form, FormControl } from 'react-bootstrap';
+import { Navbar, NavDropdown, Nav, Button, Form, FormControl } from 'react-bootstrap';
 import LoggedInDropdown from './LoggedInDropdown.js';
 import NotLoggedInDropdown from './NotLoggedInDropdown.js';
 import './Header.scss';
@@ -32,9 +32,12 @@ const CustomNav = () => {
             <Nav id="custom-nav">
               {append ? <NavLink activeClassName="selected-nav" className="nav-link" to={`/search/${sessionStorage.getItem('searchField')}`}>search</NavLink> : <NavLink activeClassName="selected-nav" className="nav-link" to="/search">search</NavLink>}
               <NavLink activeClassName="selected-nav" className="nav-link" to="/leaderboard">leaderboards</NavLink>
-              <NavLink activeClassName="selected-nav" className="nav-link" to="/tutorial">tutorial</NavLink>
-              <NavLink activeClassName="selected-nav" className="nav-link" to="/bugs">bugs</NavLink>
-              <NavLink activeClassName="selected-nav" className="nav-link" to="/about">about</NavLink>
+              <NavDropdown title='info'>
+                <NavDropdown.Item id="dropdown-link" href="#tutorial"><Link id="dropdown-link" to="/tutorial">tutorial</Link></NavDropdown.Item>
+                <NavDropdown.Item id="dropdown-link" href="#bugs"><Link id="dropdown-link" to="/bugs">bugs</Link></NavDropdown.Item>
+                <NavDropdown.Item id="dropdown-link" href="#about"><Link id="dropdown-link" to="/about">about</Link></NavDropdown.Item>
+              </NavDropdown>
+              
               {(currentUser ? <LoggedInDropdown /> : <NotLoggedInDropdown />)}
             </Nav>
             <Nav fixed="right">
