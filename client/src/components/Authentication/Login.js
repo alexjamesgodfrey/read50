@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom';
-import { GoogleLoginButton, FacebookLoginButton, GithubLoginButton } from "react-social-login-buttons";
+import { GoogleLoginButton } from "react-social-login-buttons";
 import { Form, Container, Button, Card, Alert, Spinner } from 'react-bootstrap';
 import { useAuth } from '../../contexts/AuthContext.js';
 import './Authentication.scss';
@@ -64,8 +64,6 @@ export default function Login() {
                             {error && <Alert variant="danger">{error}</Alert>}    
                             <div className="auth-buttons">
                                 <GoogleLoginButton onClick={google} className="google-auth-button" variant="primary"><span className="auth-button">log in with google</span></GoogleLoginButton>
-                                <FacebookLoginButton onClick={facebook} className="auth-button" variant="primary"><span className="auth-button">log in</span></FacebookLoginButton>
-                                <GithubLoginButton onClick={github} className="auth-button" variant="primary"><span className="auth-button">log in</span></GithubLoginButton>
                             </div>
                             <Form onSubmit={handleSubmit} className="d-flex flex-column" >
                                 <Form.Group id="email">

@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "./static/css/main.69ce77e9.chunk.css",
-    "main.js": "./static/js/main.14a63743.chunk.js",
-    "main.js.map": "./static/js/main.14a63743.chunk.js.map",
-    "runtime-main.js": "./static/js/runtime-main.63287613.js",
-    "runtime-main.js.map": "./static/js/runtime-main.63287613.js.map",
+    "main.css": "./static/css/main.6bc7c6d0.chunk.css",
+    "main.js": "./static/js/main.9b437da7.chunk.js",
+    "main.js.map": "./static/js/main.9b437da7.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.8aef0d53.js",
+    "runtime-main.js.map": "./static/js/runtime-main.8aef0d53.js.map",
     "static/css/2.150d169a.chunk.css": "./static/css/2.150d169a.chunk.css",
-    "static/js/2.e3a10ce9.chunk.js": "./static/js/2.e3a10ce9.chunk.js",
-    "static/js/2.e3a10ce9.chunk.js.map": "./static/js/2.e3a10ce9.chunk.js.map",
-    "static/js/3.c4273403.chunk.js": "./static/js/3.c4273403.chunk.js",
-    "static/js/3.c4273403.chunk.js.map": "./static/js/3.c4273403.chunk.js.map",
+    "static/js/2.c455fedd.chunk.js": "./static/js/2.c455fedd.chunk.js",
+    "static/js/2.c455fedd.chunk.js.map": "./static/js/2.c455fedd.chunk.js.map",
+    "static/js/3.ef68e7e8.chunk.js": "./static/js/3.ef68e7e8.chunk.js",
+    "static/js/3.ef68e7e8.chunk.js.map": "./static/js/3.ef68e7e8.chunk.js.map",
     "index.html": "./index.html",
     "static/css/2.150d169a.chunk.css.map": "./static/css/2.150d169a.chunk.css.map",
-    "static/css/main.69ce77e9.chunk.css.map": "./static/css/main.69ce77e9.chunk.css.map",
-    "static/js/2.e3a10ce9.chunk.js.LICENSE.txt": "./static/js/2.e3a10ce9.chunk.js.LICENSE.txt",
+    "static/css/main.6bc7c6d0.chunk.css.map": "./static/css/main.6bc7c6d0.chunk.css.map",
+    "static/js/2.c455fedd.chunk.js.LICENSE.txt": "./static/js/2.c455fedd.chunk.js.LICENSE.txt",
     "static/media/addtoread.59952150.JPG": "./static/media/addtoread.59952150.JPG",
     "static/media/amazon.af6bd859.svg": "./static/media/amazon.af6bd859.svg",
     "static/media/bookcardsample1.add2d343.JPG": "./static/media/bookcardsample1.add2d343.JPG",
@@ -27,10 +27,10 @@
     "static/media/wikipedia.5eb04832.svg": "./static/media/wikipedia.5eb04832.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.63287613.js",
+    "static/js/runtime-main.8aef0d53.js",
     "static/css/2.150d169a.chunk.css",
-    "static/js/2.e3a10ce9.chunk.js",
-    "static/css/main.69ce77e9.chunk.css",
-    "static/js/main.14a63743.chunk.js"
+    "static/js/2.c455fedd.chunk.js",
+    "static/css/main.6bc7c6d0.chunk.css",
+    "static/js/main.9b437da7.chunk.js"
   ]
 }

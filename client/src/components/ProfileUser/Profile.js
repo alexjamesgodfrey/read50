@@ -144,9 +144,9 @@ const Profile = (props) => {
         empty = empty.concat(toJson).concat(fromJson);
         for (let i = 0; i < empty.length; i++) {
             empty[i].username = empty[i].username_a;
+            empty[i].username = empty[i].username_b;
         }
         await setFriends(empty);
-        console.log(friends);
     }
 
     //on hide, this a regeneration of the frinds list is called for

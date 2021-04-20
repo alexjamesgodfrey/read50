@@ -59,7 +59,7 @@ const LoggedInDropdown = () => {
         <NavDropdown.Item id="dropdown-link" href="#profile"><Link id="dropdown-link" to="/profile">profile</Link></NavDropdown.Item>
         <NavDropdown.Item id="dropdown-link" href="#settings"><Link id="dropdown-link" to="/settings">settings</Link></NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item id="sign-out" onClick={() => handleLogout()}>sign out</NavDropdown.Item>
+        <NavDropdown.Item id="sign-out" onClick={() => handleLogout()}>log out</NavDropdown.Item>
     </NavDropdown>
   );
 }

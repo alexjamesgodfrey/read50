@@ -12,15 +12,12 @@ const User = (props) => {
     const [picture, setPicture] = useState("");
 
     const fetchCreds = async () => {
-        console.log('fetch creds');
         try {
             //fetch auth0_id from username param
             const getSub = await fetch(`/api/usernametosub/${username}`);
             const subText = await getSub.json();
-            console.log(subText);
             setSub(subText);
         } catch (err) {
-            console.log('failed')
             console.error(err.message);
             setReRun(reRun + 1);
         }
