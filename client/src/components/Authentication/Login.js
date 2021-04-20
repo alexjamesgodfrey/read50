@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom';
+import { GoogleLoginButton, FacebookLoginButton, GithubLoginButton } from "react-social-login-buttons";
 import { Form, Container, Button, Card, Alert, Spinner } from 'react-bootstrap';
 import { useAuth } from '../../contexts/AuthContext.js';
 import './Authentication.scss';
@@ -7,7 +8,7 @@ import './Authentication.scss';
 export default function Login() {
     const emailRef = useRef();
     const passwordRef = useRef();
-    const { login } = useAuth();
+    const { login, googleSignup, facebookSignup, githubSignup } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const history = useHistory();
@@ -27,6 +28,25 @@ export default function Login() {
         setLoading(false)
     }
 
+    const google = async () => {
+        setLoading(true);
+        try {
+            await googleSignup();
+            history.push("/search");
+        } catch (error) {
+            setError('failed to sign in with google. please try again.')
+        }
+        setLoading(true);
+    }
+
+    const facebook = async () => {
+        await facebookSignup();
+    }
+
+    const github = async () => {
+        await githubSignup();
+    }
+
     return (
         <div className="signup">
         <Container
@@ -41,7 +61,12 @@ export default function Login() {
                         <div className="auth-spinner"><Spinner id="auth-spin" variant="warning" animation="border" /></div>
                         :
                         <div>
-                            {error && <Alert variant="danger">{error}</Alert>}
+                            {error && <Alert variant="danger">{error}</Alert>}    
+                            <div className="auth-buttons">
+                                <GoogleLoginButton onClick={google} className="google-auth-button" variant="primary"><span className="auth-button">log in with google</span></GoogleLoginButton>
+                                <FacebookLoginButton onClick={facebook} className="auth-button" variant="primary"><span className="auth-button">log in</span></FacebookLoginButton>
+                                <GithubLoginButton onClick={github} className="auth-button" variant="primary"><span className="auth-button">log in</span></GithubLoginButton>
+                            </div>
                             <Form onSubmit={handleSubmit} className="d-flex flex-column" >
                                 <Form.Group id="email">
                                     <Form.Label>email</Form.Label>

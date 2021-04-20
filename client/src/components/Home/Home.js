@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth } from '../../contexts/AuthContext.js';
 import CountUp from 'react-countup';
 import Button from 'react-bootstrap/Button';
 import Loading from '../Loading.js';
@@ -8,7 +8,7 @@ import './Home.scss';
  
 const Home = () => {
     //user checks
-    const { loginWithRedirect, user, isAuthenticated } = useAuth0();
+    const { currentUser } = useAuth();
 
     //state for counts and loading
     const [users, setUsers] = useState(0);
@@ -49,10 +49,10 @@ const Home = () => {
                 <p><CountUp suffix=" words." end={words} duration={2} separator="," /></p>
                 <p><CountUp prefix="Read by "suffix=" users" end={users} duration={3} separator="," /></p>
                 <div className="desc"><p className="smaller">Challenge friends, join clubs, and climb the leaderboards. Registration only takes 30 seconds.</p></div>
-                {isAuthenticated ?
-                    <Link to="/search"><Button id="loginbutton" variant="danger" size="lg">welcome, {user['https://www.read50.com/username']}</Button></Link>
+                {currentUser ?
+                    <Link to="/search"><Button id="loginbutton" variant="danger" size="lg">welcome, {currentUser.displayName}</Button></Link>
                 :
-                    <Button id="loginbutton" variant="danger" size="lg" onClick={() => loginWithRedirect()}>get started</Button>
+                    <Link to="/search"><Button id="loginbutton" variant="danger" size="lg">get started</Button></Link>
                 }
             </div>
         </div>
