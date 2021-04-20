@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useCookies  } from 'react-cookie';
+import { useAuth } from '../../contexts/AuthContext.js';
 import Spinner from 'react-bootstrap/Spinner';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -11,9 +10,8 @@ import wikipedia from '../../images/wikipedia.svg';
 import './BookCard.scss';
 
 const BookCard = (props) => {
-  //cookies & auth0
-  const { user, isAuthenticated, isLoading } = useAuth0();
-  const [cookies, setCookie] = useCookies(['auth0']);
+  //currentuser
+  const { currentUser } = useAuth();
 
   //state for checks
   const [loadingChecks, setLoadingChecks] = useState(true);
@@ -75,7 +73,7 @@ const BookCard = (props) => {
     setReadingCheck(false);
     setReadCheck(false);
     setDNFCheck(false);
-    const checks = await fetch(`/api/getchecks/${cookies.auth0}/${props.google_id}`);
+    const checks = await fetch(`/api/getchecks/${currentUser.uid}/${props.google_id}`);
     const checksJSON = await checks.json();
     for (let i = 0; i < checksJSON.length; i++) {
       if (checksJSON[i]) {
@@ -99,7 +97,7 @@ const BookCard = (props) => {
     const seconds_added = Date.now();
     //create json
     const json = `{
-      "auth0_id": "${cookies.auth0}",
+      "auth0_id": "${currentUser.uid}",
       "google_id": "${props.google_id}",
       "listtype": "${listType}",
       "title": "${props.title}",
@@ -121,7 +119,7 @@ const BookCard = (props) => {
 
   //generic function to remove an entry
   const removeEntry = async (listType) => {
-    const response = fetch(`/api/booklists/${cookies.auth0}/${listType}/${props.google_id}`, {
+    const response = fetch(`/api/booklists/${currentUser.uid}/${listType}/${props.google_id}`, {
       method: "DELETE"
     });
   }
@@ -169,7 +167,7 @@ const BookCard = (props) => {
     const date_added = Date();
     const seconds_added = Date.now();
     const json = `{
-      "auth0_id": "${cookies.auth0}",
+      "auth0_id": "${currentUser.uid}",
       "google_id": "${props.google_id}",
       "listtype": "ARL",
       "title": "${props.title}",
@@ -326,16 +324,16 @@ const BookCard = (props) => {
                 <p className="DNF-count">({DNFCount})</p>
               </div>
               <div className="checklist-container">
-                <input type="checkbox" className="TBR" checked={wantCheck} onChange={() => addRemoveWant(cookies.auth0)} />
+                <input type="checkbox" className="TBR" checked={wantCheck} onChange={() => addRemoveWant(currentUser.uid)} />
               </div>
               <div className="checklist-container">
-                <input type="checkbox" className="CURR" checked={readingCheck} onChange={() => addRemoveReading(cookies.auth0)} />
+                <input type="checkbox" className="CURR" checked={readingCheck} onChange={() => addRemoveReading(currentUser.uid)} />
               </div>
               <div className="checklist-container">
-                <input type="checkbox" className="ARL" checked={readCheck} onChange={() => addRemoveRead(cookies.auth0)} />
+                <input type="checkbox" className="ARL" checked={readCheck} onChange={() => addRemoveRead(currentUser.uid)} />
               </div>
               <div className="checklist-container">
-                <input type="checkbox" className="DNF" checked={DNFCheck} onClick={() => addRemoveDNF(cookies.auth0)} />
+                <input type="checkbox" className="DNF" checked={DNFCheck} onClick={() => addRemoveDNF(currentUser.uid)} />
               </div>
             </div>
           }

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { NavLink, Redirect, useLocation } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth } from '../../contexts/AuthContext.js';
 import { Navbar, Nav, Button, Form, FormControl } from 'react-bootstrap';
 import LoggedInDropdown from './LoggedInDropdown.js';
 import NotLoggedInDropdown from './NotLoggedInDropdown.js';
 import './Header.scss';
 
 const CustomNav = () => {
-  const { isAuthenticated } = useAuth0();
+  const { currentUser } = useAuth();
   //state for search field
   const [field, setField] = useState("brandon sanderson");
   //fetches url
@@ -35,7 +35,7 @@ const CustomNav = () => {
               <NavLink activeClassName="selected-nav" className="nav-link" to="/tutorial">tutorial</NavLink>
               <NavLink activeClassName="selected-nav" className="nav-link" to="/bugs">bugs</NavLink>
               <NavLink activeClassName="selected-nav" className="nav-link" to="/about">about</NavLink>
-              {(isAuthenticated ? <LoggedInDropdown /> : <NotLoggedInDropdown />)}
+              {(currentUser ? <LoggedInDropdown /> : <NotLoggedInDropdown />)}
             </Nav>
             <Nav fixed="right">
                 {/*if the url is /search, do not render the search field*/}

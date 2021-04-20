@@ -6,15 +6,7 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import { CookiesProvider } from 'react-cookie';
 
 ReactDOM.render(
-  <Auth0Provider
-    domain="dev-rtb0ue8q.us.auth0.com"
-    clientId="8WjM6U2lIKjte5t7Z9FQ3G05DK0Y9wrF"
-    redirectUri="http://localhost:3000/#/search"
-  >
-    <CookiesProvider>
-    <App />
-    </CookiesProvider>
-  </Auth0Provider>,
+  <App />,
   document.getElementById('root')
 );
 

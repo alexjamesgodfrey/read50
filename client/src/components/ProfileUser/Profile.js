@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useCookies } from 'react-cookie';
+import { useAuth } from '../../contexts/AuthContext.js';
 import { Spinner, ProgressBar, Button, Form, OverlayTrigger, Modal, Popover, PopoverContent, Nav } from 'react-bootstrap';
 import Header from '../Header/Header.js';
 import Shelf from './Shelf.js';
@@ -12,8 +11,7 @@ import './Profile.scss';
 import './ShelfEntry.scss';
 
 const Profile = (props) => {
-    //allows the use of cookies
-    const [cookies, setCookie] = useCookies(['auth0', 'username', 'picture']);
+    const { currentUser } = useAuth();
 
     //function to get day of year 
     const dayOfYear = date => {
@@ -49,6 +47,9 @@ const Profile = (props) => {
     const [ARL, setARL] = useState([]);
     const [DNF, setDNF] = useState([]);
 
+
+    const sleep = ms => new Promise(res => setTimeout(res, ms));
+
     //function that is run on the click of the edit yearly goal button
     const onEdit = async () => {
         //changes button text
@@ -60,13 +61,13 @@ const Profile = (props) => {
             if (isNaN(goal)) {
                 console.log('mischief');
                 setGoal(50);
-                const setDB = await fetch(`/api/setgoal/50/${cookies.auth0}`, {
+                const setDB = await fetch(`/api/setgoal/50/${currentUser.uid}`, {
                     method: "PUT",
                 });
             };
             if (!isNaN(goal)) {
                 //sends new goal to database
-                const setDB = await fetch(`/api/setgoal/${goal}/${cookies.auth0}`, {
+                const setDB = await fetch(`/api/setgoal/${goal}/${currentUser.uid}`, {
                     method: "PUT",
                 });
             }
@@ -79,7 +80,7 @@ const Profile = (props) => {
     }
 
     const getInfo = async () => {
-        const info = await fetch(`/api/users/${cookies.auth0}`);
+        const info = await fetch(`/api/users/${currentUser.uid}`);
         const infoJson = await info.json();
         const person = infoJson[0];
         setBooks(person.books);
@@ -91,19 +92,19 @@ const Profile = (props) => {
     }
 
     const getRequests = async () => {
-        const incoming = await fetch(`/api/friends/incoming/${cookies.auth0}`);
+        const incoming = await fetch(`/api/friends/incoming/${currentUser.uid}`);
         const incomingJson = await incoming.json();
         await setFrequests([...incomingJson]);
     }
 
     const getLists = async () => {
-        const TBRResponse = await fetch(`/api/booklists/TBR/${cookies.auth0}`)
+        const TBRResponse = await fetch(`/api/booklists/TBR/${currentUser.uid}`)
         const TBRjson = await TBRResponse.json();
-        const CURRResponse = await fetch(`/api/booklists/CURR/${cookies.auth0}`)
+        const CURRResponse = await fetch(`/api/booklists/CURR/${currentUser.uid}`)
         const CURRjson = await CURRResponse.json();
-        const ARLResponse = await fetch(`/api/booklists/ARL/${cookies.auth0}`)
+        const ARLResponse = await fetch(`/api/booklists/ARL/${currentUser.uid}`)
         const ARLjson = await ARLResponse.json();
-        const DNFResponse = await fetch(`/api/booklists/DNF/${cookies.auth0}`)
+        const DNFResponse = await fetch(`/api/booklists/DNF/${currentUser.uid}`)
         const DNFjson = await DNFResponse.json();
         setTBR(TBRjson);
         setCURR(CURRjson);
@@ -115,19 +116,18 @@ const Profile = (props) => {
     //function to be run upon each click of the shelves div - it will update timeline and progress bar if an entry is to be removed
     const onShelfClick = async () => {
         getInfo();
-        await props.sleep(500);
         setReRender(reRender + 1);
     }
 
     const denyRequest = async (username, i) => {
-        const deny = await fetch(`/api/friends/rejectrequest/${cookies.auth0}/${username}`, {
+        const deny = await fetch(`/api/friends/rejectrequest/${currentUser.uid}/${username}`, {
             method: "DELETE"
         });
         getRequests();
     }
 
     const acceptRequest = async (username) => {
-        const accept = await fetch(`/api/friends/acceptrequest/${cookies.auth0}/${username}`, {
+        const accept = await fetch(`/api/friends/acceptrequest/${currentUser.uid}/${username}`, {
             method: "PUT"
         });
         getRequests();
@@ -137,9 +137,9 @@ const Profile = (props) => {
     //gets a list of completed friend requests
     const getFriends = async () => {
         let empty = [];
-        const to = await fetch(`/api/friends/tome/${cookies.auth0}`);
+        const to = await fetch(`/api/friends/tome/${currentUser.uid}`);
         const toJson = await to.json();
-        const from = await fetch(`/api/friends/fromme/${cookies.auth0}`);
+        const from = await fetch(`/api/friends/fromme/${currentUser.uid}`);
         const fromJson = await from.json();
         empty = empty.concat(toJson).concat(fromJson);
         for (let i = 0; i < empty.length; i++) {
@@ -176,7 +176,7 @@ const Profile = (props) => {
                 <div className="profile">
                     <div className="profile-top">
                         <div className="picture-section">
-                            <img className="profile-pic" src={cookies.picture}></img>
+                            <img className="profile-pic" src={currentUser.photoURL}></img>
                             <Button variant="light" size="sm">upload</Button>
                         </div>
                         
@@ -209,7 +209,7 @@ const Profile = (props) => {
                                     </div>
                                 </OverlayTrigger>
                             </div>
-                            <p className="profile-piece"><span className="name" id="user">{cookies.username}</span></p>
+                            <p className="profile-piece"><span className="name" id="user">{currentUser.displayName}</span></p>
                         </div>
 
                         <div className="profile-rest">
@@ -300,15 +300,15 @@ const Profile = (props) => {
                     {shelf === 'All' ? 
                         <div onClick={onShelfClick} className="profile-main">
                             <div className="shelves-container">
-                                <Shelf sample={true} profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Read Shelf'} username={cookies.username} />
-                                <Shelf sample={true} profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Currently Reading Shelf'} username={cookies.username}/>
-                                <Shelf sample={true} profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Want Shelf'} username={cookies.username}/>
-                                <Shelf sample={true} profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={'Did Not Finish Shelf'} username={cookies.username}/>
+                                <Shelf sample={true} profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={sleep} type={'Read Shelf'} username={currentUser.displayName} />
+                                <Shelf sample={true} profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={sleep} type={'Currently Reading Shelf'} username={currentUser.displayName}/>
+                                <Shelf sample={true} profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={sleep} type={'Want Shelf'} username={currentUser.displayName}/>
+                                <Shelf sample={true} profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={sleep} type={'Did Not Finish Shelf'} username={currentUser.displayName}/>
                             </div>
                         </div>
                         :
                         <div onClick={onShelfClick} className="profile-main">
-                            <Shelf profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={props.sleep} type={shelf} username={cookies.username}/>
+                            <Shelf profile={true} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={sleep} type={shelf} username={currentUser.displayName}/>
                         </div>
                     }
                 </div>

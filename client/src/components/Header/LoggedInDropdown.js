@@ -1,31 +1,29 @@
 import { useEffect } from 'react';
-import { useCookies  } from 'react-cookie';
-import { useAuth0 } from '@auth0/auth0-react';
+import { Link, useHistory } from 'react-router-dom'
+import { useAuth } from '../../contexts/AuthContext.js';
 import { NavDropdown } from 'react-bootstrap'
 import './Header.scss';
 
 const LoggedInDropdown = () => {
-  //auth0 user and logout
-  const { user, logout } = useAuth0();
-  //auth0 sub cookie and username cookie
-  const [cookies, setCookie] = useCookies(['auth0', 'username', 'picture']);
+  const { currentUser, logout } = useAuth();
+  const history = useHistory();
 
-  //sets auth0 and username cookie (age three hours)
-  const setAuth = async () => {
-    setCookie('auth0', user.sub, { path: '/', maxAge: 10800 });
-    setCookie('username', user['https://www.read50.com/username'], { path: '/', maxAge: 10800 });
-    setCookie('picture', user.picture, { path: '/', maxAge: 10800 });
+  const handleLogout = async () => {
+    try {
+        await logout();
+        history.push('/login');
+    } catch (error) {
+    }
   }
 
   //creates user JSON and adds to database
-  const addToDB = async (sub, email, username, picture, logcount) => {
+  const addToDB = async (sub, email, username, picture) => {
     try {
       const auth0User = `
       {"auth0_id": "${sub}",
       "email": "${email}",
       "username": "${username}",
       "picture_link": "${picture}",
-      "logincount": "${logcount}",
       "color": "#ba7373"}`
       
       const response = await fetch("/api/users", {
@@ -33,33 +31,35 @@ const LoggedInDropdown = () => {
         headers: { "Content-Type": "application/json" },
         body: auth0User
       });
+      console.log(auth0User);
+      console.log(response);
     } catch (err) {
       console.error(err.message);
     }
   };
 
   //checks if the user is in the database. if they are not, they are added.
-  const checkIfDB = async (sub, email, username, picture, logcount) => {
+  const checkIfDB = async (sub, email, username, picture) => {
     //responseText = valid user if user is in database
     const response = await fetch(`/api/users/herecheck/${sub}`);
     const responseText = await response.text();
     if (responseText !== 'valid user') {
       //add to database function and set inDB to true
-      addToDB(sub, email, username, picture, logcount);
+      addToDB(sub, email, username, picture);
     }
   };
 
   //sets cookies and database on each run
   useEffect(() => {
-      setAuth();
-      checkIfDB(user.sub, user.email, user['https://www.read50.com/username'], user.picture, user['https://www.read50.com/logincount']);
+      checkIfDB(currentUser.uid, currentUser.email, currentUser.displayName, currentUser.photoURL);
   }, [])
 
   return (
     <NavDropdown className="mr-auto" title='myread50'>
-        <NavDropdown.Item id="dropdown-link" href="#profile">profile</NavDropdown.Item>
+        <NavDropdown.Item id="dropdown-link" href="#profile"><Link id="dropdown-link" to="/profile">profile</Link></NavDropdown.Item>
+        <NavDropdown.Item id="dropdown-link" href="#settings"><Link id="dropdown-link" to="/settings">settings</Link></NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item id="sign-out" onClick={() => logout()}>sign out</NavDropdown.Item>
+        <NavDropdown.Item id="sign-out" onClick={() => handleLogout()}>sign out</NavDropdown.Item>
     </NavDropdown>
   );
 }

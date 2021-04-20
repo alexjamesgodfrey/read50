@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useCookies  } from 'react-cookie';
+import { useAuth } from '../../contexts/AuthContext.js';
 import { Spinner } from 'react-bootstrap';
 import UserLine from './UserLine.js';
 import './UserPage.scss';
 
 
 const UserPage = (props) => {
-  //cookies
-  const [cookies, setCookie] = useCookies(['auth0', 'username']);
+  const { currentUser } = useAuth();
   //loading to be used for edit of searchfield
   const [loading, setLoading] = useState(false);
   //users array
@@ -30,14 +29,14 @@ const UserPage = (props) => {
 
   //gets a list of friends who you have sent requests to
   const getOutgoing = async () => {
-    const out = await fetch(`/api/friends/outgoing/${cookies.auth0}`);
+    const out = await fetch(`/api/friends/outgoing/${currentUser.uid}`);
     const outJson = await out.json();
     await setOutgoings(outJson);
   }
 
   //gets a list of friend who you have gotten requests
   const getIncoming = async () => {
-    const inc = await fetch(`/api/friends/incoming/${cookies.auth0}`)
+    const inc = await fetch(`/api/friends/incoming/${currentUser.uid}`)
     const incJson = await inc.json();
     await setIncomings(incJson);
   }
@@ -45,9 +44,9 @@ const UserPage = (props) => {
   //gets a list of completed friend requests
   const getFriends = async () => {
     let empty = [];
-    const to = await fetch(`/api/friends/tome/${cookies.auth0}`);
+    const to = await fetch(`/api/friends/tome/${currentUser.uid}`);
     const toJson = await to.json();
-    const from = await fetch(`/api/friends/fromme/${cookies.auth0}`);
+    const from = await fetch(`/api/friends/fromme/${currentUser.uid}`);
     const fromJson = await from.json();
     empty = empty.concat(toJson).concat(fromJson);
     await setFriends(empty);

@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useCookies } from 'react-cookie';
+import { useAuth } from '../../contexts/AuthContext.js';
 import { Spinner, Modal, Button, Form } from 'react-bootstrap';
 import './ShelfEntry.scss';
 import '../Search/BookCard.scss';
 
 const ShelfEntry = (props) => {
-    const [cookies, setCookie] = useState(['auth0', 'username']);
+    const { currentUser } = useAuth();
     const [load, setLoad] = useState(true);
     
     //used to handle the displayed details of a book on the ARL shelf
@@ -27,7 +26,7 @@ const ShelfEntry = (props) => {
         const entries = document.getElementsByClassName(shelfName);
         entries[props.entryNumber].style.display = 'none';
         //step 2: send a delete request to booklists table
-        const deleteResponse = await fetch(`/api/booklists/${cookies.auth0}/${listType}/${props.google_id}`, {
+        const deleteResponse = await fetch(`/api/booklists/${currentUser.uid}/${listType}/${props.google_id}`, {
             method: "DELETE"
         });
     }
