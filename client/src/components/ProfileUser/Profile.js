@@ -10,6 +10,7 @@ import Notification from '../../images/notification.svg';
 import Reddot from '../../images/reddot.svg';
 import './Profile.scss';
 import './ShelfEntry.scss';
+import PrivateRoute from '../../PrivateRoute.js';
 
 const Profile = () => {
     const { currentUser } = useAuth();
@@ -159,11 +160,26 @@ const Profile = () => {
         getFriends();
     }
 
+    const parameterShelf = () => {
+        if (paramShelf) {
+            if (paramShelf === 'read') {
+                setShelf('Read Shelf');
+            } else if (paramShelf === 'want') {
+                setShelf('Want Shelf')
+            } else if (paramShelf === 'current') {
+                setShelf('Currently Reading Shelf');
+            } else {
+                setShelf('Did Not Finish Shelf');
+            }
+        }
+    }
+
     useEffect(() => {
         getInfo();
         getLists();
         getRequests();
         getFriends();
+        parameterShelf();
         dayOfYear(new Date());
     }, []);
 

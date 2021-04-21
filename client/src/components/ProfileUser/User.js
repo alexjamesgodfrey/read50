@@ -133,8 +133,8 @@ const User = (props) => {
                                     <p className="profile-piece" id="stats"><strong>{parseInt(words).toLocaleString()}</strong> words</p>
                                 </div>
                                 <div className="numsum">
-                                    <p className="under" id="stats">view friends</p>
-                                    <p className="under" id="stats">view clubs</p>
+                                    {/* <p className="under" id="stats">view friends</p>
+                                    <p className="under" id="stats">view clubs</p> */}
                                 </div>
 
                             </div>

@@ -14,6 +14,8 @@ const CustomNav = () => {
   const location = useLocation();
   //gets the first part of url (where /search will potentially be)
   const [here, setHere] = useState(location.pathname.slice(0, 7));
+  //gets the first part of url (where /profile will potentiall be)
+  const [profile, setProfile] = useState(location.pathname.slice(0, 8));
   //set to true if redirect is needed
   const [redirect, setRedirect] = useState(false);
   //link for book memory
@@ -40,12 +42,17 @@ const CustomNav = () => {
               
               {(currentUser ? <LoggedInDropdown /> : <NotLoggedInDropdown />)}
             </Nav>
-            <Nav>
-              <NavLink className="nav-link" to="/profile/read">read</NavLink>
-              <NavLink className="nav-link" to="/profile/want">want</NavLink>
-              <NavLink className="nav-link" to="/profile/current">current</NavLink>
-              <NavLink className="nav-link" to="/profile/dnf">dnf</NavLink>
-            </Nav>
+            {/* if the url is /profile, do not render the quick list buttons */}
+            {profile === '/profile' ?
+              <span></span>
+              :
+               <Nav>
+                <NavLink className="nav-link" to="/profile/read">read</NavLink>
+                <NavLink className="nav-link" to="/profile/want">want</NavLink>
+                <NavLink className="nav-link" to="/profile/current">current</NavLink>
+                <NavLink className="nav-link" id="dnf-link" to="/profile/dnf">dnf</NavLink>
+              </Nav>
+            }
             <Nav>
               {/*if the url is /search, do not render the search field*/}
               {here === '/search' ?
