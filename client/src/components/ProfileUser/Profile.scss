@@ -352,3 +352,20 @@ h2 {
 .profile-nav-item:global(.active) {
   color: red;
 }
+
+.synthetic-header {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 22px;
+  line-height: 0.3;
+  border-bottom: 1px solid grey;
+
+  @media screen and (max-width: $barrier) {
+    font-size: 18px;
+  }
+}
+
+.cursor:hover {
+  cursor: pointer;
+}

@@ -9,10 +9,6 @@ const Shelf = (props) => {
         if (props.TBR.length === 0) {
             return (
                 <div className="sample-empty">
-                    <div className="sample-header">
-                            <p>Want Shelf</p>
-                            {/* <p className="see">SEE ALL</p> */}
-                    </div>
                     {props.profile ? <p>Empty! <Link id="add-link" to="/search">Add books</Link></p> : <p>Empty :(</p>}
                 </div>
             )
@@ -20,10 +16,6 @@ const Shelf = (props) => {
         if (props.sample === true) {
             return (
                 <div className="sample">
-                    <div className="sample-header">
-                        <p>Want Shelf ({props.TBR.length})</p>
-                        {/* <p className="see">SEE ALL</p> */}
-                    </div>
                     <div className="sample-items">
                     {
                         props.TBR.slice(0, 3).map((book, i) => {
@@ -52,9 +44,6 @@ const Shelf = (props) => {
         }
         return (
             <div className="shelf">
-                <div className="sample-header">
-                        <p>Want Shelf ({props.TBR.length})</p>
-                    </div>
                 <div className="items">
         {
             props.TBR.map((book, i) => {
@@ -85,10 +74,6 @@ const Shelf = (props) => {
         if (props.CURR.length === 0) {
             return (
                 <div className="sample-empty">
-                    <div className="sample-header">
-                            <p>Currently Reading Shelf ({props.CURR.length})</p>
-                            {/* <p className="see">SEE ALL</p> */}
-                    </div>
                     {props.profile ? <p>Empty! <Link id="add-link" to="/search">Add books</Link></p> : <p>Empty :(</p>}
                 </div>
             )
@@ -96,10 +81,6 @@ const Shelf = (props) => {
         if (props.sample === true) {
             return (
                 <div className="sample">
-                    <div className="sample-header">
-                        <p>Currently Reading Shelf</p>
-                        {/* <p className="see">SEE ALL</p> */}
-                    </div>
                     <div className="sample-items">
                     {
                         props.CURR.slice(0, 3).map((book, i) => {
@@ -129,9 +110,6 @@ const Shelf = (props) => {
         }
         return (
             <div className="shelf">
-                <div className="sample-header">
-                        <p>Currently Reading Shelf</p>
-                    </div>
                 <div className="items">
         {
             props.CURR.map((book, i) => {
@@ -162,10 +140,6 @@ const Shelf = (props) => {
         if (props.ARL.length === 0) {
             return (
                 <div className="sample-empty">
-                    <div className="sample-header">
-                            <p>Read Shelf ({props.ARL.length})</p>
-                            {/* <p className="see">SEE ALL</p> */}
-                    </div>
                     {props.profile ? <p>Empty! <Link id="add-link" to="/search">Add books</Link></p> : <p>Empty :(</p>}
                 </div>
             )
@@ -173,10 +147,6 @@ const Shelf = (props) => {
         if (props.sample === true) {
             return (
                 <div className="sample">
-                    <div className="sample-header">
-                        <p>Read Shelf ({props.ARL.length})</p>
-                        {/* <p className="see">SEE ALL</p> */}
-                    </div>
                     <div className="sample-items">
                     {
                         props.ARL.slice(0, 3).map((book, i) => {
@@ -212,9 +182,6 @@ const Shelf = (props) => {
         }
         return (
             <div className="shelf">
-                <div className="sample-header">
-                        <p id="shelf-header">Read Shelf ({props.ARL.length})</p>
-                    </div>
                 <div className="items">
         {
             props.ARL.map((book, i) => {
@@ -251,10 +218,6 @@ const Shelf = (props) => {
         if (props.DNF.length === 0) {
             return (
                 <div className="sample-empty">
-                    <div className="sample-header">
-                        <p id="shelf-header">Did Not Finish Shelf ({props.DNF.length})</p>
-                        {/* <p className="see">SEE ALL</p> */}
-                    </div>
                     {props.profile ? <p>Empty! <Link id="add-link" to="/search">Add books</Link></p> : <p>Empty :(</p>}
                 </div>
             )
@@ -262,10 +225,6 @@ const Shelf = (props) => {
         if (props.sample === true) {
             return (
                 <div className="sample">
-                    <div className="sample-header">
-                        <p id="shelf-header">Did Not Finish Shelf ({props.DNF.length})</p>
-                        {/* <p className="see">SEE ALL</p> */}
-                    </div>
                     <div className="sample-items">
                     {
                         props.DNF.slice(0, 3).map((book, i) => {
@@ -295,9 +254,6 @@ const Shelf = (props) => {
         }
         return (
             <div className="shelf">
-                <div className="sample-header">
-                        <p id="shelf-header">Did Not Finish Shelf ({props.DNF.length})</p>
-                    </div>
                 <div className="items">
         {
             props.DNF.map((book, i) => {
