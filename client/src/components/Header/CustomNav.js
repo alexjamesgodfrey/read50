@@ -40,15 +40,21 @@ const CustomNav = () => {
               
               {(currentUser ? <LoggedInDropdown /> : <NotLoggedInDropdown />)}
             </Nav>
-            <Nav fixed="right">
-                {/*if the url is /search, do not render the search field*/}
-                {here === '/search' ?
-                  <span></span>
-                :
-                  <Form flex>
-                    <FormControl className="header-search-box" type="text" placeholder='quick search' onChange={(e) => setField(e.target.value)} />
-                    <Button type="submit" variant="outline-light" onClick={() => setRedirect(true)}>search</Button>
-                  </Form>
+            <Nav>
+              <NavLink className="nav-link" to="/profile/read">read</NavLink>
+              <NavLink className="nav-link" to="/profile/want">want</NavLink>
+              <NavLink className="nav-link" to="/profile/current">current</NavLink>
+              <NavLink className="nav-link" to="/profile/dnf">dnf</NavLink>
+            </Nav>
+            <Nav>
+              {/*if the url is /search, do not render the search field*/}
+              {here === '/search' ?
+                <span></span>
+              :
+                <Form flex>
+                  <FormControl className="header-search-box" type="text" placeholder='quick search' onChange={(e) => setField(e.target.value)} />
+                  <Button type="submit" variant="outline-light" onClick={() => setRedirect(true)}>search</Button>
+                </Form>
               }
             </Nav>
           </Navbar.Collapse>

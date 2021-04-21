@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext.js';
 import { Spinner, ProgressBar, Button, Form, OverlayTrigger, Modal, Popover, PopoverContent, Nav } from 'react-bootstrap';
@@ -10,8 +11,9 @@ import Reddot from '../../images/reddot.svg';
 import './Profile.scss';
 import './ShelfEntry.scss';
 
-const Profile = (props) => {
+const Profile = () => {
     const { currentUser } = useAuth();
+    let { paramShelf } = useParams();
 
     //function to get day of year 
     const dayOfYear = date => {
@@ -144,7 +146,9 @@ const Profile = (props) => {
         empty = empty.concat(toJson).concat(fromJson);
         for (let i = 0; i < empty.length; i++) {
             empty[i].username = empty[i].username_a;
-            empty[i].username = empty[i].username_b;
+            if (!empty[i].username) {
+                empty[i].username = empty[i].username_b;
+            }
         }
         await setFriends(empty);
     }

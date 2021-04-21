@@ -125,7 +125,7 @@ const UserLine = props => {
     if (received === true) {
         return (
             <div className="line">
-                <Link to={`/user/${props.info.username}`}><h4 className="username" style={props.sty}>{props.info.username}</h4></Link>
+                <Link to={`/user/${props.info.username}`}><p className="username" style={props.sty}>{props.info.username}</p></Link>
                 {loading === false ? 
                     <div>  
                         <Button id="request-text" variant="warning" size="md" onClick={() => denyRequest()}>deny</Button>
@@ -140,7 +140,7 @@ const UserLine = props => {
 
     return (
         <div className="line">
-            {(props.info.username !== currentUser.displayName) ? <Link to={`/user/${props.info.username}`}><h4 className="username" style={props.sty}>{props.info.username}</h4></Link> : <Link to={`/profile`}><h4 className="username" style={props.sty}>{props.info.username} (you)</h4></Link>}
+            {(props.info.username !== currentUser.displayName) ? <Link to={`/user/${props.info.username}`}><p className="username" style={props.sty}>{props.info.username}</p></Link> : <Link to={`/profile`}><p className="username" style={props.sty}>{props.info.username} (you)</p></Link>}
             {((props.info.username !== currentUser.displayName) && loading === false) ?
                 <div>
                     {(sent === true) ? 
