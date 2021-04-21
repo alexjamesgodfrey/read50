@@ -271,7 +271,13 @@ const Profile = () => {
                                         </Button>
                                         </Modal.Footer>
                                     </Modal>
+                                    <OverlayTrigger trigger="click" placement="right" overlay={
+                                        <Popover id="popover-basic">
+                                            <Popover.Title>coming soon</Popover.Title>
+                                        </Popover>
+                                    }>
                                     <p className="under" id="stats">view clubs</p>
+                                    </OverlayTrigger>
                                 </div>
 
                             </div>
