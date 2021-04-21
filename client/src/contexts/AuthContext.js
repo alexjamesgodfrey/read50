@@ -59,6 +59,14 @@ export default function AuthProvider({ children }) {
         });
     }
 
+    function deleteUser() {
+        return currentUser.delete();
+    }
+
+    function reauthenticate(credential) {
+        return currentUser.reauthenticateWithCredential(credential);
+    }
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user);
@@ -80,7 +88,9 @@ export default function AuthProvider({ children }) {
         updateEmail,
         updateDisplayName,
         updatePassword,
-        updatePhotoURL
+        updatePhotoURL,
+        deleteUser,
+        reauthenticate
     }
 
     return (

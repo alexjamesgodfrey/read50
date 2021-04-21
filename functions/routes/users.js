@@ -116,6 +116,20 @@ module.exports = function (app) {
         } catch (err) {
             console.error(err.message);
         }
+    });
+
+    //delete a user
+    app.delete("/api/deleteuser/:sub", async (req, res) => {
+        try {
+            const { sub } = req.params;
+            const deleteUser = await pool.query(
+                "DELETE FROM users WHERE auth0_id = $1",
+                [sub]
+            );
+            res.json(deleteUser.rows[0]);
+        } catch (err) {
+            console.error(err.message);
+        }
     })
 
     //get a user's goal

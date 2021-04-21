@@ -1,13 +1,13 @@
 import React, { useState, useRef } from 'react'
 import { useHistory } from 'react-router-dom';
-import { Card, Container, Form, Button, Alert } from 'react-bootstrap'
+import { Card, Container, Form, Button, Alert, Modal } from 'react-bootstrap'
 import { useAuth } from '../../contexts/AuthContext.js';
 import Header from '../Header/Header.js';
 import './Authentication.scss';
 import app from '../../firebase.js';
 
 export default function Settings() {
-    const { currentUser, logout, updateEmail, updateDisplayName, updatePassword, updatePhotoURL } = useAuth();
+    const { currentUser, login, logout, updateEmail, updateDisplayName, updatePassword, updatePhotoURL, deleteUser, reauthenticate } = useAuth();
     const [verified, setVerified] = useState(currentUser.verified);
     const [loading, setLoading] = useState(false);
     
@@ -95,7 +95,7 @@ export default function Settings() {
         setError('');
         setSuccess('');
         if (currentUser.providerData[0].providerId !== 'password') {
-            return setError('you must have signed up with email to edit your password');
+            return setError('cannot change password for google sign in');
         }
         if (editEmail === false) {
             setEditPassword(false);
@@ -138,7 +138,7 @@ export default function Settings() {
         setError('');
         setSuccess('');
         if (currentUser.providerData[0].providerId !== 'password') {
-            return setError('you must have signed up with email to edit your password');
+            return setError('cannot change email for google sign in');
         }
         if (editPassword === false) {
             setEditEmail(false);
@@ -179,6 +179,39 @@ export default function Settings() {
         }
     }
 
+    const [showDelete, setShowDelete] = useState(false)
+    const [credentials, setCredentials] = useState('');
+    const confirmRef = useRef();
+    const reauth = async (e) => {
+        e.preventDefault();
+
+        if (confirmRef.current.value !== 'confirm') {
+            setShowDelete(false)
+            return setError('you must type confirm in the bottom box')
+        }
+
+        if (currentUser.providerData[0].providerId !== 'password') {
+            try {
+                await deleteUser();
+                history.push('/')
+            } catch (error) {
+                return setError('please log out then in and try again');
+            }
+        }
+
+        try {
+            await login(emailRef.current.value, passwordRef.current.value);
+            await fetch(`/api/deleteuser/${currentUser.uid}`, {
+                method: "DELETE"
+            });
+            await deleteUser();
+            history.push('/')
+        } catch (error) {
+            setShowDelete(false);
+            return setError('incorrect email or password');
+        }
+    }
+
     return (
         <div className="settings">
         <Header />
@@ -201,7 +234,39 @@ export default function Settings() {
                             <p><strong>username: </strong>{currentUser.displayName ? currentUser.displayName : <span>none! add one</span>} <span onClick={showDisplayName} className="edit-button">{displayNameEditText}</span></p>
                             <p className="profile-test"><strong>email: </strong>{currentUser.email} <span onClick={showEmail} className="edit-button">{emailEditText}</span></p>
                             <p onClick={showPassword}><strong>change password</strong></p>
+                            <Button onClick={() => setShowDelete(true)} variant="secondary">delete account</Button>
                         </div>
+                        <Modal show={showDelete} onHide={() => setShowDelete(false)} dismissible>
+                            <Modal.Header closeButton>
+                                <h3 style={{ color: '#dc3545'}}>WARNING: THIS ACTION IS PERMANENT</h3>
+                            </Modal.Header>
+                                <Modal.Body>
+                                    once you delete your account, all your credentials will be immediately deleted from our databases.
+                                    there is no going back.
+                                    <p></p>
+                                <Form className="d-flex flex-column">
+                                    {currentUser.providerData[0].providerId === 'password' ?
+                                        <div>
+                                        <Form.Group id="email">
+                                            <Form.Label>email</Form.Label>
+                                            <Form.Control type="email" ref={emailRef} required placeHolder='enter email here'></Form.Control>
+                                        </Form.Group>
+                                        <Form.Group id="password-confirm">
+                                            <Form.Label>confirm password</Form.Label>
+                                            <Form.Control type="password" ref={passwordRef} required placeHolder='enter password here'></Form.Control>
+                                        </Form.Group>
+                                        </div>
+                                        :
+                                        <span></span>
+                                    }
+                                    <Form.Group id="confirm">
+                                        <Form.Label>final confirmation</Form.Label>
+                                        <Form.Control type="text" ref={confirmRef} required placeHolder='type confirm into this box'></Form.Control>
+                                    </Form.Group>
+                                    <Button onClick={(e) => reauth(e)} variant="secondary">delete account</Button>
+                                </Form>
+                            </Modal.Body>
+                        </Modal>
                     </div>
                     {editDisplayName ?
                         <Form onSubmit={handleDisplayName} className="d-flex flex-column" >
