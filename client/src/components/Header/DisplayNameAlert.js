@@ -30,7 +30,7 @@ export default function DisplayNameAlert() {
     
     if (show && (!currentUser.displayName || !currentUser.photoURL || !hasGoal)) {
         return (
-            <Alert id="betaalert" variant="danger" dismissible onClose={() => setShow(false)}>
+            <Alert id="betaalert" variant="light" dismissible onClose={() => setShow(false)}>
                 TODO:
                 {!currentUser.displayName ? <Link id="alert-link" to="/settings"> | set username | </Link> : <span></span>}
                 {!currentUser.photoURL ? <Link id="alert-link" to="/settings"> | upload profile picture | </Link> : <span></span>}
