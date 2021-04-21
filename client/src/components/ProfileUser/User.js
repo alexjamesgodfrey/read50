@@ -115,7 +115,7 @@ const User = (props) => {
                     
                         <div className="profile-info">
                             <p className="user-desc"><span id="user">USER</span></p>
-                            <p className="profile-piece"><span className="name">{username}</span></p>
+                            <p id="name">{username}</p>
                         </div>
 
                         <div className="profile-rest">
@@ -177,13 +177,49 @@ const User = (props) => {
                     }
                     {shelf === 'All' ?
                         <div className="profile-main">
+                            <div className="synthetic-header">
+                                <p onClick={() => setShelf('Read Shelf')} className="cursor">Read Shelf ({ARL.length})</p>
+                                <p onClick={() => setShelf('Read Shelf')} className="see">SEE ALL</p>
+                            </div>
                             <Shelf sample={true} profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={sleep} type={'Want Shelf'} username={username} />
+                            <div className="synthetic-header" style={{ marginBottom: '20px' }}>
+                                <p onClick={() => setShelf('Currently Reading Shelf')} className="cursor">Currently Reading Shelf ({CURR.length})</p>
+                                <p onClick={() => setShelf('Currently Reading Shelf')} className="see">SEE ALL</p>
+                            </div>
                             <Shelf sample={true} profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={sleep} type={'Currently Reading Shelf'} username={username} />
+                            <div className="synthetic-header" style={{ marginBottom: '20px' }}>
+                                <p onClick={() => setShelf('Want Shelf')} className="cursor">Want Shelf ({TBR.length})</p>
+                                <p onClick={() => setShelf('Want Shelf')} className="see">SEE ALL</p> 
+                            </div>
                             <Shelf sample={true} profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={sleep} type={'Read Shelf'} username={username} />
+                            <div className="synthetic-header" style={{marginBottom: '20px'}}>
+                                <p onClick={() => setShelf('Did Not Finish Shelf')} className="cursor">Did Not Finish Shelf ({DNF.length})</p>
+                                <p onClick={() => setShelf('Did Not Finish Shelf')} className="see">SEE ALL</p>
+                            </div>
                             <Shelf sample={true} profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={sleep} type={'Did Not Finish Shelf'} username={username} />
                         </div>
                         :
                         <div className="profile-main">
+                            {shelf === 'Read Shelf' ?
+                                <div className="synthetic-header" style={{marginBottom: '20px'}}><p className="cursor">Read Shelf ({ARL.length})</p></div>
+                                :
+                                <span></span>
+                            }
+                            {shelf === 'Currently Reading Shelf' ?
+                                <div className="synthetic-header" style={{marginBottom: '20px'}}><p className="cursor">Currently Reading Shelf ({CURR.length})</p></div>
+                                :
+                                <span></span>
+                            }
+                            {shelf === 'Want Shelf' ?
+                                <div className="synthetic-header" style={{marginBottom: '20px'}}><p className="cursor">Want Shelf ({TBR.length})</p></div>
+                                :
+                                <span></span>
+                            }
+                            {shelf === 'Did Not Finish Shelf' ?
+                                <div className="synthetic-header" style={{marginBottom: '20px'}}><p className="cursor">Did Not Finish Shelf ({DNF.length})</p></div>
+                                :
+                                <span></span>
+                            }
                             <Shelf profile={false} TBR={TBR} CURR={CURR} ARL={ARL} DNF={DNF} delay={sleep} type={shelf} username={username} />
                         </div>
                     }

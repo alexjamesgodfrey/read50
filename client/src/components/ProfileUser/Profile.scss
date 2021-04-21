@@ -56,9 +56,18 @@ $barrier: 800px;
   margin-top: 10px;
 }
 
-.name {
-  font-size: 60px;
+#name {
+  width: 70px;
+  font-size: 50px;
+  line-height: 0.9;
   color: $primary-color;
+  white-space: nowrap;
+}
+
+.name-box {
+  background-color: red;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .book {
@@ -107,8 +116,9 @@ $barrier: 800px;
 }
 
 .profile-pic {
-  margin-bottom: 10px;
+  margin-top: 10px;
   height: 115px;
+  width: 115px;
   border-radius: 50%;
 }
 
@@ -360,6 +370,7 @@ h2 {
   font-size: 22px;
   line-height: 0.3;
   border-bottom: 1px solid grey;
+  margin: 0px auto;
 
   @media screen and (max-width: $barrier) {
     font-size: 18px;

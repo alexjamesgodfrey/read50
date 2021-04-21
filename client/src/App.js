@@ -36,7 +36,7 @@ class App extends Component {
               <PrivateRoute path="/about" component={About} />
               <PrivateRoute path="/bugs" component={Bugs} />
               <PrivateRoute path="/tutorial" component={Tutorial} />
-              <PrivateRoute path="/profile" component={Profile} />
+              <PrivateRoute path="/profile/:shelf?" component={Profile} />
               <PrivateRoute path="/user/:username" component={User} />
               <PrivateRoute path="/clubs" component={Clubs} />
               <PrivateRoute path="/leaderboard" component={Leaderboard} />
