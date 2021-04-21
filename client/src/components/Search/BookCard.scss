@@ -297,5 +297,11 @@ $barrier: 800px;
 }
 
 #modal-title {
+  font-size: 30px;
   color: $font-color;
+  line-height: 1;
+}
+
+#modal-title-bottom {
+  line-height: 0;
 }

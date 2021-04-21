@@ -223,7 +223,10 @@ const BookCard = (props) => {
       {thoughts ?
         <Modal show={thoughts} onHide={() => setThoughts(false)} keyboard="true">
           <Modal.Header closeButton>
-            <Modal.Title id="modal-title">Add {props.title} to Read Shelf</Modal.Title>
+            <div>
+              <p id="modal-title">Add {props.title} to Read Shelf</p>
+              <p id="modal-title-bottom">all fields are optional</p>
+            </div>
           </Modal.Header>
           <Modal.Body>
             {submitting ?
@@ -272,9 +275,9 @@ const BookCard = (props) => {
                 <Form.Group>
                   <Form.Label>Format</Form.Label>
                   <div id="format">
-                    <Form.Check onClick={() => setFormat('paper')} type="radio" label="paper" name="formHorizontalRadios" />
-                    <Form.Check onClick={() => setFormat('ebook')} type="radio" label="ebook" name="formHorizontalRadios" />
-                    <Form.Check onClick={() => setFormat('audio')} type="radio" label="audio" name="formHorizontalRadios" />
+                    <label onClick={() => setFormat('paper')}><input name="formHorizontalRadios" type="radio" /> paper</label>
+                    <label onClick={() => setFormat('ebook')}><input name="formHorizontalRadios" type="radio" /> ebook</label>
+                    <label onClick={() => setFormat('audio')}><input name="formHorizontalRadios" type="radio" /> audio</label>
                   </div>
                 </Form.Group>
                 <Form.Group >
