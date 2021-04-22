@@ -36,7 +36,7 @@ export default function Login() {
         } catch (error) {
             setError('failed to sign in with google. please try again.')
         }
-        setLoading(true);
+        setLoading(false);
     }
 
     const facebook = async () => {
